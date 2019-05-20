@@ -362,10 +362,10 @@ public class SlimefunItems {
 	public static ItemStack GRIND_STONE = new CustomItem(Material.DISPENSER, "&b磨石", 0, new String[] {"", "&a&o更高效的磨物品"});
 	public static ItemStack ARMOR_FORGE = new CustomItem(Material.ANVIL, "&6盔甲鍛造台", 0, new String[] {"", "&a&o給你創造強大防具的力量"});
 	public static ItemStack SMELTERY = new CustomItem(Material.FURNACE, "&6冶煉爐", 0, new String[] {"", "&a&o用作冶煉金屬的高溫爐"});
-	public static ItemStack IGNITION_CHAMBER = new CustomItem(new ItemStack(Material.HOPPER), "&4自動點火裝置", "&r以防你的冶煉爐失去火焰", "&r需要打火石", "&r必須放置於冶煉爐的發射器旁邊");
-	public static ItemStack ORE_CRUSHER = new CustomItem(Material.DISPENSER, "&b碎礦機", 0, new String[] {"", "&a&o粉碎礦石並且得到雙倍的粉塵"});
+	public static ItemStack IGNITION_CHAMBER = new CustomItem(new ItemStack(Material.HOPPER), "&4自動點火機", "&r以防你的冶煉爐失去火焰", "&r需要打火石", "&r必須放置於冶煉爐的發射器旁邊");
+	public static ItemStack ORE_CRUSHER = new CustomItem(Material.DISPENSER, "&b礦石粉碎機", 0, new String[] {"", "&a&o粉碎礦石並且得到雙倍的粉塵"});
 	public static ItemStack COMPRESSOR = new CustomItem(Material.PISTON, "&b壓縮機", 0, new String[] {"", "&a&o壓縮物品"});
-	public static ItemStack PRESSURE_CHAMBER = new CustomItem(Material.GLASS, "&b壓力室", 0, new String[] {"", "&a&o壓縮更多的物品"});
+	public static ItemStack PRESSURE_CHAMBER = new CustomItem(Material.GLASS, "&b壓力機", 0, new String[] {"", "&a&o壓縮更多的物品"});
 	public static ItemStack MAGIC_WORKBENCH = new CustomItem(Material.CRAFTING_TABLE, "&6魔法工作台", 0, new String[] {"給物品注入魔法能量"});
 	public static ItemStack ORE_WASHER = new CustomItem(Material.CAULDRON, "&6洗礦機", 0, new String[] {"", "&a&o清洗篩礦變成過濾礦石", "&a&o並且給你一些小石塊" });
 	public static ItemStack SAW_MILL = new CustomItem(Material.IRON_BARS, "&6鋸木機", 0, new String[] {"", "&a&o從1個原木中獲得8個木頭"});
@@ -546,8 +546,8 @@ public class SlimefunItems {
 	public static ItemStack INFUSED_HOPPER = new CustomItem(new MaterialData(Material.HOPPER), "&5吸入漏斗", "", "&r自動吸入在漏斗附近", "&r7x7x7 範圍內的所有物品");
 
 	public static ItemStack PLASTIC_SHEET = new CustomItem(new MaterialData(Material.PAPER), "&r塑料紙");
-	public static ItemStack HEATED_PRESSURE_CHAMBER = new CustomItem(new MaterialData(Material.LIGHT_GRAY_STAINED_GLASS), "&c加熱壓力室", "", "&4終極機器", "&8\u21E8 &7速度: 1x", "&8\u21E8 &e\u26A1 &710 J/s");
-	public static ItemStack HEATED_PRESSURE_CHAMBER_2 = new CustomItem(new MaterialData(Material.LIGHT_GRAY_STAINED_GLASS), "&c加熱壓力室&7- &eII", "", "&4終極機器", "&8\u21E8 &7速度: 5x", "&8\u21E8 &e \u26A1 &744 J/s");
+	public static ItemStack HEATED_PRESSURE_CHAMBER = new CustomItem(new MaterialData(Material.LIGHT_GRAY_STAINED_GLASS), "&c加熱壓力艙", "", "&4終極機器", "&8\u21E8 &7速度: 1x", "&8\u21E8 &e\u26A1 &710 J/s");
+	public static ItemStack HEATED_PRESSURE_CHAMBER_2 = new CustomItem(new MaterialData(Material.LIGHT_GRAY_STAINED_GLASS), "&c加熱壓力艙&7- &eII", "", "&4終極機器", "&8\u21E8 &7速度: 5x", "&8\u21E8 &e \u26A1 &744 J/s");
 
 	public static ItemStack ELECTRIC_SMELTERY = new CustomItem(new MaterialData(Material.FURNACE), "&c電力冶煉機", "", "&4僅支持合金, 不能將粉冶煉成錠", "", "&4終極機器", " &8\u21E8 &7速度: 1x", "&8\u21E8 &e\u26A1 &720 J/s");
 	public static ItemStack ELECTRIC_SMELTERY_2 = new CustomItem(new MaterialData(Material.FURNACE), "&c電力冶煉機&7- &eII", "", "&4僅支持合金, 不能將粉冶煉成錠", "", "&4終極機器", "&8\u21E8 &7速度: 3x", "&8\u21E8 &e\u26A1 &740 J/s");
