@@ -23,11 +23,10 @@ public class SlimefunTabCompleter implements TabCompleter {
 			}
 			else if (args[0].equalsIgnoreCase("research")) {
 				List<String> researches = new ArrayList<String>();
-				for (Research res : Research.list()) {
+				for(Research res: Research.list()) {
 					researches.add(res.getName().toUpperCase().replace(" ", "_"));
 				}
 				researches.add("all");
-				researches.add("reset");
 				return createReturnList(researches, args[2]);
 			}
 			else {
@@ -45,6 +44,7 @@ public class SlimefunTabCompleter implements TabCompleter {
 	 * @param string The typed string
 	 * @return Sublist if string is not empty
 	 */
+
 	private List<String> createReturnList(List<String> list, String string) {
 		if (string.equals("")) return list;
 
@@ -56,5 +56,4 @@ public class SlimefunTabCompleter implements TabCompleter {
 		}
 		return returnList;
 	}
-
 }

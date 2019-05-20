@@ -24,18 +24,12 @@ public class EnhancedFurnace extends SlimefunItem {
 		addItemHandler(new BlockTicker() {
 			@Override
 			public void tick(Block b, SlimefunItem item, Config data) {
-				if (b.getState() instanceof Furnace) {
+				if (b.getState() instanceof Furnace)
 					if (((Furnace) b.getState()).getCookTime() > 0) {
 						Furnace furnace = (Furnace) b.getState();
-
-						int newCookTime = furnace.getCookTime() + getSpeed() * 10;
-
-						if (newCookTime > 200) furnace.setCookTime((short) 188);
-						else furnace.setCookTime((short) newCookTime);
-
+						furnace.setCookTime((short) (furnace.getCookTime() + getSpeed() * 10));
 						furnace.update(true, false);
 					}
-				}
 			}
 
 			@Override
@@ -54,7 +48,7 @@ public class EnhancedFurnace extends SlimefunItem {
 	}
 	
 	public int getFuelEfficiency() {
-		return efficiency;
+		return speed;
 	}
 	
 	public int getOutput() {
