@@ -166,7 +166,6 @@ public abstract class ProgrammableAndroid extends SlimefunItem {
 					});
 
 					menu.replaceExistingItem(17, new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTYxMzlmZDFjNTY1NGU1NmU5ZTRlMmM4YmU3ZWIyYmQ1YjQ5OWQ2MzM2MTY2NjNmZWVlOTliNzQzNTJhZDY0In19fQ=="), "&4暫停"));
-
 					menu.addMenuClickHandler(17, (p, slot, item, action) -> {
 						BlockStorage.addBlockInfo(b, "paused", "true");
 						Messages.local.sendTranslation(p, "robot.stopped", true);

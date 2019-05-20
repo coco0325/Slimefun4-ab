@@ -163,6 +163,7 @@ public class SlimefunGuide {
 				return false;
 			});
 		}
+
 		menu.addItem(1, new CustomItem(new ItemStack(Material.WRITABLE_BOOK), "&a有關本插件", "", "&7版本: &a" + SlimefunStartup.instance.getDescription().getVersion(), "&7協作者: &e" + contributors.size(), "", "&7⇨ 看看背後的開發人員"));
 		menu.addMenuClickHandler(1, (pl, slot, item, action) -> {
 			openCredits(pl, guide);
@@ -181,6 +182,7 @@ public class SlimefunGuide {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		menu.addItem(7, new CustomItem(new ItemStack(Material.REDSTONE), "&4Bug 追蹤器", "", "&7未解決的問題: &a" + issues, "", "&7⇨ 前往Bug追蹤器"));
 		menu.addMenuClickHandler(7, (pl, slot, item, action) -> {
 			pl.closeInventory();
@@ -517,6 +519,7 @@ public class SlimefunGuide {
 			}
 
 			final int finalPages = pages;
+
 			menu.addItem(46, new CustomItem(new ItemStack(Material.LIME_STAINED_GLASS_PANE), "&r\u21E6 上一頁", "", "&7(" + selected_page + " / " + pages + ")"));
 			menu.addMenuClickHandler(46, (pl, slot, item, action) -> {
 				int next = selected_page - 1;
@@ -661,6 +664,7 @@ public class SlimefunGuide {
 					(pl, slot, item, action) -> false
 				);
 			}
+
 			menu.addItem(4, new CustomItem(new ItemStack(Material.ENCHANTED_BOOK), "&7⇦ 返回"));
 			menu.addMenuClickHandler(4, (pl, slot, item, action) -> {
 				openMainMenu(pl, survival, book, 1);
@@ -680,6 +684,7 @@ public class SlimefunGuide {
 					(pl, slot, item, action) -> false
 				);
 			}
+
 			menu.addItem(46, new CustomItem(new ItemStack(Material.LIME_STAINED_GLASS_PANE), "&r\u21E6 上一頁", "", "&7(" + selected_page + " / " + pages + ")"));
 			menu.addMenuClickHandler(46, (pl, slot, item, action) -> {
 				int next = selected_page - 1;
@@ -687,6 +692,7 @@ public class SlimefunGuide {
 				if (next != selected_page) openCategory(pl, category, survival, next, book);
 				return false;
 			});
+
 			menu.addItem(52, new CustomItem(new ItemStack(Material.LIME_STAINED_GLASS_PANE), "&r下一頁 \u21E8", "", "&7(" + selected_page + " / " + pages + ")"));
 			menu.addMenuClickHandler(52, (pl, slot, item, action) -> {
 				int next = selected_page + 1;
@@ -873,16 +879,19 @@ public class SlimefunGuide {
 				return false;
 			});
 		}
+
 		menu.addItem(3, Slimefun.hasUnlocked(p, recipe[0], false) ? recipe[0]: new CustomItem(Material.BARRIER, StringUtils.formatItemName(recipe[0], false), 0, new String[] {"&4&l已鎖定", "", Slimefun.hasPermission(p, SlimefunItem.getByItem(recipe[0]), false) ? "&r需要在其他地方解鎖" : "&r沒有權限"}));
 		menu.addMenuClickHandler(3, (pl, slot, itemstack, action) -> {
 			displayItem(pl, itemstack, true, book, 0);
 			return false;
 		});
+
 		menu.addItem(4, Slimefun.hasUnlocked(p, recipe[1], false) ? recipe[1]: new CustomItem(Material.BARRIER, StringUtils.formatItemName(recipe[1], false), 0, new String[] {"&4&l已鎖定", "", Slimefun.hasPermission(p, SlimefunItem.getByItem(recipe[1]), false) ? "&r需要在其他地方解鎖" : "&r沒有權限"}));
 		menu.addMenuClickHandler(4, (pl, slot, itemstack, action) -> {
 			displayItem(pl, itemstack, true, book, 0);
 			return false;
 		});
+
 		menu.addItem(5, Slimefun.hasUnlocked(p, recipe[2], false) ? recipe[2]: new CustomItem(Material.BARRIER, StringUtils.formatItemName(recipe[2], false), 0, new String[] {"&4&l已鎖定", "", Slimefun.hasPermission(p, SlimefunItem.getByItem(recipe[2]), false) ? "&r需要在其他地方解鎖" : "&r沒有權限"}));
 		menu.addMenuClickHandler(5, (pl, slot, itemstack, action) -> {
 			displayItem(pl, itemstack, true, book, 0);
@@ -924,6 +933,7 @@ public class SlimefunGuide {
 		menu.addMenuClickHandler(10,
 			(pl, slot, itemstack, action) -> false
 		);
+
 		menu.addItem(12, Slimefun.hasUnlocked(p, recipe[3], false) ? recipe[3]: new CustomItem(Material.BARRIER, StringUtils.formatItemName(recipe[3], false), 0, new String[] {"&4&l已鎖定", "", Slimefun.hasPermission(p, SlimefunItem.getByItem(recipe[3]), false) ? "&r需要在其他地方解鎖" : "&r沒有權限"}));
 		menu.addMenuClickHandler(12, (pl, slot, itemstack, action) -> {
 			displayItem(pl, itemstack, true, book, 0);
@@ -958,6 +968,7 @@ public class SlimefunGuide {
 			displayItem(pl, itemstack, true, book, 0);
 			return false;
 		});
+
 		menu.addItem(23, Slimefun.hasUnlocked(p, recipe[8], false) ? recipe[8]: new CustomItem(Material.BARRIER, StringUtils.formatItemName(recipe[8], false), 0, new String[] {"&4&l已鎖定", "", Slimefun.hasPermission(p, SlimefunItem.getByItem(recipe[8]), false) ? "&r需要在其他地方解鎖" : "&r沒有權限"}));
 		menu.addMenuClickHandler(23, (pl, slot, itemstack, action) -> {
 			displayItem(pl, itemstack, true, book, 0);

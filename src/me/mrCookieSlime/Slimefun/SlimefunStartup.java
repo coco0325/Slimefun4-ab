@@ -11,8 +11,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import me.mrCookieSlime.CSCoreLibPlugin.CSCoreLib;
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.PluginUtils;
+import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Reflection.ReflectionUtils;
 import me.mrCookieSlime.Slimefun.AncientAltar.Pedestals;
 import me.mrCookieSlime.Slimefun.CSCoreLibSetup.CSCoreLibLoader;
@@ -33,12 +33,16 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AContainer;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.machines.AutoEnchanter;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.machines.ElectricDustWasher;
-import me.mrCookieSlime.Slimefun.Setup.*;
+import me.mrCookieSlime.Slimefun.Setup.Files;
+import me.mrCookieSlime.Slimefun.Setup.Messages;
+import me.mrCookieSlime.Slimefun.Setup.MiscSetup;
+import me.mrCookieSlime.Slimefun.Setup.ResearchSetup;
+import me.mrCookieSlime.Slimefun.Setup.SlimefunManager;
+import me.mrCookieSlime.Slimefun.Setup.SlimefunSetup;
 import me.mrCookieSlime.Slimefun.URID.AutoSavingTask;
 import me.mrCookieSlime.Slimefun.URID.URID;
 import me.mrCookieSlime.Slimefun.WorldEdit.WESlimefunManager;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.MySQL.MySQLMain;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 import me.mrCookieSlime.Slimefun.api.SlimefunBackup;
 import me.mrCookieSlime.Slimefun.api.TickerTask;
@@ -52,15 +56,6 @@ import me.mrCookieSlime.Slimefun.listeners.*;
 
 import net.coreprotect.CoreProtect;
 import net.coreprotect.CoreProtectAPI;
-import org.bukkit.Bukkit;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-
-import java.io.File;
 
 public class SlimefunStartup extends JavaPlugin {
 
@@ -141,9 +136,8 @@ public class SlimefunStartup extends JavaPlugin {
 			// Init Config, Updater, Metrics and messages.yml
 			utils.setupUpdater(53485, getFile());
 			utils.setupMetrics();
-			utils.setupLocalization();		
+			utils.setupLocalization();
 			config = utils.getConfig();
-			new MySQLMain();			
 			Messages.local = utils.getLocalization();
 			Messages.setup();
 
@@ -353,12 +347,6 @@ public class SlimefunStartup extends JavaPlugin {
 
 			SlimefunBackup.start();
 		} catch (Exception ignored) {}
-
-		if (MySQLMain.instance.isEnabled())
-		{
-			//we can't just end all the thread, because its data being save to MySQL. We need to wait on them, and try and fource them to finish.
-			MySQLMain.instance.disable();
-		}
 
 		// Prevent Memory Leaks
 		config = null;
