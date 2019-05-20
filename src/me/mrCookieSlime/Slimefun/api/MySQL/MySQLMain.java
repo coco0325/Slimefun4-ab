@@ -26,11 +26,7 @@ public class MySQLMain {
     {
         instance = this;
         titanSQL = TitanSQL.instance;
-        if (!SlimefunStartup.getCfg().contains("options.mySQL_Enabled"))
-        {
-            SlimefunStartup.getCfg().setValue("options.mySQL_Enabled", false);
-        }
-        this.enabled = SlimefunStartup.getCfg().getBoolean("options.mySQL_Enabled");
+        this.enabled = true;
         if (!this.enabled) return;
         setupTables();
         load_storage = new HashMap<String, List<HashMap<String, ResultData>>>();
