@@ -1,7 +1,6 @@
 package me.mrCookieSlime.Slimefun.api.MySQL;
 
 import com.firesoftitan.play.titansql.*;
-import me.mrCookieSlime.Slimefun.SlimefunStartup;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -27,12 +26,11 @@ public class MySQLMain {
     {
         instance = this;
         titanSQL = TitanSQL.instance;
-        if (!SlimefunStartup.getCfg().contains("options.mySQL-Enabled"))
+        if (!SlimefunStartup.getCfg().contains("options.mySQL_Enabled"))
         {
-            SlimefunStartup.getCfg().setValue("options.mySQL-Enabled", false);
-            SlimefunStartup.getCfg().save();
+            SlimefunStartup.getCfg().setValue("options.mySQL_Enabled", false);
         }
-        this.enabled = SlimefunStartup.getCfg().getBoolean("options.mySQL-Enabled");
+        this.enabled = SlimefunStartup.getCfg().getBoolean("options.mySQL_Enabled");
         if (!this.enabled) return;
         setupTables();
         load_storage = new HashMap<String, List<HashMap<String, ResultData>>>();
