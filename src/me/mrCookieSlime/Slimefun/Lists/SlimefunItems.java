@@ -1,23 +1,21 @@
 package me.mrCookieSlime.Slimefun.Lists;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Color.*;
+import org.bukkit.FireworkEffect;
+import org.bukkit.FireworkEffect.Type;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkEffectMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomArmor;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomPotion;
 import me.mrCookieSlime.CSCoreLibPlugin.general.String.Christmas;
 import me.mrCookieSlime.CSCoreLibPlugin.general.World.CustomSkull;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.FireworkEffect.Type;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.FireworkEffectMeta;
-import org.bukkit.material.MaterialData;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-
-@SuppressWarnings("deprecation")
 public class SlimefunItems {
 
 	/* Items */
@@ -25,9 +23,9 @@ public class SlimefunItems {
 	public static ItemStack PORTABLE_DUSTBIN = null;
 	public static ItemStack ENDER_BACKPACK = null;
 	public static ItemStack MAGIC_EYE_OF_ENDER = new CustomItem(Material.ENDER_EYE, "&6&l魔法末影之眼", 0, new String[] {"&4&l需要全套末影護甲", "", "&7&e右鍵&7 以射出一顆末影珍珠"});
-	public static ItemStack BROKEN_SPAWNER = new CustomItem(new MaterialData(Material.SPAWNER), "&c已損壞的生怪箱", "&7類型: &b<類型>", "", "&c已損壞, 需要在遠古魔法祭壇中修復");
+	public static ItemStack BROKEN_SPAWNER = new CustomItem(Material.SPAWNER, "&c已損壞的生怪箱", "&7類型: &b<類型>", "", "&c已損壞, 需要在遠古魔法祭壇中修復");
 	public static ItemStack REPAIRED_SPAWNER = new CustomItem(Material.SPAWNER, "&b已修復的生怪箱", 0, new String[] {"&7類型: &b<type>"});
-	public static ItemStack INFERNAL_BONEMEAL = new CustomItem(new MaterialData(Material.BONE_MEAL), "&4地獄骨粉", "", "&c加速地獄疙瘩的生長速度");
+	public static ItemStack INFERNAL_BONEMEAL = new CustomItem(Material.BONE_MEAL, "&4地獄骨粉", "", "&c加速地獄疙瘩的生長速度");
 
 	/* Gadgets */
 	public static ItemStack GOLD_PAN = new CustomItem(Material.BOWL, "&6淘金盤","&a&o可以獲得各種各樣的礦物", "", "&7&e右鍵&7 從沙礫中淘金");
@@ -62,7 +60,7 @@ public class SlimefunItems {
 	public static ItemStack BOUND_VOIDBAG = null;
 
 	/* Jetpacks */
-	public static ItemStack DURALUMIN_JETPACK = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_CHESTPLATE), "&9電動噴射背包&7- &eI", "", "&8\u21E8 &7材料: &b硬鋁", "&c&o&8\u21E8 &e\u26A1 &70 / 20 J", "&8\u21E8 &7推力: &c0.35", "", "&7按住&eShift&7 使用"), Color.SILVER);
+	public static ItemStack DURALUMIN_JETPACK = new CustomArmor(new CustomItem(Material.LEATHER_CHESTPLATE), "&9電動噴射背包&7- &eI", "", "&8\u21E8 &7材料: &b硬鋁", "&c&o&8\u21E8 &e\u26A1 &70 / 20 J", "&8\u21E8 &7推力: &c0.35", "", "&7按住&eShift&7 使用"), Color.SILVER);
 	public static ItemStack SOLDER_JETPACK = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_CHESTPLATE), "&9電動噴射背包&7- &eII", "", "&8\u21E8 &7材料: &b焊錫", "&c&o&8\u21E8 &e\u26A1 &70 / 30 J", "&8\u21E8 &7推力: &c0.4", "", "&7按住&eShift&7 使用"), Color.SILVER);
 	public static ItemStack BILLON_JETPACK = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_CHESTPLATE), "&9電動噴射背包&7- &eIII", "", "&8\u21E8 &7材料: &b銀銅合金", "&c&o&8\u21E8 &e \u26A1 &70 / 45 J", "&8\u21E8 &7推力: &c0.45", "", "&7按住&eShift&7 使用"), Color.SILVER);
 	public static ItemStack STEEL_JETPACK = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_CHESTPLATE), "&9電動噴射背包&7- &eIV", "", "&8\u21E8 &7材料: &b鋼", "&c&o&8\u21E8 &e\u26A1 &70 / 60 J", "&8\u21E8 &7推力: &c0.5", "", "&7按住&eShift&7 使用"), Color.SILVER);

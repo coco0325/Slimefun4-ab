@@ -1,35 +1,31 @@
  package me.mrCookieSlime.Slimefun.api;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+ import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
+ import me.mrCookieSlime.CSCoreLibPlugin.general.Math.DoubleHandler;
+ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+ import me.mrCookieSlime.Slimefun.SlimefunStartup;
+ import me.mrCookieSlime.Slimefun.api.MySQL.MySQLMain;
+ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
+ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
+ import me.mrCookieSlime.Slimefun.api.inventory.UniversalBlockMenu;
+ import org.bukkit.Bukkit;
+ import org.bukkit.Chunk;
+ import org.bukkit.Location;
+ import org.bukkit.World;
+ import org.bukkit.block.Block;
+ import org.bukkit.configuration.file.FileConfiguration;
+ import org.bukkit.configuration.file.YamlConfiguration;
+ import org.bukkit.entity.HumanEntity;
+ import org.bukkit.inventory.ItemStack;
+ import org.json.simple.JSONObject;
+ import org.json.simple.parser.JSONParser;
+ import org.json.simple.parser.ParseException;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.block.Block;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.inventory.ItemStack;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-import me.mrCookieSlime.CSCoreLibPlugin.general.Math.DoubleHandler;
-import me.mrCookieSlime.Slimefun.SlimefunStartup;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
-import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
-import me.mrCookieSlime.Slimefun.api.inventory.UniversalBlockMenu;
+ import java.io.File;
+ import java.io.IOException;
+ import java.nio.file.Files;
+ import java.nio.file.StandardCopyOption;
+ import java.util.*;
 
 public class BlockStorage {
 	private static final String path_blocks = "data-storage/Slimefun/stored-blocks/";
@@ -38,31 +34,31 @@ public class BlockStorage {
 	public static Map<String, BlockStorage> worlds = new HashMap<String, BlockStorage>();
 	public static Map<String, Set<Location>> ticking_chunks = new HashMap<String, Set<Location>>();
 	public static Set<String> loaded_tickers = new HashSet<String>();
-	
+
 	private World world;
-	
+
 	private Map<Location, Config> storage = new HashMap<>();
 	private static Map<String, String> map_chunks = new HashMap<String, String>();
-	
+
 	private Map<Location, BlockMenu> inventories = new HashMap<Location, BlockMenu>();
 	public static Map<String, UniversalBlockMenu> universal_inventories = new HashMap<String, UniversalBlockMenu>();
-	
+
 	private Map<String, Config> cache_blocks = new HashMap<String, Config>();
-	
+
 	public static int info_delay;
-	
+
 	public static BlockStorage getStorage(World world) {
 		return worlds.get(world.getName());
 	}
-	
+
 	public static BlockStorage getForcedStorage(World world) {
 		return isWorldRegistered(world.getName()) ? worlds.get(world.getName()): new BlockStorage(world);
 	}
-	
+
 	private static String serializeLocation(Location l) {
 		return l.getWorld().getName() + ";" + l.getBlockX() + ";" + l.getBlockY() + ";" + l.getBlockZ();
 	}
-	
+
 	private static String serializeChunk(Chunk chunk) {
 		return chunk.getWorld().getName() + ";Chunk;" + chunk.getX() + ";" + chunk.getZ();
 	}
@@ -70,7 +66,7 @@ public class BlockStorage {
 	private static String locationToChunkString(Location l) {
 		return l.getWorld().getName() + ";Chunk;" + (l.getBlockX() >> 4) + ";" + (l.getBlockZ() >> 4);
 	}
-	
+
 	private static Location deserializeLocation(String l) {
 		try {
 			World w = Bukkit.getWorld(l.split(";")[0]);
@@ -79,23 +75,88 @@ public class BlockStorage {
 		}
 		return null;
 	}
-	
+
 	public BlockStorage(final World w) {
 		if (worlds.containsKey(w.getName())) return;
+		Table block_storage_table = null;
+		if (MySQLMain.instance.isEnabled())
+		{
+			block_storage_table = MySQLMain.instance.getBlock_storage();
+			System.out.println("[Slimefun] Waiting for MySQL for world: " + w.getName());
+			long timestamp = System.currentTimeMillis();
+			while (!MySQLMain.instance.isLoaded(w.getName()))
+			{
+				if (timestamp + info_delay < System.currentTimeMillis()) {
+					System.out.println("[Slimefun] Waiting for MySQL for world: " + w.getName());
+					timestamp = System.currentTimeMillis();
+				}
+			}
+		}
 		this.world = w;
 		System.out.println("[Slimefun] Loading Blocks for World \"" + w.getName() + "\"");
 		System.out.println("[Slimefun] This may take a long time...");
-		
+		if (MySQLMain.instance.isEnabled()) {
+
+			List<HashMap<String, ResultData>> results = MySQLMain.instance.getLoad_storage(this.world.getName());
+			if (results != null && results.size() > 0) {
+				long total = results.size(), start = System.currentTimeMillis();
+				long done = 0, timestamp = System.currentTimeMillis(), totalBlocks = 0;
+				try {
+					for (HashMap<String, ResultData> result : results) {
+						String world = result.get("world").getString();
+						if (timestamp + info_delay < System.currentTimeMillis()) {
+							System.out.println("[Slimefun] Loading Blocks From MySQL... " + Math.round((((done * 100.0f) / total) * 100.0f) / 100.0f) + "% done (\"" + w.getName() + "\")");
+							timestamp = System.currentTimeMillis();
+						}
+						if (world.equals(this.world.getName())) {
+							String idSQL = result.get("id").getString();
+							String key = result.get("location").getString();
+							String id = result.get("slimefun_id").getString();
+							Location l = deserializeLocation(key);
+							String chunk_string = locationToChunkString(l);
+
+							String json = result.get("json").getString();
+							Config blockInfo = parseBlockInfo(l, json);
+							MySQLMain.instance.addSQLID(l, idSQL);
+							storage.put(l, blockInfo);
+							totalBlocks++;
+							if (SlimefunItem.isTicking(id)) {
+								Set<Location> locations = ticking_chunks.containsKey(chunk_string) ? ticking_chunks.get(chunk_string) : new HashSet<Location>();
+								locations.add(l);
+								ticking_chunks.put(chunk_string, locations);
+								if (!loaded_tickers.contains(chunk_string)) loaded_tickers.add(chunk_string);
+							}
+
+						}
+						done++;
+					}
+
+				} finally {
+					long time = (System.currentTimeMillis() - start);
+					System.out.println("[Slimefun] Loading Blocks From MySQL... 100% (FINISHED - " + time + "ms)");
+					System.out.println("[Slimefun] Loaded a total of " + totalBlocks + " Blocks for World \"" + world.getName() + "\"");
+					if (totalBlocks > 0)
+						System.out.println("[Slimefun] Avg: " + DoubleHandler.fixDouble((double) time / (double) totalBlocks, 3) + "ms/Block");
+				}
+
+			}
+		}
 		File f = new File(path_blocks + w.getName());
 		if (f.exists()) {
 			long total = f.listFiles().length, start = System.currentTimeMillis();
 			long done = 0, timestamp = System.currentTimeMillis(), totalBlocks = 0;
-			
+
 			try {
 				for (File file: f.listFiles()) {
 					if (file.getName().endsWith(".sfb")) {
 						if (timestamp + info_delay < System.currentTimeMillis()) {
-							System.out.println("[Slimefun] Loading Blocks... " + Math.round((((done * 100.0f) / total) * 100.0f) / 100.0f) + "% done (\"" + w.getName() + "\")");
+							if (MySQLMain.instance.isEnabled())
+							{
+								System.out.println("[Slimefun] Converting Blocks Data To MySQL... " + Math.round((((done * 100.0f) / total) * 100.0f) / 100.0f) + "% done (\"" + w.getName() + "\")");
+							}
+							else {
+								System.out.println("[Slimefun] Loading Blocks... " + Math.round((((done * 100.0f) / total) * 100.0f) / 100.0f) + "% done (\"" + w.getName() + "\")");
+							}
 							timestamp = System.currentTimeMillis();
 						}
 
@@ -117,6 +178,7 @@ public class BlockStorage {
 									System.out.println("[Slimefun] New block data (" + key + "): " + json);
 									continue;
 								}
+
 								storage.put(l, blockInfo);
 
 								if (SlimefunItem.isTicking(file.getName().replace(".sfb", ""))) {
@@ -131,7 +193,13 @@ public class BlockStorage {
 							}
 						}
 						done++;
+
 					}
+				}
+				if (MySQLMain.instance.isEnabled())
+				{
+					File f2 = new File(path_blocks + w.getName() + "_old");
+					f.renameTo(f2);
 				}
 			} finally {
 				long time = (System.currentTimeMillis() - start);
@@ -141,7 +209,7 @@ public class BlockStorage {
 			}
 		}
 		else f.mkdirs();
-		
+
 		File chunks = new File(path_chunks + "chunks.sfc");
 		if (chunks.exists()) {
 			FileConfiguration cfg = YamlConfiguration.loadConfiguration(chunks);
@@ -154,9 +222,9 @@ public class BlockStorage {
 				}
 			}
 		}
-		
+
 		worlds.put(world.getName(), this);
-		
+
 		for (File file: new File("data-storage/Slimefun/stored-inventories").listFiles()) {
 			if (file.getName().startsWith(w.getName()) && file.getName().endsWith(".sfi")) {
 				Location l = deserializeLocation(file.getName().replace(".sfi", ""));
@@ -175,7 +243,7 @@ public class BlockStorage {
 				}
 			}
 		}
-		
+
 		for (File file: new File("data-storage/Slimefun/universal-inventories").listFiles()) {
 			if (file.getName().endsWith(".sfi")) {
 				Config cfg = new Config(file);
@@ -187,54 +255,85 @@ public class BlockStorage {
 
 	private static int chunk_changes = 0;
 	private int changes = 0;
-	
+
 	public void computeChanges() {
 		changes = cache_blocks.size() + chunk_changes;
-		
+
 		Map<Location, BlockMenu> inventories2 = new HashMap<Location, BlockMenu>(inventories);
 		for (Map.Entry<Location, BlockMenu> entry: inventories2.entrySet()) {
 			changes += entry.getValue().changes;
 		}
-		
+
 		Map<String, UniversalBlockMenu> universal_inventories2 = new HashMap<String, UniversalBlockMenu>(universal_inventories);
 		for (Map.Entry<String, UniversalBlockMenu> entry: universal_inventories2.entrySet()) {
 			changes += entry.getValue().changes;
 		}
 	}
-	
+
 	public int getChanges() {
 		return changes;
 	}
-	
+
 	public void save(boolean remove) {
 		this.save(true, remove);
 	}
-	
+
 	public void save(boolean computeChanges, boolean remove) {
 		if (computeChanges) computeChanges();
-		
+
 		if (changes == 0) return;
-		
+
 		System.out.println("[Slimefun] Saving Blocks for World \"" + world.getName() + "\" (" + changes + " Changes queued)");
-		
+
 		Map<String, Config> cache = new HashMap<String, Config>(cache_blocks);
-		
+
 		for (Map.Entry<String, Config> entry: cache.entrySet()) {
 			cache_blocks.remove(entry.getKey());
 			Config cfg = entry.getValue();
-			if (cfg.getKeys().isEmpty()) {
-				cfg.getFile().delete();
-			} else {
-				File tmpFile = new File(cfg.getFile().getParentFile(), cfg.getFile().getName() + ".tmp");
-				cfg.save(tmpFile);
-				try {
-					Files.move(tmpFile.toPath(), cfg.getFile().toPath(), StandardCopyOption.ATOMIC_MOVE);
-				} catch (IOException e) {
-					e.printStackTrace();
+			if (!MySQLMain.instance.isEnabled()) {
+				if (cfg.getKeys().isEmpty()) {
+					cfg.getFile().delete();
+				} else {
+					File tmpFile = new File(cfg.getFile().getParentFile(), cfg.getFile().getName() + ".tmp");
+					cfg.save(tmpFile);
+					try {
+						Files.move(tmpFile.toPath(), cfg.getFile().toPath(), StandardCopyOption.ATOMIC_MOVE);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			else
+			{
+				MySQLMain mySQLMain = MySQLMain.instance;
+				Table block_storage_table = mySQLMain.getBlock_storage();
+
+				for (String key: cfg.getKeys()) {
+					Location l = deserializeLocation(key);
+					String json = cfg.getString(key);
+					Config blockInfo = parseBlockInfo(l, json);
+					if (blockInfo.getString("id") == null)
+					{
+						//this block turned into a head lets retrive the data from the MySQL and not save this bad data.
+
+						//System.out.println("[Slimefun]: Block with no id can't be saved, this will turn into a head. location: " + key);
+						continue;
+					}
+					if (MySQLMain.instance.getSQLID(l) == null)
+					{
+						String idSQL = MySQLMain.instance.getNewIDString();
+						mySQLMain.instance.addSQLID(l, idSQL);
+					}
+					block_storage_table.setDataField("id", MySQLMain.instance.getSQLID(l));
+					block_storage_table.setDataField("location", key);
+					block_storage_table.setDataField("slimefun_id", blockInfo.getString("id"));
+					block_storage_table.setDataField("world", l.getWorld().getName());
+					block_storage_table.setDataField("json", json);
+					block_storage_table.insertData();
 				}
 			}
 		}
-		
+
 		Map<Location, BlockMenu> inventories2 = new HashMap<Location, BlockMenu>(inventories);
 		
 		for (Map.Entry<Location, BlockMenu> entry: inventories2.entrySet()) {
@@ -404,6 +503,32 @@ public class BlockStorage {
 
 	public static void setBlockInfo(Location l, Config cfg, boolean updateTicker) {
 		BlockStorage storage = getStorage(l.getWorld());
+		if (cfg.getString("id") == null)
+		{
+			Config havData = storage.storage.get(l);
+			if (havData == null || havData.getString("id") == null)
+			{
+				System.out.println("---------------------A-----------------------");
+				System.out.println("Location: " + l.toString());
+				System.out.println(TitanSQL.getTrace());
+				System.out.println("---------------------A-----------------------");
+				return;
+			}
+			for (String key: havData.getKeys())
+			{
+				cfg.setValue(key, havData.getValue(key));
+			}
+			if (cfg.getString("id") == null)
+			{
+				System.out.println("-------------------B-------------------------");
+				System.out.println("Location: " + l.toString());
+				System.out.println(TitanSQL.getTrace());
+				System.out.println("--------------------B------------------------");
+				return;
+			}
+			System.out.println("--------------------Fixed------------------------");
+		}
+
 		storage.storage.put(l, cfg);
 		if (BlockMenuPreset.isInventory(cfg.getString("id"))) {
 			if (BlockMenuPreset.isUniversalInventory(cfg.getString("id"))) {
@@ -447,6 +572,12 @@ public class BlockStorage {
 		BlockStorage storage = getStorage(l.getWorld());
 		if (hasBlockInfo(l)) {
 			refreshCache(storage, l, getLocationInfo(l).getString("id"), null, destroy);
+			if (MySQLMain.instance.isEnabled())
+			{
+				MySQLMain.instance.getBlock_storage().delete("id",  MySQLMain.instance.getSQLID(l));
+				MySQLMain.instance.deleteSQLID(l);
+
+			}
 			storage.storage.remove(l);
 		}
 		
@@ -496,6 +627,12 @@ public class BlockStorage {
 		}
 		
 		refreshCache(storage, from, getLocationInfo(from).getString("id"), null, true);
+		if (MySQLMain.instance.isEnabled())
+		{
+			MySQLMain.instance.getBlock_storage().delete("id", MySQLMain.instance.getSQLID(from));
+			MySQLMain.instance.deleteSQLID(from);
+
+		}
 		storage.storage.remove(from);
 
 		String chunk_string = locationToChunkString(from);
