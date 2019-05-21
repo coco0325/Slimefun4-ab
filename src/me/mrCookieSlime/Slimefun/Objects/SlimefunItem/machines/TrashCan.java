@@ -1,11 +1,8 @@
 package me.mrCookieSlime.Slimefun.Objects.SlimefunItem.machines;
 
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.MenuClickHandler;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -15,6 +12,11 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
+
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class TrashCan extends SlimefunItem {
 	
@@ -48,10 +50,16 @@ public class TrashCan extends SlimefunItem {
 	}
 	
 	private void constructMenu(BlockMenuPreset preset) {
-		for (int i : border) {
+		for (int i: border) {
 			preset.addItem(i, new CustomItem(new ItemStack(Material.RED_STAINED_GLASS_PANE), " "),
-				(p, slot, item, action) -> false
-			);
+			new MenuClickHandler() {
+
+				@Override
+				public boolean onClick(Player arg0, int arg1, ItemStack arg2, ClickAction arg3) {
+					return false;
+				}
+						
+			});
 		}
 	}
 	
@@ -87,5 +95,4 @@ public class TrashCan extends SlimefunItem {
 
 		super.register(slimefun);
 	}
-
 }

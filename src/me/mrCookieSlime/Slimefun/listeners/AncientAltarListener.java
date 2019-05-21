@@ -6,6 +6,18 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Variable;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Player.PlayerInventory;
+import me.mrCookieSlime.CSCoreLibPlugin.general.String.StringUtils;
+import me.mrCookieSlime.Slimefun.SlimefunStartup;
+import me.mrCookieSlime.Slimefun.AncientAltar.Pedestals;
+import me.mrCookieSlime.Slimefun.AncientAltar.RitualAnimation;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.Setup.Messages;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import me.mrCookieSlime.Slimefun.Variables;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -24,18 +36,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.util.Vector;
 
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Variable;
-import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
-import me.mrCookieSlime.CSCoreLibPlugin.general.Player.PlayerInventory;
-import me.mrCookieSlime.CSCoreLibPlugin.general.String.StringUtils;
-import me.mrCookieSlime.Slimefun.SlimefunStartup;
-import me.mrCookieSlime.Slimefun.AncientAltar.Pedestals;
-import me.mrCookieSlime.Slimefun.AncientAltar.RitualAnimation;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.Setup.Messages;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.Variables;
-
 public class AncientAltarListener implements Listener {
 
 	public AncientAltarListener(SlimefunStartup plugin) {
@@ -45,7 +45,7 @@ public class AncientAltarListener implements Listener {
 	List<Block> altars = new ArrayList<Block>();
 	Set<UUID> removed_items = new HashSet<UUID>();
 
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+	@EventHandler(priority=EventPriority.HIGH, ignoreCancelled = true)
 	public void onInteract(PlayerInteractEvent e) {
 		if (e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 		Block b = e.getClickedBlock();
@@ -70,8 +70,12 @@ public class AncientAltarListener implements Listener {
 					final UUID uuid = stack.getUniqueId();
 					removed_items.add(uuid);
 
-					SlimefunStartup.instance.getServer().getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, () -> {
-						removed_items.remove(uuid);
+					SlimefunStartup.instance.getServer().getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, new Runnable() {
+
+						@Override
+						public void run() {
+							removed_items.remove(uuid);
+						}
 					}, 30L);
 
 					stack.remove();
@@ -141,11 +145,12 @@ public class AncientAltarListener implements Listener {
 
 	public static ItemStack fixItemStack(ItemStack itemStack, String customName) {
 		ItemStack stack = itemStack.clone();
-		if (customName.equals(StringUtils.formatItemName(new ItemStack(itemStack.getType()), false))) {
+		if (customName.equals(StringUtils.formatItemName(new CustomItem(itemStack, 1), false))) {
 			ItemMeta im = stack.getItemMeta();
 			im.setDisplayName(null);
 			stack.setItemMeta(im);
-		} else {
+		}
+		else {
 			ItemMeta im = stack.getItemMeta();
 			im.setDisplayName(customName);
 			stack.setItemMeta(im);
@@ -176,7 +181,7 @@ public class AncientAltarListener implements Listener {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler (priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onBlockPlace(BlockPlaceEvent e) {
 		Block b = e.getBlockPlaced().getRelative(0, -1, 0);
 		SlimefunItem item = BlockStorage.check(b);
@@ -186,5 +191,4 @@ public class AncientAltarListener implements Listener {
 			e.setCancelled(true);
 		}
 	}
-
 }

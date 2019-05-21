@@ -6,14 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
-
 import me.mrCookieSlime.CSCoreLibPlugin.CSCoreLib;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.AdvancedMenuClickHandler;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu.MenuClickHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ClickAction;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
@@ -29,6 +24,13 @@ import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenuPreset;
 import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 import me.mrCookieSlime.Slimefun.api.item_transport.RecipeSorter;
+
+import org.apache.commons.lang.ArrayUtils;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemStack;
 
 public abstract class ElectricSmeltery extends AContainer {
 	
@@ -71,7 +73,7 @@ public abstract class ElectricSmeltery extends AContainer {
 				
 				List<Integer> slots = new ArrayList<Integer>();
 				
-				for (int slot : getInputSlots()) {
+				for (int slot: getInputSlots()) {
 					if (SlimefunManager.isItemSimiliar(menu.getItemInSlot(slot), item, true)) {
 						slots.add(slot);
 					}
@@ -82,14 +84,7 @@ public abstract class ElectricSmeltery extends AContainer {
 				}
 				else {
 					Collections.sort(slots, new RecipeSorter(menu));
-					
-					int[] array = new int[slots.size()];
-					
-					for (int i = 0; i < slots.size(); i++) {
-						array[i] = slots.get(i);
-					}
-					
-					return array;
+					return ArrayUtils.toPrimitive(slots.toArray(new Integer[slots.size()]));
 				}
 			}
 		};
@@ -98,27 +93,28 @@ public abstract class ElectricSmeltery extends AContainer {
 			
 			@Override
 			public void onPlace(Player p, Block b, SlimefunItem item) {
+				
 			}
 			
 			@Override
 			public boolean onBreak(Player p, Block b, SlimefunItem item, UnregisterReason reason) {
 				BlockMenu inv = BlockStorage.getInventory(b);
 				if (inv != null) {
-					for (int slot : getInputSlots()) {
+					for (int slot: getInputSlots()) {
 						if (inv.getItemInSlot(slot) != null) {
 							b.getWorld().dropItemNaturally(b.getLocation(), inv.getItemInSlot(slot));
 							inv.replaceExistingItem(slot, null);
 						}
 					}
-					for (int slot : getOutputSlots()) {
+					for (int slot: getOutputSlots()) {
 						if (inv.getItemInSlot(slot) != null) {
 							b.getWorld().dropItemNaturally(b.getLocation(), inv.getItemInSlot(slot));
 							inv.replaceExistingItem(slot, null);
 						}
 					}
 				}
-				progress.remove(b);
-				processing.remove(b);
+				progress.remove(b.getLocation());
+				processing.remove(b.getLocation());
 				return true;
 			}
 		});
@@ -127,27 +123,51 @@ public abstract class ElectricSmeltery extends AContainer {
 	}
 	
 	protected void constructMenu(BlockMenuPreset preset) {
-		for (int i : border) {
+		for (int i: border) {
 			preset.addItem(i, new CustomItem(new ItemStack(Material.GRAY_STAINED_GLASS_PANE), " "),
-				(p, slot, item, action) -> false
-			);
+			new MenuClickHandler() {
+
+				@Override
+				public boolean onClick(Player arg0, int arg1, ItemStack arg2, ClickAction arg3) {
+					return false;
+				}
+						
+			});
 		}
-		for (int i : border_in) {
+		for (int i: border_in) {
 			preset.addItem(i, new CustomItem(new ItemStack(Material.CYAN_STAINED_GLASS_PANE), " "),
-				(p, slot, item, action) -> false
-			);
+			new MenuClickHandler() {
+
+				@Override
+				public boolean onClick(Player arg0, int arg1, ItemStack arg2, ClickAction arg3) {
+					return false;
+				}
+						
+			});
 		}
-		for (int i : border_out) {
+		for (int i: border_out) {
 			preset.addItem(i, new CustomItem(new ItemStack(Material.ORANGE_STAINED_GLASS_PANE), " "),
-				(p, slot, item, action) -> false
-			);
+			new MenuClickHandler() {
+
+				@Override
+				public boolean onClick(Player arg0, int arg1, ItemStack arg2, ClickAction arg3) {
+					return false;
+				}
+						
+			});
 		}
 		
 		preset.addItem(22, new CustomItem(new ItemStack(Material.BLACK_STAINED_GLASS_PANE), " "),
-			(p, slot, item, action) -> false
-		);
+		new MenuClickHandler() {
+
+			@Override
+			public boolean onClick(Player arg0, int arg1, ItemStack arg2, ClickAction arg3) {
+				return false;
+			}
+							
+		});
 		
-		for (int i : getOutputSlots()) {
+		for (int i: getOutputSlots()) {
 			preset.addMenuClickHandler(i, new AdvancedMenuClickHandler() {
 				
 				@Override

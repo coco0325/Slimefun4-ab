@@ -567,7 +567,6 @@ public class SlimefunItems {
 	public static ItemStack ENERGY_REGULATOR = null;
 	public static ItemStack DEBUG_FISH = new CustomItem(new MaterialData(Material.PUFFERFISH), "&3這魚多少錢?", "", "&e右鍵&r任意方塊以查看它的方塊數據", "&e左鍵&r破壞方塊" , "&eShift + 左鍵&r任意方塊以清除它的方塊數據", "&eShift + 右鍵&r放置一個佔位符方塊");
 
-
 	public static ItemStack NETHER_ICE = null;
 	public static ItemStack ENRICHED_NETHER_ICE = null;
 	public static ItemStack NETHER_ICE_COOLANT_CELL = null;
@@ -609,7 +608,6 @@ public class SlimefunItems {
 
 	public static ItemStack FOOD_COMPOSTER = new CustomItem(new MaterialData(Material.GREEN_TERRACOTTA), "&c食品堆肥器", "", "&r可製造&a有機肥料", "", "&6高級機器", "&8\u21E8 &7速度: 1x", "&8\u21E8 &e\u26A1 &7256 J 可儲存", "&8\u21E8 &e\u26A1 &716 J/s");
 	public static ItemStack FOOD_COMPOSTER_2 = new CustomItem(new MaterialData(Material.GREEN_TERRACOTTA), "&c食品堆肥器&7(&eII&7)", "", "&r可製造&a有機肥料", "", "&4終極機器", "&8 \u21E8 &7速度: 10x", "&8\u21E8 &e\u26A1 &7512 J 可儲存", "&8\u21E8 &e\u26A1 &752 J/s");
-
 	public static ItemStack XP_COLLECTOR = null;
 	public static ItemStack REACTOR_COOLANT_CELL = null;
 
@@ -800,3 +798,4 @@ public class SlimefunItems {
 		}
 	}
 }
+

@@ -6,7 +6,7 @@ import me.mrCookieSlime.CSCoreLibPlugin.general.World.CustomSkull;
 import org.bukkit.inventory.ItemStack;
 
 public enum ScriptPart {
-
+	
 	// Start and End Parts
 	START(AndroidType.NONE, "&2執行程式", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNGFlMjk0MjJkYjQwNDdlZmRiOWJhYzJjZGFlNWEwNzE5ZWI3NzJmY2NjODhhNjZkOTEyMzIwYjM0M2MzNDEifX19"),
 	REPEAT(AndroidType.NONE, "&9重複執行", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYmM4ZGVmNjdhMTI2MjJlYWQxZGVjZDNkODkzNjQyNTdiNTMxODk2ZDg3ZTQ2OTgxMzEzMWNhMjM1YjVjNyJ9fX0="),
@@ -54,10 +54,9 @@ public enum ScriptPart {
 	INTERFACE_ITEMS(AndroidType.NONE, "&9將物品放入面對的介面", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTBhNGRiZjY2MjVjNDJiZTU3YThiYTJjMzMwOTU0YTc2YmRmMjI3ODU1NDBlODdhNWM5NjcyNjg1MjM4ZWMifX19"),
 	INTERFACE_FUEL(AndroidType.NONE, "&c將燃料從面對的介面提取", "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjQzMmY1MjgyYTUwNzQ1YjkxMmJlMTRkZWRhNTgxYmQ0YTA5Yjk3N2EzYzMyZDdlOTU3ODQ5MWZlZThmYTcifX19");
 
-
 	private ItemStack item;
 	private AndroidType type;
-
+	
 	private ScriptPart(AndroidType type, String name, String texture) {
 		try {
 			this.type = type;
@@ -66,13 +65,12 @@ public enum ScriptPart {
 			x.printStackTrace();
 		}
 	}
-
+	
 	public ItemStack toItemStack() {
 		return this.item;
 	}
-
+	
 	public AndroidType getRequiredType() {
 		return this.type;
 	}
-
 }
