@@ -1,11 +1,12 @@
 package me.mrCookieSlime.Slimefun.Objects;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
 
+import me.mrCookieSlime.CSCoreLibPlugin.database.MySQLDatabase;
+import me.mrCookieSlime.CSCoreLibPlugin.database.TableValue;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Variable;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Particles.FireworkShow;
@@ -38,6 +39,8 @@ public class Research {
 
 	private static final int[] research_progress = {23, 44, 57, 92};
 
+	private MySQLDatabase sql = SlimefunStartup.sql;
+
 	/**
 	 * Whether researching is enabled or not;
 	 * @since 4.0
@@ -61,7 +64,7 @@ public class Research {
 	public static boolean creative_research = true;
 
 	private int id;
-	private String name;
+	private String name, sid;
 	private List<SlimefunItem> items;
 	private int cost;
 
@@ -88,7 +91,9 @@ public class Research {
 		this.name = name;
 		this.cost = cost;
 		this.items = new ArrayList<SlimefunItem>();
+		sid = String.valueOf(id);
 	}
+
 
 	/**
 	 * Gets the ID of the research.
@@ -183,6 +188,10 @@ public class Research {
 		return items;
 	}
 
+	private void save(UUID uuid, int id){
+
+	}
+
 	/**
 	 * Convenience method to check if the player unlocked this research.
 	 * 
@@ -208,7 +217,34 @@ public class Research {
 	public boolean hasUnlocked(UUID uuid) {
 		if (!enabled) return true;
 		if (!SlimefunStartup.getResearchCfg().getBoolean(this.id + ".enabled")) return true;
-		return new Config(new File("data-storage/Slimefun/Players/" + uuid.toString() + ".yml")).contains("researches." + this.id);
+		return getPlayerResearches(uuid).contains(sid);
+	}
+
+	private ArrayList<String> getPlayerResearches(UUID uuid){
+		TableValue tableValue = new TableValue("uuid", uuid.toString());
+		String[] columns = new String[]{"unlocked"};
+		String result = null;
+		try {
+			ResultSet set = sql.selectFromTable("sf_research", columns, tableValue);
+			if(!set.next()) return null;
+			result = set.getString("unlocked");
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		ArrayList<String> researches = new ArrayList<>(Arrays.asList(result.split(".")));
+		return researches;
+	}
+
+	private void SQLunlock(UUID uuid){
+		ArrayList<String> research_list = getPlayerResearches(uuid);
+		if(research_list != null && research_list.contains(sid)){
+			research_list.remove(sid);
+			StringBuilder strings = new StringBuilder();
+			for(String id : research_list){
+				strings.append(id+".");
+			}
+			sql.update("UPDATE 'sf_research' SET 'unlocked' = '"+strings.toString()+"' WHERE 'uuid' = '"+uuid.toString()+"';");
+		}
 	}
 
 	/**
@@ -233,10 +269,16 @@ public class Research {
 	 * @since 4.0
 	 */
 	public void lock(Player p) {
-		Config cfg = new Config(new File("data-storage/Slimefun/Players/" + p.getUniqueId() + ".yml"));
-		cfg.setValue("researches." + id, null);
-		cfg.save();
-		Messages.local.sendTranslation(p, "commands.research.reset-target", true);
+		ArrayList<String> research_list = getPlayerResearches(p.getUniqueId());
+		if(research_list != null && research_list.contains(sid)){
+			research_list.remove(sid);
+			StringBuilder strings = new StringBuilder();
+			for(String id : research_list){
+				strings.append(id+".");
+			}
+			sql.update("UPDATE 'sf_research' SET 'unlocked' = '"+strings.toString()+"' WHERE 'uuid' = '"+p.getUniqueId().toString()+"';");
+			Messages.local.sendTranslation(p, "commands.research.reset-target", true);
+		}
 	}
 
 	/**
@@ -254,9 +296,7 @@ public class Research {
 			if (!event.isCancelled()) {
 				final int research = this.id;
 				if (instant) {
-					Config cfg = new Config(new File("data-storage/Slimefun/Players/" + p.getUniqueId() + ".yml"));
-					cfg.setValue("researches." + research, true);
-					cfg.save();
+					SQLunlock(p.getUniqueId());
 					Messages.local.sendTranslation(p, "messages.unlocked", true, new Variable("%research%", getName()));
 					if (SlimefunStartup.getCfg().getBoolean("options.research-give-fireworks"))
 						FireworkShow.launchRandom(p, 1);
@@ -271,9 +311,7 @@ public class Research {
 						}, i*20L);
 					}
 					Bukkit.getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, () -> {
-						Config cfg = new Config(new File("data-storage/Slimefun/Players/" + p.getUniqueId() + ".yml"));
-						cfg.setValue("researches." + research, true);
-						cfg.save();
+						SQLunlock(p.getUniqueId());
 						Messages.local.sendTranslation(p, "messages.unlocked", true, new Variable("%research%", getName()));
 						if (SlimefunStartup.getCfg().getBoolean("options.research-unlock-fireworks"))
 							FireworkShow.launchRandom(p, 1);
@@ -283,6 +321,8 @@ public class Research {
 			}
 		}
 	}
+
+
 
 	/**
 	 * Registers the research.
@@ -364,11 +404,11 @@ public class Research {
 		else progress = "&a" + progress + " &r% ";
 
 		sender.sendMessage("");
-		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Statistics for Player: &b" + p.getName()));
+		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7玩家數據: &b" + p.getName()));
 		sender.sendMessage("");
-		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Title: &b" + getTitle(p, researched)));
-		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Research Progress: " + progress + "&e(" + researched.size() + " / " + list().size() + ")"));
-		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Total XP Levels spent: &b" + levels));
+		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7主題: &b" + getTitle(p, researched)));
+		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7研究進度: " + progress + "&e(" + researched.size() + " / " + list().size() + ")"));
+		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7總花費等級: &b" + levels));
 	}
 
 	/**

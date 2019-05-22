@@ -1,6 +1,6 @@
 package me.mrCookieSlime.Slimefun;
 
-import java.io.File;
+import java.io.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -14,6 +14,8 @@ import me.mrCookieSlime.CSCoreLibPlugin.CSCoreLib;
 import me.mrCookieSlime.CSCoreLibPlugin.PluginUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Reflection.ReflectionUtils;
+import me.mrCookieSlime.CSCoreLibPlugin.database.MySQLDatabase;
+import me.mrCookieSlime.CSCoreLibPlugin.database.SQLColumn;
 import me.mrCookieSlime.Slimefun.AncientAltar.Pedestals;
 import me.mrCookieSlime.Slimefun.CSCoreLibSetup.CSCoreLibLoader;
 import me.mrCookieSlime.Slimefun.Commands.SlimefunCommand;
@@ -57,6 +59,7 @@ import me.mrCookieSlime.Slimefun.listeners.*;
 import net.coreprotect.CoreProtect;
 import net.coreprotect.CoreProtectAPI;
 
+
 public class SlimefunStartup extends JavaPlugin {
 
 	public static SlimefunStartup instance;
@@ -67,6 +70,8 @@ public class SlimefunStartup extends JavaPlugin {
 	static Config whitelist;
 	static Config config;
 
+	public static MySQLDatabase sql;
+
 	public static TickerTask ticker;
 
 	private CoreProtectAPI coreProtectAPI;
@@ -74,6 +79,7 @@ public class SlimefunStartup extends JavaPlugin {
 	private boolean clearlag = false;
 	private boolean exoticGarden = false;
 	private boolean coreProtect = false;
+
 
 	// Supported Versions of Minecraft
 	final String[] supported = {"v1_14_"};
@@ -321,6 +327,12 @@ public class SlimefunStartup extends JavaPlugin {
 
 			// Do not show /sf elevator command in our Log, it could get quite spammy
 			CSCoreLib.getLib().filterLog("([A-Za-z0-9_]{3,16}) issued server command: /sf elevator (.{0,})");
+			sql = new MySQLDatabase(this);
+			sql.getConnection();
+			SQLColumn uuid_column = new SQLColumn("uuid", false, SQLColumn.DataType.CHAR(36));
+			SQLColumn research_column = new SQLColumn("unlocked", false, SQLColumn.DataType.TEXT());
+			SQLColumn[] columns = new SQLColumn[] {uuid_column, research_column};
+			sql.createTable("sf_research", "uuid", columns);
 		}
 	}
 
