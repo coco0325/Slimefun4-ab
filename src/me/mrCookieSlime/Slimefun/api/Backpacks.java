@@ -1,31 +1,29 @@
 package me.mrCookieSlime.Slimefun.api;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Date;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.io.BukkitObjectInputStream;
+import org.bukkit.util.io.BukkitObjectOutputStream;
+import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
+
+import me.vagdedes.mysql.database.SQL;
 
 public class Backpacks {
+
+	public static String tablename = "sf_backpack";
 	
 	public static String createBackpack(Player p, int size) {
-		List<Integer> ids = new ArrayList<Integer>();
-		Config cfg = new Config(new File("data-storage/Slimefun/Players/" + p.getUniqueId() + ".yml"));
-		for (int i = 0; i < 1000; i++) {
-			if (cfg.contains("backpacks." + i + ".size")) ids.add(i);
-			else break;
-		}
-		int id = ids.isEmpty() ? 0: ids.get(ids.size() - 1) + 1;
-		ids.add(id);
-		
-		cfg.setValue("backpacks." + id + ".size", size);
-		cfg.save();
+		Date date = new Date();
+		long id = date.getTime();
+		SQL.insertData("uuid, size", " '"+p.getUniqueId().toString()+"#"+id+"', '"+size+"' ", tablename);
 		return p.getUniqueId() + "#" + id;
 	}
 	
@@ -36,49 +34,91 @@ public class Backpacks {
 	
 	public static Inventory getInventory(Player p, ItemStack item) {
 		if (item == null || !item.hasItemMeta() || !item.getItemMeta().hasLore()) return null;
-		int id = -1;
+		long id = -1;
 		String uuid = "";
 		for (String line: item.getItemMeta().getLore()) {
 			if (line.startsWith(ChatColor.translateAlternateColorCodes('&', "&7ID: ")) && line.contains("#")) {
 				try {
-					id = Integer.parseInt(line.split("#")[1]);
+					id = Long.parseLong(line.split("#")[1]);
 					uuid = line.split("#")[0].replace(ChatColor.translateAlternateColorCodes('&', "&7ID: "), "");
 				} catch(NumberFormatException x) {
+					x.printStackTrace();
 				}
 			}
 		}
 		
 		if (id >= 0) {
-			Config cfg = new Config(new File("data-storage/Slimefun/Players/" + uuid + ".yml"));
-			int size = cfg.getInt("backpacks." + id + ".size");
-			Inventory inv = Bukkit.createInventory(null, size, "Backpack [" + size + " Slots]");
-			for (int i = 0; i < size; i++) {
-				inv.setItem(i, cfg.getItem("backpacks." + id + ".contents." + i));
+			Object o = SQL.get("inv", "uuid", "=", uuid+"#"+id, tablename);
+			String baseinv = String.valueOf(o);
+			Integer size = (Integer)SQL.get("size", "uuid", "=", uuid+"#"+id, tablename);
+			try {
+				Inventory inv = Bukkit.createInventory(null, size, "背包 [ 容量 " + size + " ]");
+				if(o == null){
+					return inv;
+				}
+				inv.setContents(fromBase64(baseinv).getContents());
+				return inv;
+			}catch (IOException e){
+				e.printStackTrace();
 			}
-			return inv;
+			return null;
 		}
 		else return null;
 	}
 	
 	public static void saveBackpack(Inventory inv, ItemStack item) {
-		int id = -1;
+		long id = -1;
 		String uuid = "";
 		for (String line: item.getItemMeta().getLore()) {
 			if (line.startsWith(ChatColor.translateAlternateColorCodes('&', "&7ID: ")) && line.contains("#")) {
 				try {
-					id = Integer.parseInt(line.split("#")[1]);
+					id = Long.parseLong(line.split("#")[1]);
 					uuid = line.split("#")[0].replace(ChatColor.translateAlternateColorCodes('&', "&7ID: "), "");
 				} catch(NumberFormatException x) {
+					x.printStackTrace();
 				}
 			}
 		}
-		
-		if (id >= 0) {
-			Config cfg = new Config(new File("data-storage/Slimefun/Players/" + uuid + ".yml"));
-			for (int i = 0; i < inv.getContents().length; i++) {
-				cfg.setValue("backpacks." + id + ".contents." + i, inv.getContents()[i]);
+		String baseinv = toBase64(inv);
+		SQL.set("inv", baseinv, "uuid", "=", uuid+"#"+id, tablename);
+	}
+
+	public static String toBase64(Inventory inventory) throws IllegalStateException {
+		try {
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			BukkitObjectOutputStream dataOutput = new BukkitObjectOutputStream(outputStream);
+
+			// Write the size of the inventory
+			dataOutput.writeInt(inventory.getSize());
+
+			// Save every element in the list
+			for (int i = 0; i < inventory.getSize(); i++) {
+				dataOutput.writeObject(inventory.getItem(i));
 			}
-			cfg.save();
+
+			// Serialize that array
+			dataOutput.close();
+			return Base64Coder.encodeLines(outputStream.toByteArray());
+		} catch (Exception e) {
+			throw new IllegalStateException("無法編碼.", e);
+		}
+	}
+
+	public static Inventory fromBase64(String data) throws IOException {
+		try {
+			ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
+			BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+			Inventory inventory = Bukkit.getServer().createInventory(null, dataInput.readInt());
+
+			// Read the serialized inventory
+			for (int i = 0; i < inventory.getSize(); i++) {
+				inventory.setItem(i, (ItemStack) dataInput.readObject());
+			}
+
+			dataInput.close();
+			return inventory;
+		} catch (ClassNotFoundException e) {
+			throw new IOException("無法解碼.", e);
 		}
 	}
 

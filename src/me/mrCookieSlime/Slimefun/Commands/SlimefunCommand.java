@@ -3,6 +3,7 @@ package me.mrCookieSlime.Slimefun.Commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.vagdedes.mysql.database.SQL;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -245,7 +246,7 @@ public class SlimefunCommand implements CommandExecutor, Listener {
 								e.printStackTrace();
 							}
 						}
-						else sender.sendMessage("&4Unknown Player: &c" + args[1]);
+						else sender.sendMessage("&4未知的玩家: &c" + args[1]);
 					}
 					else Messages.local.sendTranslation(sender, "messages.no-permission", true);
 				}
@@ -257,15 +258,19 @@ public class SlimefunCommand implements CommandExecutor, Listener {
 						if (Players.isOnline(args[1])) {
 							Player p = Bukkit.getPlayer(args[1]);
 							if (args[2].equalsIgnoreCase("all")) {
-								for (Research res : Research.list()) {
-									if (!res.hasUnlocked(p)) Messages.local.sendTranslation(sender, "messages.give-research", true, new Variable("%player%", p.getName()), new Variable("%research%", res.getName()));
-									res.unlock(p, true);
+								List<Research> research_list = Research.list();
+								StringBuilder strings = new StringBuilder();
+								for(Research res : research_list){
+									strings.append(res.getID()+"\\.");
+								}
+								if(SQL.exists("uuid", p.getUniqueId().toString(), Research.tablename)){
+										SQL.set("unlocked", strings.toString(), "uuid", "=", p.getUniqueId().toString(), Research.tablename);
+								}else{
+									SQL.insertData("uuid, unlocked", " '"+p.getUniqueId().toString()+"', '"+strings.toString()+"' ", Research.tablename);
 								}
 							}
 							else if (args[2].equalsIgnoreCase("reset")) {
-								for (Research res : Research.list()) {
-									res.lock(p);
-								}
+								SQL.deleteData("uuid", "=", p.getUniqueId().toString(), Research.tablename);
 								Messages.local.sendTranslation(p, "commands.research.reset", true, new Variable("%player%", args[1]));
 							}
 							else {

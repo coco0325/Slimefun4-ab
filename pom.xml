@@ -88,6 +88,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/ExoticGarden v1.2.0.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>me.vagdedes</groupId>
+            <artifactId>MySQL-API</artifactId>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/MySQL-API.jar</systemPath>
+        </dependency>
     </dependencies>
     <dependencyManagement>
     	<dependencies>
@@ -126,6 +132,11 @@
     			<artifactId>ExoticGarden</artifactId>
     			<version>1.2.0</version>
     		</dependency>
+            <dependency>
+                <groupId>me.vagdedes</groupId>
+                <artifactId>MySQL-API</artifactId>
+                <version>2.5</version>
+            </dependency>
     	</dependencies>
     </dependencyManagement>
 </project>

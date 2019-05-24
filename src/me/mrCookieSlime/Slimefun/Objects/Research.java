@@ -1,13 +1,7 @@
 package me.mrCookieSlime.Slimefun.Objects;
 
-import java.io.File;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 
-import me.mrCookieSlime.CSCoreLibPlugin.database.MySQLDatabase;
-import me.mrCookieSlime.CSCoreLibPlugin.database.TableValue;
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Variable;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Particles.FireworkShow;
 import me.mrCookieSlime.Slimefun.SlimefunStartup;
@@ -24,6 +18,8 @@ import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import me.vagdedes.mysql.database.SQL;
+
 /**
  * Statically handles researches. Represents a research, which is bound to one
  * {@link SlimefunItem} or more and require XP levels to unlock this/these item(s).
@@ -39,7 +35,7 @@ public class Research {
 
 	private static final int[] research_progress = {23, 44, 57, 92};
 
-	private MySQLDatabase sql = SlimefunStartup.sql;
+	public static String tablename = "sf_research";
 
 	/**
 	 * Whether researching is enabled or not;
@@ -91,7 +87,7 @@ public class Research {
 		this.name = name;
 		this.cost = cost;
 		this.items = new ArrayList<SlimefunItem>();
-		sid = String.valueOf(id);
+		this.sid = String.valueOf(id);
 	}
 
 
@@ -214,36 +210,48 @@ public class Research {
 	 * @since 4.0
 	 * @see #hasUnlocked(Player)
 	 */
+
 	public boolean hasUnlocked(UUID uuid) {
 		if (!enabled) return true;
 		if (!SlimefunStartup.getResearchCfg().getBoolean(this.id + ".enabled")) return true;
-		return getPlayerResearches(uuid).contains(sid);
+		ArrayList<String> list = getPlayerResearches(uuid);
+		if(list == null) return false;
+		return list.contains(this.sid);
 	}
 
-	private ArrayList<String> getPlayerResearches(UUID uuid){
-		TableValue tableValue = new TableValue("uuid", uuid.toString());
-		String[] columns = new String[]{"unlocked"};
-		String result = null;
-		try {
-			ResultSet set = sql.selectFromTable("sf_research", columns, tableValue);
-			if(!set.next()) return null;
-			result = set.getString("unlocked");
-		}catch (SQLException e){
-			e.printStackTrace();
+	public static void checkConnetion(){
+		if(!me.vagdedes.mysql.database.MySQL.isConnected()){
+			me.vagdedes.mysql.database.MySQL.connect();
 		}
-		ArrayList<String> researches = new ArrayList<>(Arrays.asList(result.split(".")));
+	}
+
+	public static ArrayList<String> getPlayerResearches(UUID uuid){
+		String result;
+		if(SQL.exists("uuid", uuid.toString(), tablename)){
+			checkConnetion();
+			result = String.valueOf(SQL.get("unlocked", "uuid", "=", uuid.toString(), tablename));
+		}else{
+			return null;
+		}
+		ArrayList<String> researches = new ArrayList<String>(Arrays.asList(result.split("\\.")));
 		return researches;
 	}
 
 	private void SQLunlock(UUID uuid){
-		ArrayList<String> research_list = getPlayerResearches(uuid);
-		if(research_list != null && research_list.contains(sid)){
-			research_list.remove(sid);
-			StringBuilder strings = new StringBuilder();
-			for(String id : research_list){
-				strings.append(id+".");
+		if(SQL.exists("uuid", uuid.toString(), tablename)){
+			ArrayList<String> research_list = getPlayerResearches(uuid);
+			if(!research_list.contains(this.sid)){
+				research_list.add(this.sid);
+				StringBuilder strings = new StringBuilder();
+				for(String id : research_list){
+					strings.append(id+"\\.");
+				}
+				checkConnetion();
+				SQL.set("unlocked", strings.toString(), "uuid", "=", uuid.toString(), tablename);
 			}
-			sql.update("UPDATE 'sf_research' SET 'unlocked' = '"+strings.toString()+"' WHERE 'uuid' = '"+uuid.toString()+"';");
+		}else{
+			checkConnetion();
+			SQL.insertData("uuid, unlocked", " '"+uuid.toString()+"', '"+this.sid+"\\.' ", tablename);
 		}
 	}
 
@@ -269,15 +277,21 @@ public class Research {
 	 * @since 4.0
 	 */
 	public void lock(Player p) {
-		ArrayList<String> research_list = getPlayerResearches(p.getUniqueId());
-		if(research_list != null && research_list.contains(sid)){
-			research_list.remove(sid);
+		Messages.local.sendTranslation(p, "commands.research.reset-target", true);
+		if(SQL.exists("uuid", p.getUniqueId().toString(), tablename)){
+			ArrayList<String> research_list = new ArrayList<String>(getPlayerResearches(p.getUniqueId()));
+			research_list.remove(this.sid);
+			if(research_list.size() == 0){
+				checkConnetion();
+				SQL.deleteData("uuid", "=", p.getUniqueId().toString(), tablename);
+				return;
+			}
 			StringBuilder strings = new StringBuilder();
 			for(String id : research_list){
-				strings.append(id+".");
+				strings.append(id+"\\.");
 			}
-			sql.update("UPDATE 'sf_research' SET 'unlocked' = '"+strings.toString()+"' WHERE 'uuid' = '"+p.getUniqueId().toString()+"';");
-			Messages.local.sendTranslation(p, "commands.research.reset-target", true);
+			checkConnetion();
+			SQL.set("unlocked", strings.toString(), "uuid", "=", p.getUniqueId().toString(), tablename);
 		}
 	}
 
@@ -296,7 +310,7 @@ public class Research {
 			if (!event.isCancelled()) {
 				final int research = this.id;
 				if (instant) {
-					SQLunlock(p.getUniqueId());
+                    SQLunlock(p.getUniqueId());
 					Messages.local.sendTranslation(p, "messages.unlocked", true, new Variable("%research%", getName()));
 					if (SlimefunStartup.getCfg().getBoolean("options.research-give-fireworks"))
 						FireworkShow.launchRandom(p, 1);
@@ -311,7 +325,7 @@ public class Research {
 						}, i*20L);
 					}
 					Bukkit.getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, () -> {
-						SQLunlock(p.getUniqueId());
+                        SQLunlock(p.getUniqueId());
 						Messages.local.sendTranslation(p, "messages.unlocked", true, new Variable("%research%", getName()));
 						if (SlimefunStartup.getCfg().getBoolean("options.research-unlock-fireworks"))
 							FireworkShow.launchRandom(p, 1);

@@ -2,6 +2,8 @@ package me.mrCookieSlime.Slimefun;
 
 import java.io.*;
 
+import me.vagdedes.mysql.database.SQL;
+
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -14,8 +16,6 @@ import me.mrCookieSlime.CSCoreLibPlugin.CSCoreLib;
 import me.mrCookieSlime.CSCoreLibPlugin.PluginUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Reflection.ReflectionUtils;
-import me.mrCookieSlime.CSCoreLibPlugin.database.MySQLDatabase;
-import me.mrCookieSlime.CSCoreLibPlugin.database.SQLColumn;
 import me.mrCookieSlime.Slimefun.AncientAltar.Pedestals;
 import me.mrCookieSlime.Slimefun.CSCoreLibSetup.CSCoreLibLoader;
 import me.mrCookieSlime.Slimefun.Commands.SlimefunCommand;
@@ -70,8 +70,6 @@ public class SlimefunStartup extends JavaPlugin {
 	static Config whitelist;
 	static Config config;
 
-	public static MySQLDatabase sql;
-
 	public static TickerTask ticker;
 
 	private CoreProtectAPI coreProtectAPI;
@@ -80,6 +78,7 @@ public class SlimefunStartup extends JavaPlugin {
 	private boolean exoticGarden = false;
 	private boolean coreProtect = false;
 
+	public static SQL sql;
 
 	// Supported Versions of Minecraft
 	final String[] supported = {"v1_14_"};
@@ -327,12 +326,10 @@ public class SlimefunStartup extends JavaPlugin {
 
 			// Do not show /sf elevator command in our Log, it could get quite spammy
 			CSCoreLib.getLib().filterLog("([A-Za-z0-9_]{3,16}) issued server command: /sf elevator (.{0,})");
-			sql = new MySQLDatabase(this);
-			sql.getConnection();
-			SQLColumn uuid_column = new SQLColumn("uuid", false, SQLColumn.DataType.CHAR(36));
-			SQLColumn research_column = new SQLColumn("unlocked", false, SQLColumn.DataType.TEXT());
-			SQLColumn[] columns = new SQLColumn[] {uuid_column, research_column};
-			sql.createTable("sf_research", "uuid", columns);
+			me.vagdedes.mysql.database.MySQL.update("CREATE TABLE IF NOT EXISTS sf_research " +
+					"(uuid CHAR(36), " + " unlocked TEXT(2000), PRIMARY KEY (uuid))");
+			me.vagdedes.mysql.database.MySQL.update("CREATE TABLE IF NOT EXISTS sf_backpack" +
+					" (uuid CHAR(50), size INT, inv TEXT, PRIMARY KEY (uuid))");
 		}
 	}
 
