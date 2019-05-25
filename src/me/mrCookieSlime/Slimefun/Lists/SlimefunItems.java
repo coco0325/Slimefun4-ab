@@ -25,8 +25,8 @@ public class SlimefunItems {
 	public static ItemStack PORTABLE_DUSTBIN = null;
 	public static ItemStack ENDER_BACKPACK = null;
 	public static ItemStack MAGIC_EYE_OF_ENDER = new CustomItem(Material.ENDER_EYE, "&6&l魔法末影之眼", 0, new String[] {"&4&l需要全套末影護甲", "", "&7&e右鍵&7 以射出一顆末影珍珠"});
-	public static ItemStack BROKEN_SPAWNER = new CustomItem(new MaterialData(Material.SPAWNER), "&c已損壞的生怪箱", "&7類型: &b<類型>", "", "&c已損壞, 需要在遠古魔法祭壇中修復");
-	public static ItemStack REPAIRED_SPAWNER = new CustomItem(Material.SPAWNER, "&b已修復的生怪箱", 0, new String[] {"&7類型: &b<type>"});
+	public static ItemStack BROKEN_SPAWNER = new CustomItem(new MaterialData(Material.SPAWNER), "&c已損壞的生怪箱", "&7類型: &b<#>", "", "&c已損壞, 需要在遠古魔法祭壇中修復");
+	public static ItemStack REPAIRED_SPAWNER = new CustomItem(Material.SPAWNER, "&b已修復的生怪箱", 0, new String[] {"&7類型: &b<#>"});
 	public static ItemStack INFERNAL_BONEMEAL = new CustomItem(new MaterialData(Material.BONE_MEAL), "&4地獄骨粉", "", "&c加速地獄疙瘩的生長速度");
 
 	/* Gadgets */
