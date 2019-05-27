@@ -129,7 +129,7 @@ public class ReactorAccessPort extends SlimefunItem {
 			(p, slot, item, action) -> false
 		);
 		
-		preset.addItem(22, new CustomItem(SlimefunItems.PLUTONIUM, "&7副產物槽", "", "&r此槽輸出反應堆副產物", "&r像是 &a錼 &ror &7鈽"),
+		preset.addItem(22, new CustomItem(SlimefunItems.PLUTONIUM, "&7副產物槽", "", "&r此槽輸出反應堆副產物", "&r像是 &a錼 &r或 &7鈽"),
 			(p, slot, item, action) -> false
 		);
 		
