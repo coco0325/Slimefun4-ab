@@ -33,7 +33,7 @@ public class XPCollector extends SlimefunItem {
 	public XPCollector(Category category, ItemStack item, String name, RecipeType recipeType, ItemStack[] recipe) {
 		super(category, item, name, recipeType, recipe);
 		
-		new BlockMenuPreset(name, "&aEXP Collector") {
+		new BlockMenuPreset(name, "&a經驗收集器") {
 			
 			@Override
 			public void init() {

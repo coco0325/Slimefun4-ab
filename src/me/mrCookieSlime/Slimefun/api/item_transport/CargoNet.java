@@ -46,7 +46,7 @@ public class CargoNet extends Network {
 	// Chest Terminal Stuff
 	private static final ChestTerminalSorter sorter = new ChestTerminalSorter();
 	public static final int[] terminal_slots = new int[] {0, 1, 2, 3, 4, 5, 6, 9, 10, 11, 12, 13, 14, 15, 18, 19, 20, 21, 22, 23, 24, 27, 28, 29, 30, 31, 32, 33, 36, 37, 38, 39, 40, 41, 42};
-	private static final ItemStack terminal_noitem_item = new CustomItem(new ItemStack(Material.BARRIER), "&4No Item cached");
+	private static final ItemStack terminal_noitem_item = new CustomItem(new ItemStack(Material.BARRIER), "&4無項目");
 	private static final MenuClickHandler terminal_noitem_handler = (p, slot, item, action) -> false;
 
 	public static CargoNet getNetworkFromLocation(Location l) {
@@ -140,16 +140,16 @@ public class CargoNet extends Network {
 
 	public void tick(final Block b) {
 		if (!regulator.equals(b.getLocation())) {
-			CargoHologram.update(b, "&4Multiple Cargo Regulators connected");
+			CargoHologram.update(b, "&4偵測到多重物流管理器");
 			return;
 		}
 		super.tick();
 		if (connectorNodes.isEmpty() && terminusNodes.isEmpty()) {
-			CargoHologram.update(b, "&7Status: &4&lOFFLINE");
+			CargoHologram.update(b, "&7狀態: &4&l未運行");
 			return;
 		}
 		else {
-			CargoHologram.update(b, "&7Status: &a&lONLINE");
+			CargoHologram.update(b, "&7狀態: &a&l運行中");
 
 
 			final Map<Integer, List<Location>> output = new HashMap<Integer, List<Location>>();
@@ -484,9 +484,9 @@ public class CargoNet extends Network {
 								ItemMeta im = stack.getItemMeta();
 								List<String> lore = new ArrayList<String>();
 								lore.add("");
-								lore.add(ChatColor.translateAlternateColorCodes('&', "&7Stored Items: &r" + DoubleHandler.getFancyDouble(item.getAmount())));
-								if (stack.getMaxStackSize() > 1) lore.add(ChatColor.translateAlternateColorCodes('&', "&7<Left Click: Request 1 | Right Click: Request " + (item.getAmount() > stack.getMaxStackSize() ? stack.getMaxStackSize(): item.getAmount()) + ">"));
-								else lore.add(ChatColor.translateAlternateColorCodes('&', "&7<Left Click: Request 1>"));
+								lore.add(ChatColor.translateAlternateColorCodes('&', "&7儲存的物品: &r" + DoubleHandler.getFancyDouble(item.getAmount())));
+								if (stack.getMaxStackSize() > 1) lore.add(ChatColor.translateAlternateColorCodes('&', "&7<左鍵:要求 1 | 右鍵:要求" + (item.getAmount() > stack.getMaxStackSize() ? stack.getMaxStackSize(): item.getAmount()) + ">"));
+								else lore.add(ChatColor.translateAlternateColorCodes('&', "&7<左鍵:要求 1>"));
 								lore.add("");
 								if (im.hasLore()) {
 									for (String line: im.getLore()) {

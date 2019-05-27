@@ -81,7 +81,7 @@ public abstract class AReactor extends SlimefunItem {
 						BlockStorage.addBlockInfo(b, "reactor-mode", "generator");
 					}
 					if (!BlockStorage.hasBlockInfo(b) || BlockStorage.getLocationInfo(b.getLocation(), "reactor-mode").equals("generator")) {
-						menu.replaceExistingItem(4, new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTM0M2NlNThkYTU0Yzc5OTI0YTJjOTMzMWNmYzQxN2ZlOGNjYmJlYTliZTQ1YTdhYzg1ODYwYTZjNzMwIn19fQ=="), "&7Focus: &eElectricity", "", "&6Your Reactor will focus on Power Generation", "&6If your Energy Network doesn't need Power", "&6it will not produce any either", "", "&7> Click to change the Focus to &eProduction"));
+						menu.replaceExistingItem(4, new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTM0M2NlNThkYTU0Yzc5OTI0YTJjOTMzMWNmYzQxN2ZlOGNjYmJlYTliZTQ1YTdhYzg1ODYwYTZjNzMwIn19fQ=="), "&7生產: &e電力", "", "&6反應堆將會專注在生產電力上", "&6假如能源網絡不需要更多電力", "&6電力將不會繼續產生", "", "&7> 點我變更為生產 &e物質"));
 						menu.addMenuClickHandler(4, (p, slot, item, action) -> {
 							BlockStorage.addBlockInfo(b, "reactor-mode", "production");
 							newInstance(menu, b);
@@ -89,7 +89,7 @@ public abstract class AReactor extends SlimefunItem {
 						});
 					}
 					else {
-						menu.replaceExistingItem(4, new CustomItem(SlimefunItems.PLUTONIUM, "&7Focus: &eProduction", "", "&6Your Reactor will focus on producing goods", "&6If your Energy Network doesn't need Power", "&6it will continue to run and simply will", "&6not generate any Power in the mean time", "", "&7> Click to change the Focus to &ePower Generation"));
+						menu.replaceExistingItem(4, new CustomItem(SlimefunItems.PLUTONIUM, "&7生產: &e物質", "", "&6反應堆將會專注在生產物質上", "&6假如能源網絡不需要更多電力", "&6將會繼續生產物質l", "&6而不生產電力", "", "&7> 點我變更為生產 &e電力"));
 						menu.addMenuClickHandler(4, (p, slot, item, action) -> {
 							BlockStorage.addBlockInfo(b, "reactor-mode", "generator");
 							newInstance(menu, b);
@@ -173,7 +173,7 @@ public abstract class AReactor extends SlimefunItem {
 			(p, slot, item, action) -> false
 		);
 
-		preset.addItem(1, new CustomItem(SlimefunItems.URANIUM, "&7Fuel Slot", "", "&rThis Slot accepts radioactive Fuel such as:", "&2Uranium &ror &aNeptunium"),
+		preset.addItem(1, new CustomItem(SlimefunItems.URANIUM, "&7燃料槽", "", "&r接受:", "&2鈾 &r或 &a錼"),
 			(p, slot, item, action) -> false
 		);
 
@@ -184,13 +184,13 @@ public abstract class AReactor extends SlimefunItem {
 		}
 
 		if (needsCooling()) {
-			preset.addItem(7, new CustomItem(this.getCoolant(), "&bCoolant Slot", "", "&rThis Slot accepts Coolant Cells", "&4Without any Coolant Cells, your Reactor", "&4will explode"));
+			preset.addItem(7, new CustomItem(this.getCoolant(), "&b冷卻槽", "", "&r接受: 冷卻劑", "&4若沒有放入任何冷卻劑", "&4反應堆將會爆炸!"));
 		}
 		else {
-			preset.addItem(7, new CustomItem(new ItemStack(Material.BARRIER), "&bCoolant Slot", "", "&rThis Slot accepts Coolant Cells"));
+			preset.addItem(7, new CustomItem(new ItemStack(Material.BARRIER), "&b冷卻槽", "", "&r接受: 冷卻劑"));
 
 			for (int i : border_4) {
-				preset.addItem(i, new CustomItem(new ItemStack(Material.BARRIER), "&cNo Coolant Required"),
+				preset.addItem(i, new CustomItem(new ItemStack(Material.BARRIER), "&c不需冷卻劑"),
 					(p, slot, item, action) -> false
 				);
 			}

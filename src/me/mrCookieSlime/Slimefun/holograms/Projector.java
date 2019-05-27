@@ -36,9 +36,9 @@ public class Projector {
 	}
 
 	public static void openEditor(Player p, final Block projector) {
-		ChestMenu menu = new ChestMenu("Hologram Settings");
+		ChestMenu menu = new ChestMenu("投影設定");
 		
-		menu.addItem(0, new CustomItem(new ItemStack(Material.NAME_TAG), "&7Text &e(Click to edit)", "", "&r" + ChatColor.translateAlternateColorCodes('&', BlockStorage.getLocationInfo(projector.getLocation(), "text"))));
+		menu.addItem(0, new CustomItem(new ItemStack(Material.NAME_TAG), "&7文字 &e(點我編輯)", "", "&r" + ChatColor.translateAlternateColorCodes('&', BlockStorage.getLocationInfo(projector.getLocation(), "text"))));
 		menu.addMenuClickHandler(0, (pl, slot, item, action) -> {
 			pl.closeInventory();
 			Messages.local.sendTranslation(pl, "machines.HOLOGRAM_PROJECTOR.enter-text", true);
@@ -52,7 +52,7 @@ public class Projector {
 			return false;
 		});
 		
-		menu.addItem(1, new CustomItem(new ItemStack(Material.CLOCK), "&7Offset: &e" + DoubleHandler.fixDouble(Double.valueOf(BlockStorage.getLocationInfo(projector.getLocation(), "offset")) + 1.0D), "", "&rLeft Click: &7+0.1", "&rRight Click: &7-0.1"));
+		menu.addItem(1, new CustomItem(new ItemStack(Material.CLOCK), "&7高度: &e" + DoubleHandler.fixDouble(Double.valueOf(BlockStorage.getLocationInfo(projector.getLocation(), "offset")) + 1.0D), "", "&r左鍵: &7+0.1", "&r右鍵: &7-0.1"));
 		menu.addMenuClickHandler(1, (pl, slot, item, action) -> {
 			double offset = DoubleHandler.fixDouble(Double.valueOf(BlockStorage.getLocationInfo(projector.getLocation(), "offset")) + (action.isRightClicked() ? -0.1F : 0.1F));
 			ArmorStand hologram = getArmorStand(projector);

@@ -102,7 +102,7 @@ public abstract class HeatedPressureChamber extends AContainer {
 	}
 	
 	public String getInventoryTitle() {
-		return "&cHeated Pressure Chamber";
+		return "&c加熱壓力室";
 	}
 	
 	public ItemStack getProgressBar() {

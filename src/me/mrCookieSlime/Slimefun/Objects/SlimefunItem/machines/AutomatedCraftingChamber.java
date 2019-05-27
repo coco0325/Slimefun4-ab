@@ -46,7 +46,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem {
 	public AutomatedCraftingChamber(Category category, ItemStack item, String name, RecipeType recipeType, ItemStack[] recipe) {
 		super(category, item, name, recipeType, recipe);
 		
-		new BlockMenuPreset(name, "&6Automated Crafting Chamber") {
+		new BlockMenuPreset(name, "&6自動合成機") {
 			
 			@Override
 			public void init() {
@@ -56,7 +56,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem {
 			@Override
 			public void newInstance(final BlockMenu menu, final Block b) {
 				if (!BlockStorage.hasBlockInfo(b) || BlockStorage.getLocationInfo(b.getLocation(), "enabled") == null || BlockStorage.getLocationInfo(b.getLocation(), "enabled").equals("false")) {
-					menu.replaceExistingItem(6, new CustomItem(new ItemStack(Material.GUNPOWDER), "&7Enabled: &4\u2718", "", "&e> Click to enable this Machine"));
+					menu.replaceExistingItem(6, new CustomItem(new ItemStack(Material.GUNPOWDER), "&7啟用狀態: &4\u2718", "", "&e> 點我開啟機器"));
 					menu.addMenuClickHandler(6, (p, slot, item, action) -> {
 						BlockStorage.addBlockInfo(b, "enabled", "true");
 						newInstance(menu, b);
@@ -64,7 +64,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem {
 					});
 				}
 				else {
-					menu.replaceExistingItem(6, new CustomItem(new ItemStack(Material.REDSTONE), "&7Enabled: &2\u2714", "", "&e> Click to disable this Machine"));
+					menu.replaceExistingItem(6, new CustomItem(new ItemStack(Material.REDSTONE), "&7啟用狀態: &2\u2714", "", "&e> 點我關閉機器"));
 					menu.addMenuClickHandler(6, (p, slot, item, action) -> {
 						BlockStorage.addBlockInfo(b, "enabled", "false");
 						newInstance(menu, b);
@@ -164,7 +164,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem {
 			});
 		}
 
-		preset.addItem(2, new CustomItem(new ItemStack(Material.CRAFTING_TABLE), "&eRecipe", "", "&bPut in the Recipe you want to craft", "&4Enhanced Crafting Table Recipes ONLY"),
+		preset.addItem(2, new CustomItem(new ItemStack(Material.CRAFTING_TABLE), "&e合成表", "", "&b請放入想合成物品的合成表", "&4僅限進階工作台合成表"),
 			(p, slot, item, action) -> false
 		);
 	}

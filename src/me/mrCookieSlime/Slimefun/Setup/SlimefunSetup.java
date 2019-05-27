@@ -1305,37 +1305,37 @@ public class SlimefunSetup {
 
 		new MultiTool(SlimefunItems.DURALUMIN_MULTI_TOOL, "DURALUMIN_MULTI_TOOL", RecipeType.ENHANCED_CRAFTING_TABLE,
 		new ItemStack[] {SlimefunItems.DURALUMIN_INGOT, null, SlimefunItems.DURALUMIN_INGOT, SlimefunItems.DURALUMIN_INGOT, SlimefunItems.SMALL_CAPACITOR, SlimefunItems.DURALUMIN_INGOT, null, SlimefunItems.DURALUMIN_INGOT, null},
-		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item"}, new Object[] {true, "Portable Crafter", "PORTABLE_CRAFTER", true, "Magic Eye of Ender", "MAGIC_EYE_OF_ENDER", true, "Wind Staff", "STAFF_ELEMENTAL_WIND", true, "Grappling Hook", "GRAPPLING_HOOK"})
+		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item"}, new Object[] {true, "隨身工作台", "PORTABLE_CRAFTER", true, "魔法末影之眼", "MAGIC_EYE_OF_ENDER", true, "元素法杖 - 風", "STAFF_ELEMENTAL_WIND", true, "抓鉤", "GRAPPLING_HOOK"})
 		.register(true);
 
 		new MultiTool(SlimefunItems.SOLDER_MULTI_TOOL, "SOLDER_MULTI_TOOL", RecipeType.ENHANCED_CRAFTING_TABLE,
 		new ItemStack[] {SlimefunItems.SOLDER_INGOT, null, SlimefunItems.SOLDER_INGOT, SlimefunItems.SOLDER_INGOT, SlimefunItems.SMALL_CAPACITOR, SlimefunItems.SOLDER_INGOT, null, SlimefunItems.SOLDER_INGOT, null},
-		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item"}, new Object[] {true, "Portable Crafter", "PORTABLE_CRAFTER", true, "Magic Eye of Ender", "MAGIC_EYE_OF_ENDER", true, "Wind Staff", "STAFF_ELEMENTAL_WIND", true, "Grappling Hook", "GRAPPLING_HOOK"})
+		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item"}, new Object[] {true, "隨身工作台", "PORTABLE_CRAFTER", true, "魔法末影之眼", "MAGIC_EYE_OF_ENDER", true, "元素法杖 - 風", "STAFF_ELEMENTAL_WIND", true, "抓鉤", "GRAPPLING_HOOK"})
 		.register(true);
 
 		new MultiTool(SlimefunItems.BILLON_MULTI_TOOL, "BILLON_MULTI_TOOL", RecipeType.ENHANCED_CRAFTING_TABLE,
 		new ItemStack[] {SlimefunItems.BILLON_INGOT, null, SlimefunItems.BILLON_INGOT, SlimefunItems.BILLON_INGOT, SlimefunItems.SMALL_CAPACITOR, SlimefunItems.BILLON_INGOT, null, SlimefunItems.BILLON_INGOT, null},
-		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item"}, new Object[] {true, "Portable Crafter", "PORTABLE_CRAFTER", true, "Magic Eye of Ender", "MAGIC_EYE_OF_ENDER", true, "Wind Staff", "STAFF_ELEMENTAL_WIND", true, "Grappling Hook", "GRAPPLING_HOOK"})
+		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item"}, new Object[] {true, "隨身工作台", "PORTABLE_CRAFTER", true, "魔法末影之眼", "MAGIC_EYE_OF_ENDER", true, "元素法杖 - 風", "STAFF_ELEMENTAL_WIND", true, "抓鉤", "GRAPPLING_HOOK"})
 		.register(true);
 
 		new MultiTool(SlimefunItems.STEEL_MULTI_TOOL, "STEEL_MULTI_TOOL", RecipeType.ENHANCED_CRAFTING_TABLE,
 		new ItemStack[] {SlimefunItems.STEEL_INGOT, null, SlimefunItems.STEEL_INGOT, SlimefunItems.STEEL_INGOT, SlimefunItems.SMALL_CAPACITOR, SlimefunItems.STEEL_INGOT, null, SlimefunItems.STEEL_INGOT, null},
-		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item"}, new Object[] {true, "Portable Crafter", "PORTABLE_CRAFTER", true, "Magic Eye of Ender", "MAGIC_EYE_OF_ENDER", true, "Wind Staff", "STAFF_ELEMENTAL_WIND", true, "Grappling Hook", "GRAPPLING_HOOK"})
+		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item"}, new Object[] {true, "隨身工作台", "PORTABLE_CRAFTER", true, "魔法末影之眼", "MAGIC_EYE_OF_ENDER", true, "元素法杖 - 風", "STAFF_ELEMENTAL_WIND", true, "抓鉤", "GRAPPLING_HOOK"})
 		.register(true);
 
 		new MultiTool(SlimefunItems.DAMASCUS_STEEL_MULTI_TOOL, "DAMASCUS_STEEL_MULTI_TOOL", RecipeType.ENHANCED_CRAFTING_TABLE,
 		new ItemStack[] {SlimefunItems.DAMASCUS_STEEL_INGOT, null, SlimefunItems.DAMASCUS_STEEL_INGOT, SlimefunItems.DAMASCUS_STEEL_INGOT, SlimefunItems.SMALL_CAPACITOR, SlimefunItems.DAMASCUS_STEEL_INGOT, null, SlimefunItems.DAMASCUS_STEEL_INGOT, null},
-		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item"}, new Object[] {true, "Portable Crafter", "PORTABLE_CRAFTER", true, "Magic Eye of Ender", "MAGIC_EYE_OF_ENDER", true, "Wind Staff", "STAFF_ELEMENTAL_WIND", true, "Grappling Hook", "GRAPPLING_HOOK"})
+		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item"}, new Object[] {true, "隨身工作台", "PORTABLE_CRAFTER", true, "魔法末影之眼", "MAGIC_EYE_OF_ENDER", true, "元素法杖 - 風", "STAFF_ELEMENTAL_WIND", true, "抓鉤", "GRAPPLING_HOOK"})
 		.register(true);
 
 		new MultiTool(SlimefunItems.REINFORCED_ALLOY_MULTI_TOOL, "REINFORCED_ALLOY_MULTI_TOOL", RecipeType.ENHANCED_CRAFTING_TABLE,
 		new ItemStack[] {SlimefunItems.REINFORCED_ALLOY_INGOT, null, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.REINFORCED_ALLOY_INGOT, SlimefunItems.MEDIUM_CAPACITOR, SlimefunItems.REINFORCED_ALLOY_INGOT, null, SlimefunItems.REINFORCED_ALLOY_INGOT, null},
-		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item"}, new Object[] {true, "Portable Crafter", "PORTABLE_CRAFTER", true, "Magic Eye of Ender", "MAGIC_EYE_OF_ENDER", true, "Wind Staff", "STAFF_ELEMENTAL_WIND", true, "Grappling Hook", "GRAPPLING_HOOK"})
+		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item"}, new Object[] {true, "隨身工作台", "PORTABLE_CRAFTER", true, "魔法末影之眼", "MAGIC_EYE_OF_ENDER", true, "元素法杖 - 風", "STAFF_ELEMENTAL_WIND", true, "抓鉤", "GRAPPLING_HOOK"})
 		.register(true);
 
 		new MultiTool(SlimefunItems.CARBONADO_MULTI_TOOL, "CARBONADO_MULTI_TOOL", RecipeType.ENHANCED_CRAFTING_TABLE,
 		new ItemStack[] {SlimefunItems.CARBONADO, null, SlimefunItems.CARBONADO, SlimefunItems.CARBONADO, SlimefunItems.LARGE_CAPACITOR, SlimefunItems.CARBONADO, null, SlimefunItems.CARBONADO, null},
-		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item", "mode.4.enabled", "mode.4.name", "mode.4.item"}, new Object[] {true, "Portable Crafter", "PORTABLE_CRAFTER", true, "Magic Eye of Ender", "MAGIC_EYE_OF_ENDER", true, "Wind Staff", "STAFF_ELEMENTAL_WIND", true, "Grappling Hook", "GRAPPLING_HOOK", true, "Gold Pan", "GOLD_PAN"})
+		new String[] {"mode.0.enabled", "mode.0.name", "mode.0.item", "mode.1.enabled", "mode.1.name", "mode.1.item", "mode.2.enabled", "mode.2.name", "mode.2.item", "mode.3.enabled", "mode.3.name", "mode.3.item", "mode.4.enabled", "mode.4.name", "mode.4.item"}, new Object[] {true, "隨身工作台", "PORTABLE_CRAFTER", true, "魔法末影之眼", "MAGIC_EYE_OF_ENDER", true, "元素法杖 - 風", "STAFF_ELEMENTAL_WIND", true, "抓鉤", "GRAPPLING_HOOK", true, "淘金盤", "GOLD_PAN"})
 		.register(true);
 
 		new SlimefunMachine(Categories.MACHINES_1, SlimefunItems.ORE_WASHER, "ORE_WASHER",
@@ -3119,7 +3119,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&bElectric Furnace";
+				return "&b電動熔爐";
 			}
 
 			@Override
@@ -3144,7 +3144,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&bElectric Furnace";
+				return "&b電動熔爐";
 			}
 
 			@Override
@@ -3169,7 +3169,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&bElectric Furnace";
+				return "&b電動熔爐";
 			}
 
 			@Override
@@ -3278,7 +3278,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&cElectric Ingot Factory";
+				return "&c電動鑄錠機";
 			}
 
 			@Override
@@ -3303,7 +3303,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&cElectric Ingot Factory";
+				return "&c電動鑄錠機";
 			}
 
 			@Override
@@ -3328,7 +3328,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&cElectric Ingot Factory";
+				return "&c電動鑄錠機";
 			}
 
 			@Override
@@ -3402,7 +3402,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&bElectric Ore Grinder";
+				return "&b電動碎礦機";
 			}
 
 			@Override
@@ -3436,7 +3436,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&bElectric Ore Grinder";
+				return "&b電動碎礦機";
 			}
 
 			@Override
@@ -3500,7 +3500,7 @@ public class SlimefunSetup {
 		new ItemStack[] {null, SlimefunItems.ELECTRIC_ORE_GRINDER, null, SlimefunItems.LEAD_INGOT, SlimefunItems.MEDIUM_CAPACITOR, SlimefunItems.LEAD_INGOT, SlimefunItems.LEAD_INGOT, SlimefunItems.HEATING_COIL, SlimefunItems.LEAD_INGOT}){
 			@Override
 			public String getInventoryTitle() {
-				return "&bElectric Ingot Pulverizer";
+				return "&b電動磨粉機";
 			}
 
 			@Override
@@ -3573,7 +3573,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&cCoal Generator";
+				return "&c煤炭發電機";
 			}
 
 			@Override
@@ -3636,7 +3636,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&2Bio Reactor";
+				return "&2生物反應器";
 			}
 
 			@Override
@@ -4395,7 +4395,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&4Lava Generator";
+				return "&4岩漿發電機";
 			}
 
 			@Override
@@ -4421,7 +4421,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&cCombustion Reactor";
+				return "&c燃燒反應堆";
 			}
 
 			@Override
@@ -4491,7 +4491,7 @@ public class SlimefunSetup {
 
 			@Override
 			public void onPlace(Player p, Block b, SlimefunItem item) {
-				BlockStorage.addBlockInfo(b, "text", "&bHi, I am a Hologram, &3configure me using the Projector");
+				BlockStorage.addBlockInfo(b, "text", "&b我是一個投影 OwO, &3使用投影器設定文字~");
 				BlockStorage.addBlockInfo(b, "offset", "-0.5");
 				BlockStorage.addBlockInfo(b, "owner", p.getUniqueId().toString());
 
@@ -4611,7 +4611,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&cFood Fabricator";
+				return "&c食品加工機";
 			}
 
 			@Override
@@ -4636,7 +4636,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&cFood Fabricator";
+				return "&c食品加工機";
 			}
 
 			@Override
@@ -4701,7 +4701,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&cFood Composter";
+				return "&c食品堆肥器";
 			}
 
 			@Override
@@ -4726,7 +4726,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&cFood Composter";
+				return "&c食品堆肥器";
 			}
 
 			@Override
@@ -4821,7 +4821,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&bFreezer";
+				return "&b冰箱";
 			}
 
 			@Override
@@ -4846,7 +4846,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&bFreezer";
+				return "&b冰箱";
 			}
 
 			@Override
@@ -4892,7 +4892,7 @@ public class SlimefunSetup {
 
             @Override
 			public String getInventoryTitle() {
-				return "&2Nuclear Reactor";
+				return "&2核能反應堆";
 			}
 
 			@Override
@@ -4933,7 +4933,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&fNether Star Reactor";
+				return "&f地獄之星反應堆";
 			}
 
 			@Override
@@ -5001,11 +5001,11 @@ public class SlimefunSetup {
 
 				if (BlockStorage.getLocationInfo(e.getClickedBlock().getLocation(), "visualizer") == null) {
 					BlockStorage.addBlockInfo(e.getClickedBlock(), "visualizer", "disabled");
-					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cCargo Net Visualizer: " + "&4\u2718"));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c物流顯示器: " + "&4\u2718"));
 				}
 				else {
 					BlockStorage.addBlockInfo(e.getClickedBlock(), "visualizer", null);
-					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cCargo Net Visualizer: " + "&2\u2714"));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c物流顯示器: " + "&2\u2714"));
 				}
 				return true;
 			}
@@ -5036,10 +5036,10 @@ public class SlimefunSetup {
 				if (!item.getID().equals("CARGO_NODE")) return false;
 
 				if (CargoNet.getNetworkFromLocation(e.getClickedBlock().getLocation()) != null) {
-					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Connected: " + "&2\u2714"));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7連接狀態: " + "&2\u2714"));
 				}
 				else {
-					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Connected: " + "&4\u2718"));
+					p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7連接狀態: " + "&4\u2718"));
 				}
 				return true;
 			}
@@ -5089,7 +5089,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&cCarbon Press";
+				return "&c碳壓機";
 			}
 
 			@Override
@@ -5114,7 +5114,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&cCarbon Press";
+				return "&c碳壓機";
 			}
 
 			@Override
@@ -5139,7 +5139,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&cCarbon Press";
+				return "&c碳壓機";
 			}
 
 			@Override

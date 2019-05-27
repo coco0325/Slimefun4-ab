@@ -24,21 +24,21 @@ public class Elevator {
 	public static List<UUID> ignored = new ArrayList<UUID>();
 
 	public static void openEditor(Player p, final Block b) {
-		ChestMenu menu = new ChestMenu("Elevator Settings");
+		ChestMenu menu = new ChestMenu("電梯板設定");
 		
-		menu.addItem(4, new CustomItem(new ItemStack(Material.NAME_TAG), "&7Floor Name &e(Click to edit)", "", "&r" + ChatColor.translateAlternateColorCodes('&', BlockStorage.getLocationInfo(b.getLocation(), "floor"))));
+		menu.addItem(4, new CustomItem(new ItemStack(Material.NAME_TAG), "&7樓層名稱&e(點我編輯)", "", "&r" + ChatColor.translateAlternateColorCodes('&', BlockStorage.getLocationInfo(b.getLocation(), "floor"))));
 		menu.addMenuClickHandler(4, (pl, slot, item, action) -> {
 			pl.closeInventory();
 			pl.sendMessage("");
-			pl.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4&l>> &ePlease enter a Name for this Floor in your Chat!"));
-			pl.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4&l>> &e(Chat Colors are supported!"));
+			pl.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4&l>> &e請將樓層名稱輸入聊天欄!"));
+			pl.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4&l>> &e(支援顏色代碼!"));
 			pl.sendMessage("");
 			
 			MenuHelper.awaitChatInput(pl, (player, message) -> {
 				BlockStorage.addBlockInfo(b, "floor", message.replaceAll("&", "&"));
 				
 				player.sendMessage("");
-				player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4&l>> &eSuccessfully named this Floor:"));
+				player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4&l>> &e成功命名樓層:"));
 				player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4&l>> &r" + ChatColor.translateAlternateColorCodes('&', message)));
 				player.sendMessage("");
 				
@@ -66,11 +66,11 @@ public class Elevator {
 				String floor = ChatColor.translateAlternateColorCodes('&', BlockStorage.getLocationInfo(block.getLocation(), "floor"));
 				if (block.getY() == b.getY()) {
 					tellraw.addText("&7> " + index + ". &r" + floor + "\n");
-					tellraw.addHoverEvent(HoverAction.SHOW_TEXT, "\n&eThis is the Floor you are currently on:\n&r" + floor + "\n");
+					tellraw.addHoverEvent(HoverAction.SHOW_TEXT, "\n&e本樓層為:\n&r" + floor + "\n");
 				}
 				else {
 					tellraw.addText("&7" + index + ". &r" + floor + "\n");
-					tellraw.addHoverEvent(HoverAction.SHOW_TEXT, "\n&eClick to teleport to this Floor\n&r" + floor + "\n");
+					tellraw.addHoverEvent(HoverAction.SHOW_TEXT, "\n&e點我前往樓層\n&r" + floor + "\n");
 					tellraw.addClickEvent(me.mrCookieSlime.CSCoreLibPlugin.general.Chat.TellRawMessage.ClickAction.RUN_COMMAND, "/sf elevator " + block.getX() + " " + block.getY() + " " + block.getZ() + " ");
 				}
 				

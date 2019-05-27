@@ -53,7 +53,7 @@ public class TeleportationSequence {
 		players.remove(uuid);
 		if (p != null) {
 			try {
-				TitleBuilder title = (TitleBuilder) new TitleBuilder(20, 60, 20).addText(ChatColor.translateAlternateColorCodes('&', "&4Teleportation cancelled"));
+				TitleBuilder title = (TitleBuilder) new TitleBuilder(20, 60, 20).addText(ChatColor.translateAlternateColorCodes('&', "&4傳送取消"));
 				TitleBuilder subtitle = (TitleBuilder) new TitleBuilder(20, 60, 20).addText(ChatColor.translateAlternateColorCodes('&', "&40%"));
 				
 				title.send(TitleType.TITLE, p);
@@ -69,7 +69,7 @@ public class TeleportationSequence {
 		if (isValid(p, source)) {
 			try {
 				if (progress > 99) {
-					TitleBuilder title = (TitleBuilder) new TitleBuilder(20, 60, 20).addText(ChatColor.translateAlternateColorCodes('&', "&3Teleported!"));
+					TitleBuilder title = (TitleBuilder) new TitleBuilder(20, 60, 20).addText(ChatColor.translateAlternateColorCodes('&', "&3成功傳送!"));
 					TitleBuilder subtitle = (TitleBuilder) new TitleBuilder(20, 60, 20).addText(ChatColor.translateAlternateColorCodes('&', "&b100%"));
 					
 					title.send(TitleType.TITLE, p);
@@ -79,7 +79,7 @@ public class TeleportationSequence {
 					
 					if (resistance) {
 						p.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600, 20));
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&lYou have been given 30 Seconds of Invulnerability!"));
+						p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b&l你被賦予了30秒的無敵狀態!"));
 					}
 					
 					destination.getWorld().spawnParticle(Particle.PORTAL,new Location(destination.getWorld(), destination.getX(), destination.getY() + 1, destination.getZ()),progress * 2, 0.2F, 0.8F, 0.2F );
@@ -87,7 +87,7 @@ public class TeleportationSequence {
 					players.remove(uuid);
 				}
 				else {
-					TitleBuilder title = (TitleBuilder) new TitleBuilder(0, 60, 0).addText(ChatColor.translateAlternateColorCodes('&', "&3Teleporting..."));
+					TitleBuilder title = (TitleBuilder) new TitleBuilder(0, 60, 0).addText(ChatColor.translateAlternateColorCodes('&', "&3傳送中..."));
 					TitleBuilder subtitle = (TitleBuilder) new TitleBuilder(0, 60, 0).addText(ChatColor.translateAlternateColorCodes('&', "&b" + progress + "%"));
 					
 					title.send(TitleType.TITLE, p);

@@ -36,14 +36,14 @@ public class DamageListener implements Listener {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
-    private SimpleDateFormat format = new SimpleDateFormat("(MMM d, yyyy @ hh:mm)");
+    private SimpleDateFormat format = new SimpleDateFormat("(yyyy/MM/dd @ hh:mm)");
 
     @EventHandler
     public void onDamage(EntityDeathEvent e) {
         if (e.getEntity() instanceof Player) {
             Player p = (Player) e.getEntity();
             if (p.getInventory().containsAtLeast(SlimefunItems.GPS_EMERGENCY_TRANSMITTER, 1)) {
-                Slimefun.getGPSNetwork().addWaypoint(p, "&4Deathpoint &7" + format.format(new Date()), p.getLocation().getBlock().getLocation());
+                Slimefun.getGPSNetwork().addWaypoint(p, "&4死亡點 &7" + format.format(new Date()), p.getLocation().getBlock().getLocation());
             }
             Iterator<ItemStack> drops = e.getDrops().iterator();
             while (drops.hasNext()) {

@@ -28,16 +28,16 @@ public class IntegerFormat {
 		int hours = (int) ((System.currentTimeMillis() - timestamp) / (1000 * 60 * 60));
 		
 		if (hours == 0) {
-			return "> 1h";
+			return "> 1小時";
 		}
 		else if ((hours / 24) == 0) {
-			return (hours % 24) + "h";
+			return (hours % 24) + "小時";
 		}
 		else if (hours % 24 == 0) {
-			return (hours / 24) + "d";
+			return (hours / 24) + "天";
 		}
 		else {
-			return (hours / 24) + "d " + (hours % 24) + "h";
+			return (hours / 24) + "天 " + (hours % 24) + "小時";
 		}
 	}
 

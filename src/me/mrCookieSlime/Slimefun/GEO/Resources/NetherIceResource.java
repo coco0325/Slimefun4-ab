@@ -22,7 +22,7 @@ public class NetherIceResource implements OreGenResource {
 
 	@Override
 	public String getName() {
-		return "Nether Ice";
+		return "地獄冰";
 	}
 
 	@Override
@@ -32,7 +32,7 @@ public class NetherIceResource implements OreGenResource {
 
 	@Override
 	public String getMeasurementUnit() {
-		return "Blocks";
+		return "塊";
 	}
 
 }

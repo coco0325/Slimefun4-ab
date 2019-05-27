@@ -70,7 +70,7 @@ public class SlimefunItems {
 	public static ItemStack STEEL_JETPACK = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_CHESTPLATE), "&9電動噴射背包&7 - &eIV", "", "&8\u21E8 &7材料: &b鋼", "&c&o&8\u21E8 &e\u26A1 &70 / 60 J", "&8\u21E8 &7推力: &c0.5", "", "&7按住&eShift&7 使用"), Color.SILVER);
 	public static ItemStack DAMASCUS_STEEL_JETPACK = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_CHESTPLATE), "&9電動噴射背包&7 - &eV", "", "&8\u21E8 &7材料: &b大馬士革鋼", "&c&o&8\u21E8 &e\u26A1 &70 / 75 J", "&8\u21E8 &7推力: &c0.55", "", "&7按住&eShift&7 使用"), Color.SILVER);
 	public static ItemStack REINFORCED_ALLOY_JETPACK = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_CHESTPLATE), "&9電動噴射背包&7 - &eVI", "", "&8\u21E8 &7材料: &b強化合金", "&c&o&8\u21E8 &e\u26A1 &70 / 100 J", "&8\u21E8 &7推力: &c0.6", "", "&7按住&eShift&7 使用"), Color.SILVER);
-	public static ItemStack CARBONADO_JETPACK = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_CHESTPLATE), "&9電動噴射背包&7 - &eVII", "", "&8\u21E8 &7材料: &b黑金剛石", "&c&o&8\u21E8 &e\u26A1 &70 / 150 J", "&8\u21E8 &7推力: &c0.7", "", "&7按住&eShift&7 使用"), Color.BLACK);
+	public static ItemStack CARBONADO_JETPACK = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_CHESTPLATE), "&9電動噴射背包&7 - &eVII", "", "&8\u21E8 &7材料: &b黑鑽石", "&c&o&8\u21E8 &e\u26A1 &70 / 150 J", "&8\u21E8 &7推力: &c0.7", "", "&7按住&eShift&7 使用"), Color.BLACK);
 	public static ItemStack ARMORED_JETPACK = new CustomItem(new MaterialData(Material.IRON_CHESTPLATE), "&9裝甲噴射背包", "&8\u21E8 &7材料: &b鋼", "", "&c&o&8\u21E8 &e\u26A1 &70 / 50 J", "&8\u21E8 &7推力: &c0.45", "", "&7按住&eShift&7 使用");
 
 	/* Jetboots */
@@ -80,7 +80,7 @@ public class SlimefunItems {
 	public static ItemStack STEEL_JETBOOTS = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_BOOTS), "&9噴射靴&7 - &eIV", "", "&8\u21E8 &7材料: &b鋼", "&c&o&8\u21E8 &e\u26A1 &70 / 50 J", "&8\u21E8 &7速度: &a0.5", "&8\u21E8 &7準確度: &e70%", "", "&7按住&eShift&7 使用"), Color.SILVER);
 	public static ItemStack DAMASCUS_STEEL_JETBOOTS = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_BOOTS), "&9噴射靴&7 - &eV", "", "&8\u21E8 &7材料: &b大馬士革鋼", "&c&o&8\u21E8 &e\u26A1 &70 / 75 J", "&8\u21E8 &7速度: &a0.55", "&8\u21E8 &7準確度: &a75%", "", "&7按住&eShift&7 使用"), Color.SILVER);
 	public static ItemStack REINFORCED_ALLOY_JETBOOTS = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_BOOTS), "&9噴射靴&7 - &eVI", "", "&8\u21E8 &7材料: &b強化合金", "&c&o&8\u21E8 &e\u26A1 &70 / 100 J", "&8\u21E8 &7速度: &a0.6", "&8\u21E8 &7準確度: &c80%", "", "&7按住&eShift&7 使用"), Color.SILVER);
-	public static ItemStack CARBONADO_JETBOOTS = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_BOOTS), "&9噴射靴&7 - &eVII", "", "&8\u21E8 &7材料: &b黑金剛石", "&c&o&8\u21E8 &e\u26A1 &70 / 125 J", "&8\u21E8 &7速度: &a0.7", "&8\u21E8 &7準確度: &c99.9%", "", "&7按住&eShift&7 使用"), Color.BLACK);
+	public static ItemStack CARBONADO_JETBOOTS = new CustomArmor(new CustomItem(new MaterialData(Material.LEATHER_BOOTS), "&9噴射靴&7 - &eVII", "", "&8\u21E8 &7材料: &b黑鑽石", "&c&o&8\u21E8 &e\u26A1 &70 / 125 J", "&8\u21E8 &7速度: &a0.7", "&8\u21E8 &7準確度: &c99.9%", "", "&7按住&eShift&7 使用"), Color.BLACK);
 	public static ItemStack ARMORED_JETBOOTS = new CustomItem(new MaterialData(Material.IRON_BOOTS), "&9裝甲噴射靴", "", "&8\u21E8 &7材料: &b鋼", "&c&o&8\u21E8 &e\u26A1 &70 / 50 J", "&8\u21E8 &7速度: &a0.45", "&8\u21E8 &7準確度: &e70%", "", "&7按住&eShift&7 使用");
 
 	/* Multi Tools */
@@ -90,7 +90,7 @@ public class SlimefunItems {
 	public static ItemStack STEEL_MULTI_TOOL = new CustomItem(new MaterialData(Material.SHEARS), "&9多功能工具&7- &eIV", "", "&8\u21E8 &7材料: &b鋼", "&c&o&8\u21E8 &e\u26A1 &70 / 50 J", "", "&7&e右鍵&7 使用", "&7按住&eShift + 右鍵&7 以更改模式");
 	public static ItemStack DAMASCUS_STEEL_MULTI_TOOL = new CustomItem(new MaterialData(Material.SHEARS), "&9多功能工具&7- &eV", "", "&8\u21E8 &7材料: &b大馬士革鋼", "&c&o&8\u21E8 &e\u26A1 &70 / 60 J", "", "&7&e右鍵&7 使用", "&7按住&eShift + 右鍵&7 以更改模式");
 	public static ItemStack REINFORCED_ALLOY_MULTI_TOOL = new CustomItem(new MaterialData(Material.SHEARS), "&9多功能工具&7- &eVI", "", "&8\u21E8 &7材料: &b強化合金", "&c&o&8\u21E8 &e\u26A1 &70 / 75 J", "", "&7&e右鍵&7 使用", "&7按住&eShift + 右鍵&7 以更改模式");
-	public static ItemStack CARBONADO_MULTI_TOOL = new CustomItem(new MaterialData(Material.SHEARS), "&9多功能工具&7- &eVII", "", "&8\u21E8 &7材料: &b黑金剛石", "&c&o&8\u21E8 &e\u26A1 &70 / 100 J", "", "&7&e右鍵&7 使用", "&7按住&eShift + 右鍵&7 以更改模式");
+	public static ItemStack CARBONADO_MULTI_TOOL = new CustomItem(new MaterialData(Material.SHEARS), "&9多功能工具&7- &eVII", "", "&8\u21E8 &7材料: &b黑鑽石", "&c&o&8\u21E8 &e\u26A1 &70 / 100 J", "", "&7&e右鍵&7 使用", "&7按住&eShift + 右鍵&7 以更改模式");
 
 	/* Food */
 	public static ItemStack FORTUNE_COOKIE = new CustomItem(Material.COOKIE, "&6幸運餅乾", "", "&a&o告訴你未來發生的事 :o");
@@ -397,7 +397,7 @@ public class SlimefunItems {
 	public static ItemStack ENHANCED_FURNACE_10 = new CustomItem(Material.FURNACE, "&7強化熔爐 - &eX", 0, new String[] {"", "&7燃燒速度: &e5x", "&7燃料效率: &e5x", "&7產物翻倍倍數: &e2x"});
 	public static ItemStack ENHANCED_FURNACE_11 = new CustomItem(Material.FURNACE, "&7強化熔爐 - &eXI", 0, new String[] {"", "&7燃燒速度: &e5x", "&7燃料效率: &e5x", "&7產物翻倍倍數: &e3x"});
 	public static ItemStack REINFORCED_FURNACE = new CustomItem(Material.FURNACE, "&7強化合金熔爐", 0, new String[] {"", "&7燃燒速度: &e10x", "&7燃料效率: &e10x", "&7產物翻倍倍數: &e3x"});
-	public static ItemStack CARBONADO_EDGED_FURNACE = new CustomItem(Material.FURNACE, "&7超級黑金剛石熔爐", 0, new String[] {"", "&7燃燒速度: &e20x", "&7燃料效率: &e10x", "&7產物翻倍倍數: &e3x"});
+	public static ItemStack CARBONADO_EDGED_FURNACE = new CustomItem(Material.FURNACE, "&7超級黑鑽石熔爐", 0, new String[] {"", "&7燃燒速度: &e20x", "&7燃料效率: &e10x", "&7產物翻倍倍數: &e3x"});
 
 	public static ItemStack BLOCK_PLACER = new CustomItem(Material.DISPENSER, "&a方塊放置裝置", 0, new String[] {"", "&r所有在這個發射器內的方塊", "&r會被自動放置"}) ;
 
@@ -477,7 +477,7 @@ public class SlimefunItems {
 	/* Electricity */
 	public static ItemStack SOLAR_GENERATOR = new CustomItem(new ItemStack(Material.DAYLIGHT_DETECTOR), "&b太陽能發電機", "", "&e基礎發電機", "&8\u21E8 &e\u26A1 &70 J 可儲存", "&8\u21E8 &e\u26A1 &74 J/秒");
 	public static ItemStack SOLAR_GENERATOR_2 = new CustomItem(new ItemStack(Material.DAYLIGHT_DETECTOR), "&c高級太陽能發電機", "", "&a中級發電機", "&8\u21E8 &e\u26A1 &70 J 可儲存", "&8\u21E8 &e\u26A1 &716 J/秒");
-	public static ItemStack SOLAR_GENERATOR_3 = new CustomItem(new ItemStack(Material.DAYLIGHT_DETECTOR), "&4黑金剛石太陽能發電機", "", "&4終極發電機", "&8\u21E8 &e\u26A1 &70 J 可儲存", "&8 \u21E8 &e\u26A1 &764 J/秒");
+	public static ItemStack SOLAR_GENERATOR_3 = new CustomItem(new ItemStack(Material.DAYLIGHT_DETECTOR), "&4黑鑽石太陽能發電機", "", "&4終極發電機", "&8\u21E8 &e\u26A1 &70 J 可儲存", "&8 \u21E8 &e\u26A1 &764 J/秒");
 	public static ItemStack SOLAR_GENERATOR_4 = new CustomItem(new ItemStack(Material.DAYLIGHT_DETECTOR), "&e充能太陽能發電機", "", "&9可以在夜間工作", "", "&4終極發電機", "&8\u21E8 &e\u26A1 &70 J 可儲存", "&8\u21E8 &e\u26A1 &7256 J/秒 (日間)", "&8\u21E8 &e\u26A1 &7128 J/秒 (夜間)");
 
 	public static ItemStack COAL_GENERATOR = null;
@@ -695,7 +695,7 @@ public class SlimefunItems {
 
 			ELECTRIC_GOLD_PAN = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjIwMTIzMzZkYTZmODFmMTExOWE3Njk5OWExYTdhNDExZjAzNzAyMDI4MGFlNGJkZDNkZjZhNmVkMmVhMmYyYiJ9fX0="), "&6電動淘金機", "", "&e基礎機器", "&8\u21E8 &7速度: 1x", "&8\u21E8 &e\u26A1 &72 J/秒");
 			ELECTRIC_GOLD_PAN_2 = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTA2NGU1MDQzNGJiNzMyZGRjMThiNTc5NTYxYTdjYWJlYTAxMDdkZDE4NTg1OGZhYjZiOTQ5MDVkNzA2M2I2YiJ9fX0="),"&6電動淘金機&7 - &eII", "", "&e基礎機器", "&8\u21E8 &7速度: 3x", "&8\u21E8 &e\u26A1 &74 J/秒");
-			ELECTRIC_GOLD_PAN_3 = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDZhNGNkNDI1YmU5NmE3NWJlZDRmNzFiZDRjMzhkNGQwYmIyY2FjZDYzM2RhNmE1YzMyZWJlNDc3M2UzYSJ9fX0="),"&6電動淘金機&7(&eIII&7)", "", "&4終極機器", "&8\u21E8 &7速度: 10x", "&8\u21E8 &e\u26A1 &714 J/秒");
+			ELECTRIC_GOLD_PAN_3 = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDZhNGNkNDI1YmU5NmE3NWJlZDRmNzFiZDRjMzhkNGQwYmIyY2FjZDYzM2RhNmE1YzMyZWJlNDc3M2UzYSJ9fX0="),"&6電動淘金機&7 - &eIII", "", "&4終極機器", "&8\u21E8 &7速度: 10x", "&8\u21E8 &e\u26A1 &714 J/秒");
 
 			CHARGING_BENCH = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWZjMDVhZjBlODhjNmZiMTBiNGM4YzhiODFiN2FhNjU4ZTY0NjQ5NzI0Y2I3M2JiOWJiMGYyNWYyOGJkIn19fQ=="), "&6充電台", "", "&r能夠給物品充電, 比如噴射背包", "", "&e基礎機器", "&8\u21E8 &e\u26A1 &7128 J 可儲存", "&8\u21E8 &e\u26A1 &7能源損失率: &c50%");
 
@@ -751,7 +751,7 @@ public class SlimefunItems {
 			VOIDBAG_LARGE = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmEzYjM0ODYyYjlhZmI2M2NmOGQ1Nzc5OTY2ZDNmYmE3MGFmODJiMDRlODNmM2VhZjY0NDlhZWJhIn19fQ=="), "&4大型虛空袋", new String[] {"", "&7大小: &e36", "&7ID: <ID>", "", " &7&e左鍵&7 以吸起周圍的物品", "&7&e右鍵&7 打開"});
 			BOUND_VOIDBAG = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMmEzYjM0ODYyYjlhZmI2M2NmOGQ1Nzc5OTY2ZDNmYmE3MGFmODJiMDRlODNmM2VhZjY0NDlhZWJhIn19fQ=="), "&4靈魂綁定虛空袋", new String[] {"", "&7大小: &e36", "&7ID: <ID>", "" , "&7&e左鍵&7 以吸起周圍的物品", "&7&e右鍵&7 打開"});
 
-			COAL_GENERATOR = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTM0M2NlNThkYTU0Yzc5OTI0YTJjOTMzMWNmYzQxN2ZlOGNjYmJlYTliZTQ1YTdhYzg1ODYwYTZjNzMwIn19fQ=="), "&c煤發電機", "", "&6普通發電機", "&8\u21E8 &e\u26A1 &764 J 可儲存", "&8\u21E8 &e\u26A1 &716 J/秒");
+			COAL_GENERATOR = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTM0M2NlNThkYTU0Yzc5OTI0YTJjOTMzMWNmYzQxN2ZlOGNjYmJlYTliZTQ1YTdhYzg1ODYwYTZjNzMwIn19fQ=="), "&c煤炭發電機", "", "&6普通發電機", "&8\u21E8 &e\u26A1 &764 J 可儲存", "&8\u21E8 &e\u26A1 &716 J/秒");
 			LAVA_GENERATOR = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTliYzBkMjYwNTc1MmExMWRiMTRmYjZlNTY2M2IzOGJkNTU1YmMxZmUxNDEwZDJiMzY2YWM1ODcyYjg3OSJ9fX0="), "&4岩漿發電機", "", "&6普通發電機", "&8\u21E8 &e\u26A1 &7512 J 可儲存", "&8\u21E8 &e\u26A1 &720 J/秒");
 			COMBUSTION_REACTOR = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWViZWVjNWNlZmQ0ZmFjM2QyNTg1NzQ4ZWJjYTk4YjMzNGM5OWIyOTMxNWU0ZjYyODMxMzhmYjEzZTNmMzgifX19"), "&c燃燒反應機", "", "&6高級發電機", "&8\u21E8 &e\u26A1 &7256 J 可儲存", "&8\u21E8 &e\u26A1 &724 J/秒");
 
@@ -793,7 +793,7 @@ public class SlimefunItems {
 
 			GPS_TRANSMITTER = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjBjOWMxYTAyMmY0MGI3M2YxNGI0Y2JhMzdjNzE4YzZhNTMzZjNhMjg2NGI2NTM2ZDVmNDU2OTM0Y2MxZiJ9fX0="), "&bGPS 發射器", "", "&8\u21E8 &e\u26A1 &716 J 可儲存", "&8\u21E8 &e\u26A1 &72 J/秒") ;
 			GPS_TRANSMITTER_2 = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjBjOWMxYTAyMmY0MGI3M2YxNGI0Y2JhMzdjNzE4YzZhNTMzZjNhMjg2NGI2NTM2ZDVmNDU2OTM0Y2MxZiJ9fX0="), "&c高級GPS 發射器", "", "&8\u21E8 &e\u26A1 &764 J 可儲存", "&8\u21E8 &e\u26A1 &76 J/秒 ");
-			GPS_TRANSMITTER_3 = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjBjOWMxYTAyMmY0MGI3M2YxNGI0Y2JhMzdjNzE4YzZhNTMzZjNhMjg2NGI2NTM2ZDVmNDU2OTM0Y2MxZiJ9fX0="), "&4黑金剛石GPS 發射器", "", "&8\u21E8 &e\u26A1 &7256 J 可儲存", "&8\u21E8 &e\u26A1 &722 J/秒");
+			GPS_TRANSMITTER_3 = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjBjOWMxYTAyMmY0MGI3M2YxNGI0Y2JhMzdjNzE4YzZhNTMzZjNhMjg2NGI2NTM2ZDVmNDU2OTM0Y2MxZiJ9fX0="), "&4黑鑽石GPS 發射器", "", "&8\u21E8 &e\u26A1 &7256 J 可儲存", "&8\u21E8 &e\u26A1 &722 J/秒");
 			GPS_TRANSMITTER_4 = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjBjOWMxYTAyMmY0MGI3M2YxNGI0Y2JhMzdjNzE4YzZhNTMzZjNhMjg2NGI2NTM2ZDVmNDU2OTM0Y2MxZiJ9fX0="), "&e充能GPS 發射器", "", "&8\u21E8 &e\u26A1 &71024 J 可儲存", "&8\u21E8 &e\u26A1 &792 J/秒");
 
 			GPS_CONTROL_PANEL = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGRjZmJhNThmYWYxZjY0ODQ3ODg0MTExODIyYjY0YWZhMjFkN2ZjNjJkNDQ4MWYxNGYzZjNiY2I2MzMwIn19fQ=="), "&bGPS 控制面板", "", "&r允許你追蹤你的衛星", "&r並且管理已有的標記點");
@@ -816,7 +816,7 @@ public class SlimefunItems {
 
 			SYNTHETIC_SAPPHIRE = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZTM1MDMyZjRkN2QwMWRlOGVjOTlkODlmODcyMzAxMmQ0ZTc0ZmE3MzAyMmM0ZmFjZjFiNTdjN2ZmNmZmMCJ9fX0="), "&b人造藍寶石");
 			CARBONADO = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTJmNGIxNTc3ZjUxNjBjNjg5MzE3MjU3MWM0YTcxZDhiMzIxY2RjZWFhMDMyYzZlMGUzYjYwZTBiMzI4ZmEifX19"), "&b&l黑金剛石", "", "&7&o\"黑鑽石\"");
-			RAW_CARBONADO = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWI0OWU2ZWMxMDc3MWU4OTkyMjVhZWE3M2NkOGNmMDM2ODRmNDExZDE0MTVjNzMyM2M5M2NiOTQ3NjIzMCJ9fX0="), "&b黑金剛石原礦");
+			RAW_CARBONADO = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWI0OWU2ZWMxMDc3MWU4OTkyMjVhZWE3M2NkOGNmMDM2ODRmNDExZDE0MTVjNzMyM2M5M2NiOTQ3NjIzMCJ9fX0="), "&b黑鑽石原礦");
 
 			ENERGY_REGULATOR = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDc4ZjJiN2U1ZTc1NjM5ZWE3ZmI3OTZjMzVkMzY0YzRkZjI4YjQyNDNlNjZiNzYyNzdhYWRjZDYyNjEzMzcifX19"), "&6能源調節器", "", "&r能源網絡的核心部分");
 

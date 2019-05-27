@@ -125,25 +125,21 @@ public class ReactorAccessPort extends SlimefunItem {
 			);
 		}
 		
-		preset.addItem(1, new CustomItem(SlimefunItems.URANIUM, "&7Fuel Slot", "", "&rThis Slot accepts radioactive Fuel such as:", "&2Uranium &ror &aNeptunium"),
+		preset.addItem(1, new CustomItem(SlimefunItems.URANIUM, "&r接受:", "&2鈾 &r或 &a錼"),
 			(p, slot, item, action) -> false
 		);
 		
-		preset.addItem(22, new CustomItem(SlimefunItems.PLUTONIUM, "&7Byproduct Slot", "", "&rThis Slot contains the Reactor's Byproduct", "&rsuch as &aNeptunium &ror &7Plutonium"),
+		preset.addItem(22, new CustomItem(SlimefunItems.PLUTONIUM, "&7副產物槽", "", "&r此槽輸出反應堆副產物", "&r像是 &a錼 &ror &7鈽"),
 			(p, slot, item, action) -> false
 		);
 		
-		preset.addItem(7, new CustomItem(SlimefunItems.REACTOR_COOLANT_CELL, "&bCoolant Slot", "", "&rThis Slot accepts Coolant Cells", "&4Without any Coolant Cells, your Reactor", "&4will explode"),
-			(p, slot, item, action) -> false
-		);
-		
-		preset.addItem(7, new CustomItem(SlimefunItems.REACTOR_COOLANT_CELL, "&bCoolant Slot", "", "&rThis Slot accepts Coolant Cells", "&4Without any Coolant Cells, your Reactor", "&4will explode"),
+		preset.addItem(7, new CustomItem(SlimefunItems.REACTOR_COOLANT_CELL, "&b冷卻槽", "", "&r接受: 冷卻劑", "&4若沒有放入任何冷卻劑", "&4反應堆將會爆炸!"),
 			(p, slot, item, action) -> false
 		);
 	}
 	
 	public String getInventoryTitle() {
-		return "&2Reactor Access Port";
+		return "&2反應堆訪問接口";
 	}
 
 	public int[] getInputSlots() {
