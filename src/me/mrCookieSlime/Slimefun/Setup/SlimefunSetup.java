@@ -4933,7 +4933,7 @@ public class SlimefunSetup {
 
 			@Override
 			public String getInventoryTitle() {
-				return "&f地獄之星反應堆";
+				return "&f星火反應堆";
 			}
 
 			@Override

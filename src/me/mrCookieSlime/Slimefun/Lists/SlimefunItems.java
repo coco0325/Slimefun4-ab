@@ -35,17 +35,17 @@ public class SlimefunItems {
 	public static ItemStack GOLD_PAN = new CustomItem(Material.BOWL, "&6淘金盤","&a&o可以獲得各種各樣的礦物", "", "&7&e右鍵&7 從沙礫中淘金");
 	public static ItemStack PARACHUTE = new CustomArmor(new CustomItem(Material.LEATHER_CHESTPLATE, "&r&l降落傘", "&7按住 &eShift&7 使用"), Color.WHITE);
 	public static ItemStack GRAPPLING_HOOK = new CustomItem(Material.LEAD, "&6抓鉤", "&7&e右鍵&7 使用");
-	public static ItemStack SOLAR_HELMET = new CustomItem(Material.IRON_HELMET, "&b太陽能頭盔", "&7&o的飢餓值", "&a&o替身上的物品充電");
+	public static ItemStack SOLAR_HELMET = new CustomItem(Material.IRON_HELMET, "&b太陽能頭盔", "", "&a&o替身上的物品充電");
 	public static ItemStack CLOTH = new CustomItem(Material.PAPER, "&b布", 0);
 	public static ItemStack CAN = null;
-	public static ItemStack NIGHT_VISION_GOGGLES = new CustomArmor(new CustomItem(Material.LEATHER_HELMET, "&a夜視眼鏡", "&7&o的飢餓值", "&9+ 夜視效果"), Color.BLACK);
-	public static ItemStack FARMER_SHOES = new CustomArmor(new CustomItem(Material.LEATHER_BOOTS, "&e農夫的靴子", "&7&o的飢餓值", "&6&o能夠防止你踩壞農田"), Color.YELLOW);
+	public static ItemStack NIGHT_VISION_GOGGLES = new CustomArmor(new CustomItem(Material.LEATHER_HELMET, "&a夜視眼鏡", "", "&9+ 夜視效果"), Color.BLACK);
+	public static ItemStack FARMER_SHOES = new CustomArmor(new CustomItem(Material.LEATHER_BOOTS, "&e農夫的靴子", "", "&6&o能夠防止你踩壞農田"), Color.YELLOW);
 	public static ItemStack INFUSED_MAGNET = null;
-	public static ItemStack FLASK_OF_KNOWLEDGE = new CustomItem(Material.GLASS_BOTTLE, "&c學識之瓶", "&7&o的飢餓值", "&r允許你將經驗儲存在瓶子裡", "&7需要消耗 &a1 個等級");
-	public static ItemStack RAG = new CustomItem(Material.PAPER, "&c破布", "&7&o的飢餓值", "&a1級醫療供給", "", "&r恢復2點血量", "&r可以熄滅身上的火", "", "&7&e右鍵&7 使用");
-	public static ItemStack BANDAGE = new CustomItem(Material.PAPER, "&c繃帶", "&7&o的飢餓值", "&a2級醫療供給", "", "&r恢復4點血量", "&r可以熄滅身上的火", "", "&7&e右鍵&7 使用");
-	public static ItemStack SPLINT = new CustomItem(Material.STICK, "&c夾板", "&7&o的飢餓值", "&a1級醫療供給", "", "&r恢復2點血量", "", "&7&e右鍵&7使用");
-	public static ItemStack VITAMINS = new CustomItem(Material.NETHER_WART, "&c維他命", "&7&o的飢餓值", "&a3級醫療供給", "", "&r恢復4點血量", "&r可以熄滅身上的火", "&r治愈中毒/凋零/輻射的負面效果", "", "&7&e右鍵&7 使用");
+	public static ItemStack FLASK_OF_KNOWLEDGE = new CustomItem(Material.GLASS_BOTTLE, "&c學識之瓶", "", "&r允許你將經驗儲存在瓶子裡", "&7需要消耗 &a1 個等級");
+	public static ItemStack RAG = new CustomItem(Material.PAPER, "&c破布", "", "&a1級醫療供給", "", "&r恢復2點血量", "&r可以熄滅身上的火", "", "&7&e右鍵&7 使用");
+	public static ItemStack BANDAGE = new CustomItem(Material.PAPER, "&c繃帶", "", "&a2級醫療供給", "", "&r恢復4點血量", "&r可以熄滅身上的火", "", "&7&e右鍵&7 使用");
+	public static ItemStack SPLINT = new CustomItem(Material.STICK, "&c夾板", "", "&a1級醫療供給", "", "&r恢復2點血量", "", "&7&e右鍵&7使用");
+	public static ItemStack VITAMINS = new CustomItem(Material.NETHER_WART, "&c維他命", "", "&a3級醫療供給", "", "&r恢復4點血量", "&r可以熄滅身上的火", "&r治愈中毒/凋零/輻射的負面效果", "", "&7&e右鍵&7 使用");
 	public static ItemStack MEDICINE = new CustomItem(Material.POTION, "&c藥物", 8229, new String[] {"", "&a3級醫療供給", "", "&r恢復4點血量", "&r可以熄滅身上的火", "&r治愈中毒/凋零/輻射的負面效果", "", "&7&e右鍵&7 飲用"});
 
 	/* Backpacks */
@@ -130,7 +130,7 @@ public class SlimefunItems {
 	public static ItemStack SEISMIC_AXE = new CustomItem(Material.IRON_AXE, "&a地震斧", "", "&7&o製造一場地震...", "", "&7&e右鍵&7 使用");
 
 	/* Bows */
-	public static ItemStack EXPLOSIVE_BOW = new CustomItem(Material.BOW, "&c爆裂之弓", 0, new String[] {"&r被爆裂之弓射出的箭擊中將會飛上天"});
+	public static ItemStack EXPLOSIVE_BOW = new CustomItem(Material.BOW, "&c爆破弓", 0, new String[] {"&r被爆裂之弓射出的箭擊中將會飛上天"});
 	public static ItemStack ICY_BOW = new CustomItem(Material.BOW, "&b冰封之弓", 0, new String[] {"&r被此弓射出的箭擊中", "&r將會因寒冷而無法移動(2秒內)"});
 	public static ItemStack WITHER_BOW = new CustomItem(Material.BOW, "&a凋零之弓", 0, new String[] {"&c&o花開凋謝之時", "", "&r將會給予射中的實體凋零效果" });
 
@@ -139,8 +139,8 @@ public class SlimefunItems {
 	public static ItemStack LUMBER_AXE = new CustomItem(Material.DIAMOND_AXE, "&6伐木斧", 0, new String[] {"&a&o砍倒整棵樹木..."});
 	public static ItemStack PICKAXE_OF_CONTAINMENT = new CustomItem(Material.IRON_PICKAXE, "&c生怪箱之鎬", 0, new String[] {"", "&9可以獲取生怪箱"});
 	public static ItemStack HERCULES_PICKAXE = new CustomItem(Material.IRON_PICKAXE, "&9榮耀之鎬", 0, new String[] {"", "&r它如此強大", "&r因此能自動將挖到的礦物變為粉末..."}, new String[] {"DURABILITY-2", "DIG_SPEED-4"});
-	public static ItemStack EXPLOSIVE_PICKAXE = new CustomItem(Material.DIAMOND_PICKAXE, "&e爆炸稿", 0, new String[] {"", "&r允許你在一瞬間挖掘礦物", "", "&9在挖礦時有時運效果"});
-	public static ItemStack PICKAXE_OF_THE_SEEKER = new CustomItem(Material.DIAMOND_PICKAXE, "&a尋礦稿", 0, new String[] {"&r使用時將會指出你附近的礦物", "&r但可能它會受到損傷", " ", "&7&e右鍵&7 以尋找四周的礦物"});
+	public static ItemStack EXPLOSIVE_PICKAXE = new CustomItem(Material.DIAMOND_PICKAXE, "&e爆炸鎬", 0, new String[] {"", "&r允許你在一瞬間挖掘礦物", "", "&9在挖礦時有時運效果"});
+	public static ItemStack PICKAXE_OF_THE_SEEKER = new CustomItem(Material.DIAMOND_PICKAXE, "&a尋礦鎬", 0, new String[] {"&r使用時將會指出你附近的礦物", "&r但可能它會受到損傷", " ", "&7&e右鍵&7 以尋找四周的礦物"});
 	public static ItemStack COBALT_PICKAXE = new CustomItem(Material.IRON_PICKAXE, "&9鈷鎬", 0, new String[] {}, new String[] {"DURABILITY-3", "DIG_SPEED-6"});
 	public static ItemStack PICKAXE_OF_VEIN_MINING = new CustomItem(Material.DIAMOND_PICKAXE, "&e礦脈鎬", 0, new String[] {"", "&r這個鎬子將會挖出", "&r整個礦脈的礦物..."} );
 
@@ -756,7 +756,7 @@ public class SlimefunItems {
 			COMBUSTION_REACTOR = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWViZWVjNWNlZmQ0ZmFjM2QyNTg1NzQ4ZWJjYTk4YjMzNGM5OWIyOTMxNWU0ZjYyODMxMzhmYjEzZTNmMzgifX19"), "&c燃燒反應機", "", "&6高級發電機", "&8\u21E8 &e\u26A1 &7256 J 可儲存", "&8\u21E8 &e\u26A1 &724 J/秒");
 
 			NUCLEAR_REACTOR = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzQxMjY1ZDU3ZDM3MDZjMGI0MjhmMWIyNDMwNDRkNTBkODQxNDkyNmFjYjM3NTJiOGNiOWY1Yjg1YmNkZDA5NiJ9fX0="), "&2核能反應堆", "", "&r需要冷卻劑!", "&8\u21E8 &b必須被水包圍", "&8\u21E8 &b必須使用反應堆冷卻劑工作", "", "&4終極發電機", "&8\u21E8 &e\u26A1 &716384 J 可儲存", "&8\u21E8 &e\u26A1 &7500 J/秒");
-			NETHERSTAR_REACTOR = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTUyZmZkMDg1MjhlYzgxODNiMzVhYWM2NThiMjkyMjZhZDhiOWFhY2FjOGRkOWUwNGNmMTg2YjExMDY0Y2E0ZCJ9fX0="), "&f地獄之星反應堆", "", "&f需要地獄之星", "&8\u21E8 &b必須被水包圍", "&8\u21E8 &b必須使用地獄之星冷卻劑工作", "", "&4終極發電機", "&8\u21E8 &e\u26A1 &732768 J 可儲存", "&8\u21E8 &e\u26A1 &71024 J/秒", "&8\u21E8 &4會導致附近的生物獲得凋零效果");
+			NETHERSTAR_REACTOR = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTUyZmZkMDg1MjhlYzgxODNiMzVhYWM2NThiMjkyMjZhZDhiOWFhY2FjOGRkOWUwNGNmMTg2YjExMDY0Y2E0ZCJ9fX0="), "&f星火反應堆", "", "&f需要地獄之星", "&8\u21E8 &b必須被水包圍", "&8\u21E8 &b必須使用地獄之星冷卻劑工作", "", "&4終極發電機", "&8\u21E8 &e\u26A1 &732768 J 可儲存", "&8\u21E8 &e\u26A1 &71024 J/秒", "&8\u21E8 &4會導致附近的生物獲得凋零效果");
 
 			SMALL_CAPACITOR = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTEzNjFlNTc2YjQ5M2NiZmRmYWUzMjg2NjFjZWRkMWFkZDU1ZmFiNGU1ZWI0MThiOTJjZWJmNjI3NWY4YmI0In19fQ=="), "&a小型儲能電容", "", "&e基礎電容", "&8\u21E8 &e\u26A1 &7128 J 可儲存");
 			MEDIUM_CAPACITOR = new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTEzNjFlNTc2YjQ5M2NiZmRmYWUzMjg2NjFjZWRkMWFkZDU1ZmFiNGU1ZWI0MThiOTJjZWJmNjI3NWY4YmI0In19fQ=="), "&a中型儲能電容", "", "&6普通電容", "&8\u21E8 &e\u26A1 &7512 J 可儲存");

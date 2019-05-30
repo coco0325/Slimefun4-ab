@@ -202,7 +202,7 @@ public class SlimefunStartup extends JavaPlugin {
 			if (config.getBoolean("items.coolers")) new CoolerListener(this);
 
 			// Handle Slimefun Guide being given on Join
-			if (config.getBoolean("options.give-guide-on-firs	t-join")) new GuideOnJoinListener(this);
+			new GuideOnJoinListener(this);
 
 			// Load/Unload Worlds in Slimefun
 			new WorldListener(this);
