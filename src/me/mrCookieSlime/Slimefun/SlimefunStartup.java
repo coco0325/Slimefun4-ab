@@ -2,6 +2,7 @@ package me.mrCookieSlime.Slimefun;
 
 import java.io.*;
 
+import me.vagdedes.mysql.database.MySQL;
 import me.vagdedes.mysql.database.SQL;
 
 import org.bukkit.Bukkit;
@@ -330,7 +331,7 @@ public class SlimefunStartup extends JavaPlugin {
 			me.vagdedes.mysql.database.MySQL.update("CREATE TABLE IF NOT EXISTS sf_research " +
 					"(uuid CHAR(36), " + " unlocked TEXT(2000), PRIMARY KEY (uuid))");
 			me.vagdedes.mysql.database.MySQL.update("CREATE TABLE IF NOT EXISTS sf_backpack" +
-					" (uuid CHAR(50), size INT, inv TEXT, PRIMARY KEY (uuid))");
+					" (uuid CHAR(50), inv TEXT, PRIMARY KEY (uuid))");
 		}
 	}
 

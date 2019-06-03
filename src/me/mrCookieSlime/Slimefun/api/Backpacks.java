@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
+import me.mrCookieSlime.Slimefun.api.energy.ItemEnergy;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -20,10 +21,10 @@ public class Backpacks {
 
 	public static String tablename = "sf_backpack";
 	
-	public static String createBackpack(Player p, int size) {
+	public static String createBackpack(Player p) {
 		Date date = new Date();
 		long id = date.getTime();
-		SQL.insertData("uuid, size", " '"+p.getUniqueId().toString()+"#"+id+"', '"+size+"' ", tablename);
+		SQL.insertData("uuid", " '"+p.getUniqueId().toString()+"#"+id+"' ", tablename);
 		return p.getUniqueId() + "#" + id;
 	}
 	
@@ -50,7 +51,7 @@ public class Backpacks {
 		if (id >= 0) {
 			Object o = SQL.get("inv", "uuid", "=", uuid+"#"+id, tablename);
 			String baseinv = String.valueOf(o);
-			Integer size = (Integer)SQL.get("size", "uuid", "=", uuid+"#"+id, tablename);
+			Integer size = getSize(item);
 			try {
 				Inventory inv = Bukkit.createInventory(null, size, "背包 [ 容量 " + size + " ]");
 				if(o == null){
@@ -122,4 +123,7 @@ public class Backpacks {
 		}
 	}
 
+	public static int getSize(ItemStack item){
+		return Integer.parseInt(item.getItemMeta().getLore().get(1).substring(8));
+	}
 }

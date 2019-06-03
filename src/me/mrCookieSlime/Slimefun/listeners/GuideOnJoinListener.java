@@ -16,6 +16,7 @@ import me.mrCookieSlime.Slimefun.SlimefunStartup;
 import me.mrCookieSlime.Slimefun.Misc.BookDesign;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,20 +33,25 @@ public class GuideOnJoinListener implements Listener {
 
 
 	public void checkGuide(Player p) {
-		List<ItemStack> contents = Arrays.asList(p.getInventory().getContents());
-		if(contents.contains(SlimefunGuide.getItem(BookDesign.CHEST)) ||
-				contents.contains(SlimefunGuide.getItem(BookDesign.BOOK)) ||
-				contents.contains(SlimefunGuide.getItem(BookDesign.CHEAT_SHEET))){
-			return;
-		}else{
-			if(p.hasPermission("slimefun.cheat.items")){
-				p.getInventory().addItem(SlimefunGuide.getItem(BookDesign.CHEAT_SHEET));
-			}else if(p.hasPermission("sf.book")){
-				p.getInventory().addItem(SlimefunGuide.getItem(BookDesign.BOOK));
-			}else{
-				p.getInventory().addItem(SlimefunGuide.getItem(BookDesign.CHEST));
+		new BukkitRunnable(){
+			@Override
+			public void run(){
+				List<ItemStack> contents = Arrays.asList(p.getInventory().getContents());
+				if(contents.contains(SlimefunGuide.getItem(BookDesign.CHEST)) ||
+						contents.contains(SlimefunGuide.getItem(BookDesign.BOOK)) ||
+						contents.contains(SlimefunGuide.getItem(BookDesign.CHEAT_SHEET))){
+					return;
+				}else{
+					if(p.hasPermission("slimefun.cheat.items")){
+						p.getInventory().addItem(SlimefunGuide.getItem(BookDesign.CHEAT_SHEET));
+					}else if(p.hasPermission("sf.book")){
+						p.getInventory().addItem(SlimefunGuide.getItem(BookDesign.BOOK));
+					}else{
+						p.getInventory().addItem(SlimefunGuide.getItem(BookDesign.CHEST));
+					}
+				}
 			}
-		}
+		}.runTaskLater(SlimefunStartup.instance, 20);
 	}
 
 	@EventHandler
