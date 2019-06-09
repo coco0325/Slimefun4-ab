@@ -58,7 +58,7 @@ public class Elevator {
 			return;
 		}
 		TellRawMessage tellraw = new TellRawMessage();
-		tellraw.addText("&3- Pick a Destination -\n\n");
+		tellraw.addText("&3- 選擇目的樓層 -\n\n");
 		int index = 1;
 		for (int y = b.getWorld().getMaxHeight(); y > 0; y--) {
 			Block block = b.getWorld().getBlockAt(b.getX(), y, b.getZ());
