@@ -4,7 +4,6 @@
     <groupId>me.mrCookieSlime</groupId>
     <artifactId>Slimefun</artifactId>
     <version>4.1.17-tw</version>
-    <packaging>jar</packaging>
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -12,8 +11,8 @@
     </properties>
     <repositories>
         <repository>
-            <id>paper-repo</id>
-            <url>https://repo.destroystokyo.com/repository/maven-public/</url>
+            <id>papermc</id>
+            <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
         <repository>
             <id>spigot-repo</id>
@@ -90,53 +89,54 @@
         </dependency>
         <dependency>
             <groupId>me.vagdedes</groupId>
-            <artifactId>MySQL-API</artifactId>
+            <artifactId>MySQL</artifactId>
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/MySQL-API.jar</systemPath>
         </dependency>
     </dependencies>
     <dependencyManagement>
-    	<dependencies>
-    		<dependency>
-    			<groupId>org.bukkit</groupId>
-    			<artifactId>bukkit</artifactId>
-    			<version>1.14.2-R0.1-SNAPSHOT</version>
-    		</dependency>
-    		<dependency>
-    			<groupId>com.sk89q.worldedit</groupId>
-    			<artifactId>worldedit-bukkit</artifactId>
-    			<version>7.0.0-SNAPSHOT</version>
-    		</dependency>
-    		<dependency>
-    			<groupId>com.github.TheBusyBiscuit</groupId>
-    			<artifactId>CS-CoreLib</artifactId>
-    			<version>v1.6.1</version>
-    		</dependency>
-    		<dependency>
-    			<groupId>me.minebuilders</groupId>
-    			<artifactId>clearlag-core</artifactId>
-    			<version>2.9.7</version>
-    		</dependency>
-    		<dependency>
-    			<groupId>net.coreprotect</groupId>
-    			<artifactId>coreprotect</artifactId>
-    			<version>2.16.0</version>
-    		</dependency>
-    		<dependency>
-    			<groupId>me.mrCookieSlime</groupId>
-    			<artifactId>EmeraldEnchants</artifactId>
-    			<version>2.0</version>
-    		</dependency>
-    		<dependency>
-    			<groupId>me.mrCookieSlime</groupId>
-    			<artifactId>ExoticGarden</artifactId>
-    			<version>1.2.0</version>
-    		</dependency>
+        <dependencies>
+            <dependency>
+                <groupId>org.bukkit</groupId>
+                <artifactId>bukkit</artifactId>
+                <version>1.14.2-R0.1-SNAPSHOT</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.sk89q.worldedit</groupId>
+                <artifactId>worldedit-bukkit</artifactId>
+                <version>7.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.TheBusyBiscuit</groupId>
+                <artifactId>CS-CoreLib</artifactId>
+                <version>1.6.1</version>
+            </dependency>
+            <dependency>
+                <groupId>me.minebuilders</groupId>
+                <artifactId>clearlag-core</artifactId>
+                <version>2.9.7</version>
+            </dependency>
+            <dependency>
+                <groupId>net.coreprotect</groupId>
+                <artifactId>coreprotect</artifactId>
+                <version>2.16.0</version>
+            </dependency>
+            <dependency>
+                <groupId>me.mrCookieSlime</groupId>
+                <artifactId>EmeraldEnchants</artifactId>
+                <version>2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>me.mrCookieSlime</groupId>
+                <artifactId>ExoticGarden</artifactId>
+                <version>1.2.0</version>
+            </dependency>
             <dependency>
                 <groupId>me.vagdedes</groupId>
-                <artifactId>MySQL-API</artifactId>
+                <artifactId>MySQL</artifactId>
                 <version>2.5</version>
             </dependency>
-    	</dependencies>
+        </dependencies>
     </dependencyManagement>
 </project>
