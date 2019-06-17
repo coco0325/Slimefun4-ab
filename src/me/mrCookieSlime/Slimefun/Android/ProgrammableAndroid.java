@@ -1013,7 +1013,7 @@ public abstract class ProgrammableAndroid extends SlimefunItem {
 			}
 			else {
 				ItemStack stack = ScriptPart.valueOf(commands[i]).toItemStack();
-				menu.addItem(i, new CustomItem(stack, stack.getItemMeta().getDisplayName(), "", "&7\u21E8 &eLeft Click &7to edit", "&7\u21E8 &eRight Click &7to delete", "&7\u21E8 &eShift + 右鍵 &7複製"));
+				menu.addItem(i, new CustomItem(stack, stack.getItemMeta().getDisplayName(), "", "&7\u21E8 &e左鍵 &7編輯", "&7\u21E8 &e右鍵 &7刪除", "&7\u21E8 &eShift + 右鍵 &7複製"));
 				menu.addMenuClickHandler(i, (pl, slot, item, action) -> {
 					if (action.isRightClicked() && action.isShiftClicked()) {
 						if (commands.length == 54) return false;
@@ -1275,7 +1275,7 @@ public abstract class ProgrammableAndroid extends SlimefunItem {
 	}
 
 	protected void openScriptComponentEditor(Player p, final Block b, final String script, final int index) throws Exception {
-		ChestMenu menu = new ChestMenu("&eScript Editor");
+		ChestMenu menu = new ChestMenu("&e程序編輯器");
 
 		final String[] commands = script.split("-");
 

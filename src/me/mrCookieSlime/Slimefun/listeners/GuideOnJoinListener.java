@@ -51,7 +51,7 @@ public class GuideOnJoinListener implements Listener {
 					}
 				}
 			}
-		}.runTaskLater(SlimefunStartup.instance, 20);
+		}.runTaskLater(SlimefunStartup.instance, 80);
 	}
 
 	@EventHandler
