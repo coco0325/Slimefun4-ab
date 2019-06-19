@@ -44,7 +44,6 @@ public class Pedestals {
 		if (BlockStorage.check(altar.getRelative(-2, 0, -2), "ANCIENT_PEDESTAL")) {
 			list.add(altar.getRelative(-2, 0, -2));
 		}
-
 		return list;
 	}
 
