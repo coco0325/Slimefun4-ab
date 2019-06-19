@@ -7,7 +7,6 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -43,8 +42,8 @@ public class AncientAltarListener implements Listener {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
-	List<Block> altars = new ArrayList<>();
-	Set<UUID> removed_items = new HashSet<>();
+	List<Block> altars = new ArrayList<Block>();
+	Set<UUID> removed_items = new HashSet<UUID>();
 
 	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
 	public void onInteract(PlayerInteractEvent e) {
@@ -146,10 +145,9 @@ public class AncientAltarListener implements Listener {
 			ItemMeta im = stack.getItemMeta();
 			im.setDisplayName(null);
 			stack.setItemMeta(im);
-		} 
-		else {
+		} else {
 			ItemMeta im = stack.getItemMeta();
-			im.setDisplayName(ChatColor.RESET + customName);
+			im.setDisplayName(customName);
 			stack.setItemMeta(im);
 		}
 		return stack;
