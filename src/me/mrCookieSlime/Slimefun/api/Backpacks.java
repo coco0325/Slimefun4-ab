@@ -20,7 +20,7 @@ import me.vagdedes.mysql.database.SQL;
 public class Backpacks {
 
 	public static String tablename = "sf_backpack";
-	
+
 	public static String createBackpack(Player p) {
 		Date date = new Date();
 		long id = date.getTime();

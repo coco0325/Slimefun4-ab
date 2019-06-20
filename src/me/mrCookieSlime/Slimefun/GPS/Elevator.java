@@ -21,7 +21,7 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 
 public class Elevator {
 	
-	public static List<UUID> ignored = new ArrayList<UUID>();
+	public static List<UUID> ignored = new ArrayList<>();
 
 	public static void openEditor(Player p, final Block b) {
 		ChestMenu menu = new ChestMenu("電梯板設定");
@@ -57,6 +57,7 @@ public class Elevator {
 			ignored.remove(p.getUniqueId());
 			return;
 		}
+		
 		TellRawMessage tellraw = new TellRawMessage();
 		tellraw.addText("&3- 選擇目的樓層 -\n\n");
 		int index = 1;
