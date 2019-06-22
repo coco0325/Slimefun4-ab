@@ -208,7 +208,9 @@ public class ToolListener implements Listener {
 				}
 			}
 			if (allow) {
-				drops.add(BlockStorage.retrieve(e.getBlock()));
+				if(!sfItem.getItem().getType().equals(Material.SPAWNER)){
+					drops.add(BlockStorage.retrieve(e.getBlock()));
+				}
 			}
 			else {
 				e.setCancelled(true);

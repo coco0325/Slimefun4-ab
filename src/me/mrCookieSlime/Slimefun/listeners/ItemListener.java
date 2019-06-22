@@ -396,6 +396,21 @@ public class ItemListener implements Listener {
 		}
 	}
 
+	@EventHandler
+	public void onGrinder(InventoryClickEvent e) {
+		if (e.getRawSlot() == 2 && e.getWhoClicked() instanceof Player && e.getInventory().getType() == InventoryType.GRINDSTONE) {
+			if (SlimefunManager.isItemSimiliar(e.getInventory().getContents()[0], SlimefunItems.ELYTRA, true)) return;
+			if (SlimefunManager.isItemSimiliar(e.getInventory().getContents()[1], SlimefunItems.ELYTRA, true)) return;
+			if (SlimefunItem.getByItem(e.getInventory().getContents()[0]) != null && !SlimefunItem.isDisabled(e.getInventory().getContents()[0])) {
+				e.setCancelled(true);
+				Messages.local.sendTranslation((Player) e.getWhoClicked(), "anvil.not-working", true);
+			}else if (SlimefunItem.getByItem(e.getInventory().getContents()[1]) != null && !SlimefunItem.isDisabled(e.getInventory().getContents()[1])) {
+				e.setCancelled(true);
+				Messages.local.sendTranslation((Player) e.getWhoClicked(), "anvil.not-working", true);
+			}
+		}
+	}
+
 	@EventHandler (ignoreCancelled = true)
 	public void onPreBrew(InventoryClickEvent e) {
 		Inventory inventory = e.getInventory();
