@@ -142,20 +142,23 @@ public class SlimefunCommand implements CommandExecutor, Listener {
 					double x = Integer.parseInt(args[1]) + 0.5D;
 					double y = Integer.parseInt(args[2]) + 0.4D;
 					double z = Integer.parseInt(args[3]) + 0.5D;
-					
-					if (BlockStorage.getLocationInfo(((Player) sender).getWorld().getBlockAt(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3])).getLocation(), "floor") != null) {
-						Elevator.ignored.add(((Player) sender).getUniqueId());
-						float yaw = ((Player) sender).getEyeLocation().getYaw() + 180;
-						if (yaw > 180) yaw = -180 + (yaw - 180);
-						((Player) sender).teleport(new Location(((Player) sender).getWorld(), x, y, z, yaw, ((Player) sender).getEyeLocation().getPitch()));
-						try {
-							TitleBuilder title = (TitleBuilder) new TitleBuilder(20, 60, 20).addText("&r" + ChatColor.translateAlternateColorCodes('&', BlockStorage.getLocationInfo(((Player) sender).getWorld().getBlockAt(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3])).getLocation(), "floor")));
-							TitleBuilder subtitle = (TitleBuilder) new TitleBuilder(20, 60, 20).addText(" ");
-							
-							title.send(TitleType.TITLE, ((Player) sender));
-							subtitle.send(TitleType.SUBTITLE, ((Player) sender));
-						} catch (Exception x1) {
-							x1.printStackTrace();
+					Location Floor = ((Player) sender).getWorld().getBlockAt(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3])).getLocation();
+					Location PL = ((Player)sender).getLocation();
+					if (BlockStorage.getLocationInfo(Floor, "floor") != null) {
+						if(Floor.getBlockX() == PL.getBlockX() && Floor.getBlockX() == PL.getBlockX()){
+							Elevator.ignored.add(((Player) sender).getUniqueId());
+							float yaw = ((Player) sender).getEyeLocation().getYaw() + 180;
+							if (yaw > 180) yaw = -180 + (yaw - 180);
+							((Player) sender).teleport(new Location(((Player) sender).getWorld(), x, y, z, yaw, ((Player) sender).getEyeLocation().getPitch()));
+							try {
+								TitleBuilder title = (TitleBuilder) new TitleBuilder(20, 60, 20).addText("&r" + ChatColor.translateAlternateColorCodes('&', BlockStorage.getLocationInfo(((Player) sender).getWorld().getBlockAt(Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3])).getLocation(), "floor")));
+								TitleBuilder subtitle = (TitleBuilder) new TitleBuilder(20, 60, 20).addText(" ");
+
+								title.send(TitleType.TITLE, ((Player) sender));
+								subtitle.send(TitleType.SUBTITLE, ((Player) sender));
+							} catch (Exception x1) {
+								x1.printStackTrace();
+							}
 						}
 					}
 				}
