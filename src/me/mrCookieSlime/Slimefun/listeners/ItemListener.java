@@ -26,10 +26,7 @@ import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.inventory.BrewerInventory;
-import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -390,8 +387,12 @@ public class ItemListener implements Listener {
 		if (e.getRawSlot() == 2 && e.getWhoClicked() instanceof Player && e.getInventory().getType() == InventoryType.ANVIL) {
 		if (SlimefunManager.isItemSimiliar(e.getInventory().getContents()[0], SlimefunItems.ELYTRA, true)) return;
 		if (SlimefunItem.getByItem(e.getInventory().getContents()[0]) != null && !SlimefunItem.isDisabled(e.getInventory().getContents()[0])) {
-				e.setCancelled(true);
-				Messages.local.sendTranslation((Player) e.getWhoClicked(), "anvil.not-working", true);
+			AnvilInventory inv = (AnvilInventory) e.getInventory();
+			Integer level = inv.getRepairCost();
+			e.setCancelled(true);
+			Player p = ((Player)e.getWhoClicked());
+			p.giveExpLevels(level);
+			Messages.local.sendTranslation((Player) e.getWhoClicked(), "anvil.not-working", true);
 			}
 		}
 	}

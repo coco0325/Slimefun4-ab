@@ -1493,6 +1493,7 @@ public class SlimefunSetup {
 			public boolean onBlockBreak(BlockBreakEvent e, ItemStack item, int fortune, List<ItemStack> drops) {
 				if (SlimefunManager.isItemSimiliar(item, SlimefunItems.AUTO_SMELT_PICKAXE, true)) {
 					if (e.getBlock().getType().equals(Material.PLAYER_HEAD)) return true;
+					if(BlockStorage.hasBlockInfo(e.getBlock().getLocation())) return true;
 
 					int j = -1;
 					List<ItemStack> dropsList = (List<ItemStack>) e.getBlock().getDrops();
