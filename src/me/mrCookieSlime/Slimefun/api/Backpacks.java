@@ -29,11 +29,11 @@ public class Backpacks {
 	}
 	
 	public static void openBackpack(Player p, ItemStack item) {
-		Inventory inv = getInventory(p, item);
+		Inventory inv = getInventory(item);
 		if (inv != null) p.openInventory(inv);
 	}
 	
-	public static Inventory getInventory(Player p, ItemStack item) {
+	public static Inventory getInventory(ItemStack item) {
 		if (item == null || !item.hasItemMeta() || !item.getItemMeta().hasLore()) return null;
 		long id = -1;
 		String uuid = "";
@@ -59,10 +59,10 @@ public class Backpacks {
 				}
 				inv.setContents(fromBase64(baseinv).getContents());
 				return inv;
-			}catch (IOException e){
-				e.printStackTrace();
+			}catch (Exception e){
+				saveBackpack(Bukkit.createInventory(null, 36), item);
+				return Bukkit.createInventory(null, size, "背包 [ 容量 " + 36+ " ]");
 			}
-			return null;
 		}
 		else return null;
 	}
@@ -125,5 +125,14 @@ public class Backpacks {
 
 	public static int getSize(ItemStack item){
 		return Integer.parseInt(item.getItemMeta().getLore().get(1).substring(8));
+	}
+
+	public static boolean isEmpty(ItemStack item){
+		for(ItemStack i : getInventory(item).getContents()){
+			if(i != null){
+				return false;
+			}
+		}
+		return true;
 	}
 }

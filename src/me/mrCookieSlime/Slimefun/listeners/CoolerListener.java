@@ -28,7 +28,7 @@ public class CoolerListener implements Listener {
 			Player p = (Player) e.getEntity();
 			for (ItemStack item: p.getInventory().getContents()) {
 				if (SlimefunManager.isItemSimiliar(item, SlimefunItem.getItem("COOLER"), false)) {
-					Inventory inv = Backpacks.getInventory(p, item);
+					Inventory inv = Backpacks.getInventory(item);
 					if (inv != null) {
 						ItemStack drink = null;
 						for (ItemStack i: inv.getContents()) {

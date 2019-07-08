@@ -1169,7 +1169,6 @@ public class SlimefunSetup {
 
 											if (sfItem instanceof SlimefunBackpack) {
 												ItemStack backpack = null;
-
 												for (int j = 0; j < 9; j++) {
 													if (inv.getContents()[j] != null) {
 														if (inv.getContents()[j].getType() != Material.AIR) {
@@ -1181,15 +1180,11 @@ public class SlimefunSetup {
 													}
 												}
 												String id = "";
-												int size = ((SlimefunBackpack) sfItem).size;
 
 												if (backpack != null) {
 													for (String line: backpack.getItemMeta().getLore()) {
 														if (line.startsWith(ChatColor.translateAlternateColorCodes('&', "&7ID: ")) && line.contains("#")) {
 															id = line.replace(ChatColor.translateAlternateColorCodes('&', "&7ID: "), "");
-															Config cfg = new Config(new File("data-storage/Slimefun/Players/" + id.split("#")[0] + ".yml"));
-															cfg.setValue("backpacks." + id.split("#")[1] + ".size", size);
-															cfg.save();
 															break;
 														}
 													}
