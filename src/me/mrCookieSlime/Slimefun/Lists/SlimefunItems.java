@@ -97,10 +97,10 @@ public class SlimefunItems {
 	public static ItemStack BEEF_JERKY = new CustomItem(Material.COOKED_BEEF, "&6牛肉乾", "", "&a&o管飽");
 	public static ItemStack MAGIC_SUGAR = new CustomItem(Material.SUGAR, "&6魔法糖", "", "&a&o感受赫爾墨斯的力量!");
 	public static ItemStack MONSTER_JERKY = new CustomItem(Material.ROTTEN_FLESH, "&6怪物肉乾", "", "&a&o提神抗飢餓");
-	public static ItemStack APPLE_JUICE = new CustomPotion("&c蘋果汁", Color.RED, new PotionEffect(PotionEffectType.SATURATION, 6, 0), "", "&7&o恢復&b&o" + "3.0" + " &7&o的飢餓值") ;
-	public static ItemStack MELON_JUICE = new CustomPotion("&c西瓜汁", Color.RED, new PotionEffect(PotionEffectType.SATURATION, 6, 0), "", "&7&o恢復&b&o" + "3.0" + " &7&o的飢餓值") ;
-	public static ItemStack CARROT_JUICE = new CustomPotion("&6胡蘿蔔汁", Color.ORANGE, new PotionEffect(PotionEffectType.SATURATION, 6, 0), "", "&7&o恢復&b&o" + "3.0" + " &7&o的飢餓值") ;
-	public static ItemStack PUMPKIN_JUICE = new CustomPotion("&6南瓜汁", Color.ORANGE, new PotionEffect(PotionEffectType.SATURATION, 6, 0), "", "&7&o恢復&b&o" + "3.0" + " &7&o的飢餓值") ;
+	public static ItemStack APPLE_JUICE = new CustomPotion("&c蘋果汁", Color.RED, new PotionEffect(PotionEffectType.SATURATION, 6, 0), "", "&7&o恢復&b&o " + "3.5" + " &7&o飽食度") ;
+	public static ItemStack MELON_JUICE = new CustomPotion("&c西瓜汁", Color.RED, new PotionEffect(PotionEffectType.SATURATION, 6, 0), "", "&7&o恢復&b&o " + "3.5" + " &7&o飽食度") ;
+	public static ItemStack CARROT_JUICE = new CustomPotion("&6胡蘿蔔汁", Color.ORANGE, new PotionEffect(PotionEffectType.SATURATION, 6, 0), "", "&7&o恢復&b&o " + "3.5" + " &7&o飽食度") ;
+	public static ItemStack PUMPKIN_JUICE = new CustomPotion("&6南瓜汁", Color.ORANGE, new PotionEffect(PotionEffectType.SATURATION, 6, 0), "", "&7&o恢復&b&o " + "3.5" + " &7&o飽食度") ;
 	public static ItemStack GOLDEN_APPLE_JUICE = new CustomPotion("&b金蘋果汁", Color.YELLOW, new PotionEffect(PotionEffectType.ABSORPTION, 20 * 20, 0));
 
 	/* Christmas */
