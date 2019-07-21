@@ -97,6 +97,7 @@ public class BlockStorage {
 						System.err.println("[Slimefun] Corrupted file detected!");
 						System.err.println("[Slimefun] Slimefun will simply skip this File, but you");
 						System.err.println("[Slimefun] should probably look into it!");
+						file.delete();
 					}
 					else if (file.getName().endsWith(".sfb")) {
 						if (timestamp + info_delay < System.currentTimeMillis()) {
