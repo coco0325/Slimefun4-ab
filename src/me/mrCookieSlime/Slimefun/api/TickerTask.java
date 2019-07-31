@@ -90,7 +90,7 @@ public class TickerTask implements Runnable {
 											map_machine.put(item.getID(), (map_machine.containsKey(item.getID()) ? map_machine.get(item.getID()): 0) + 1);
 											block_timings.put(l, System.currentTimeMillis() - timestamp3);
 										} catch (Exception x) {
-											int errors = 0;
+											/*int errors = 0;
 											if (bugged.containsKey(l)) errors = bugged.get(l);
 											errors++;
 											
@@ -181,7 +181,7 @@ public class TickerTask implements Runnable {
 											}
 											else {
 												bugged_blocks.put(l, errors);
-											}
+											}*/
 										}
 									});
 								}
@@ -197,7 +197,7 @@ public class TickerTask implements Runnable {
 								tickers.add(item.getBlockTicker());
 							} catch (Exception x) {
 								
-								int errors = 0;
+								/*int errors = 0;
 								if (bugged.containsKey(l)) errors = bugged.get(l);
 								errors++;
 								
@@ -269,7 +269,7 @@ public class TickerTask implements Runnable {
 								}
 								else {
 									bugged_blocks.put(l, errors);
-								}
+								}*/
 							}
 						}
 						else skipped++;

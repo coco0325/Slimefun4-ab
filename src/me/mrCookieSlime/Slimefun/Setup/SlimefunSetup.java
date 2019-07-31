@@ -3698,8 +3698,8 @@ public class SlimefunSetup {
 					if (e.getClickedBlock() != null && ChargableBlock.isChargable(e.getClickedBlock())) {
 						e.setCancelled(true);
 						p.sendMessage("");
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bStored Energy: &3" + DoubleHandler.getFancyDouble(ChargableBlock.getCharge(e.getClickedBlock())) + " J"));
-						p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&bCapacity: &3" + DoubleHandler.getFancyDouble(ChargableBlock.getMaxCharge(e.getClickedBlock())) + " J"));
+						p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b儲存的能量: &3" + DoubleHandler.getFancyDouble(ChargableBlock.getCharge(e.getClickedBlock())) + " J"));
+						p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&b電容量: &3" + DoubleHandler.getFancyDouble(ChargableBlock.getMaxCharge(e.getClickedBlock())) + " J"));
 						p.sendMessage("");
 					}
 					return true;
