@@ -44,8 +44,6 @@ public class GuideOnJoinListener implements Listener {
 				}else{
 					if(p.hasPermission("slimefun.cheat.items")){
 						p.getInventory().addItem(SlimefunGuide.getItem(BookDesign.CHEAT_SHEET));
-					}else if(p.hasPermission("sf.book")){
-						p.getInventory().addItem(SlimefunGuide.getItem(BookDesign.BOOK));
 					}else{
 						p.getInventory().addItem(SlimefunGuide.getItem(BookDesign.CHEST));
 					}

@@ -108,7 +108,13 @@ public class SlimefunCommand implements CommandExecutor, Listener {
 			}
 			else if (args[0].equalsIgnoreCase("guide")) {
 				if (sender instanceof Player) {
-					if (sender.hasPermission("slimefun.command.guide")) ((Player) sender).getInventory().addItem(SlimefunGuide.getItem(SlimefunStartup.getCfg().getBoolean("guide.default-view-book") ? BookDesign.BOOK : BookDesign.CHEST));
+					if (sender.hasPermission("slimefun.command.guide")){
+						if(((Player)sender).getInventory().contains(SlimefunGuide.getItem(BookDesign.CHEST))
+						|| ((Player)sender).getInventory().contains(SlimefunGuide.getItem(BookDesign.BOOK))){
+						}else{
+							((Player) sender).getInventory().addItem(SlimefunGuide.getItem(SlimefunStartup.getCfg().getBoolean("guide.default-view-book") ? BookDesign.BOOK : BookDesign.CHEST));
+						}
+					}
 					else Messages.local.sendTranslation(sender, "messages.no-permission", true);
 				}
 				else Messages.local.sendTranslation(sender, "messages.only-players", true);
