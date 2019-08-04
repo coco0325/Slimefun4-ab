@@ -5,6 +5,8 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.Damageable;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import me.mrCookieSlime.CSCoreLibPlugin.CSCoreLib;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
@@ -48,7 +50,7 @@ public class CargoInputNode extends SlimefunItem {
 						});
 					}
 					else {
-						menu.replaceExistingItem(15, new CustomItem(new ItemStack(Material.BLACK_WOOL), "&7過濾: &8黑名單", "", "&e> 點我更換至白名單"));
+						menu.replaceExistingItem(15, new CustomItem(new ItemStack(Material.BLACK_WOOL), "&7過濾: &r黑名單", "", "&e> 點我更換至白名單"));
 						menu.addMenuClickHandler(15, (p, slot, item, action) -> {
 							BlockStorage.addBlockInfo(b, "filter-type", "whitelist");
 							newInstance(menu, b);
@@ -57,7 +59,11 @@ public class CargoInputNode extends SlimefunItem {
 					}
 					
 					if (!BlockStorage.hasBlockInfo(b) || BlockStorage.getLocationInfo(b.getLocation(), "filter-durability") == null || BlockStorage.getLocationInfo(b.getLocation(), "filter-durability").equals("false")) {
-						menu.replaceExistingItem(16, new CustomItem(new ItemStack(Material.STONE_SWORD, (byte) 20), "&7檢測耐久度資訊: &4\u2718", "", "&e> 點我切換"));
+						ItemStack is = new ItemStack(Material.STONE_SWORD);
+						Damageable dmg = (Damageable) is.getItemMeta();
+						dmg.setDamage(20);
+						is.setItemMeta((ItemMeta) dmg);
+						menu.replaceExistingItem(16, new CustomItem(is, "&7檢測耐久度資訊: &4\u2718", "", "&e> 點我切換"));
 						menu.addMenuClickHandler(16, (p, slot, item, action) -> {
 							BlockStorage.addBlockInfo(b, "filter-durability", "true");
 							newInstance(menu, b);
@@ -65,7 +71,11 @@ public class CargoInputNode extends SlimefunItem {
 						});
 					}
 					else {
-						menu.replaceExistingItem(16, new CustomItem(new ItemStack(Material.GOLDEN_SWORD, (byte) 20), "&7檢測耐久度資訊: &4\u2714", "", "&e> 點我切換"));
+						ItemStack is = new ItemStack(Material.GOLDEN_SWORD);
+						Damageable dmg = (Damageable) is.getItemMeta();
+						dmg.setDamage(20);
+						is.setItemMeta((ItemMeta) dmg);
+						menu.replaceExistingItem(16, new CustomItem(is, "&7檢測耐久度資訊: &4\u2714", "", "&e> 點我切換"));
 						menu.addMenuClickHandler(16, (p, slot, item, action) -> {
 							BlockStorage.addBlockInfo(b, "filter-durability", "false");
 							newInstance(menu, b);

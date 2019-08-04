@@ -323,6 +323,7 @@ public class SlimefunItems {
 	public static ItemStack SULFATE = new CustomItem(Material.GLOWSTONE_DUST, "&6硫酸鹽", 0);
 	public static ItemStack ZINC_DUST = new CustomItem(Material.SUGAR, "&6鋅粉", 0);
 	public static ItemStack MAGNESIUM_DUST = new CustomItem(Material.SUGAR, "&6鎂", 0);
+	public static ItemStack COPPER_WIRE = new CustomItem(Material.STRING, "&6銅線", "", "&6電力機器中的重要組件");
 	public static ItemStack CARBON = null;
 	public static ItemStack SILICON = new CustomItem(Material.FIREWORK_STAR, "&6矽", 0);
 	public static ItemStack GOLD_24K_BLOCK = new CustomItem(Material.GOLD_BLOCK, "&r金塊 &7(24克拉)", 0);
@@ -370,7 +371,8 @@ public class SlimefunItems {
 	public static ItemStack PRESSURE_CHAMBER = new CustomItem(Material.GLASS, "&b壓力室", 0, new String[] {"", "&a&o壓縮更多的物品"});
 	public static ItemStack MAGIC_WORKBENCH = new CustomItem(Material.CRAFTING_TABLE, "&6魔法工作台", 0, new String[] {"給物品注入魔法能量"});
 	public static ItemStack ORE_WASHER = new CustomItem(Material.CAULDRON, "&6洗礦機", 0, new String[] {"", "&a&o清洗篩礦變成過濾礦石", "&a&o並且給你一些小石塊" });
-	public static ItemStack SAW_MILL = new CustomItem(Material.IRON_BARS, "&6鋸木機", 0, new String[] {"", "&a&o從1個原木中獲得8個木頭"});
+	public static ItemStack TABLE_SAW = new CustomItem(Material.STONECUTTER, "&6鋸床", "", "&a&o將一個原木鋸為8塊木頭", "&a&o(適用所有原木類型)");
+	public static ItemStack SAW_MILL = new CustomItem(Material.BARRIER, "&6鋸木機", "", "&c建議優先使用鋸床");
 	public static ItemStack COMPOSTER = new CustomItem(Material.CAULDRON, "&a攪拌機", 0, new String[] {"", "&a&o隨著時間的推移可以轉換各種材料..."});
 	public static ItemStack ENHANCED_CRAFTING_TABLE = new CustomItem(Material.CRAFTING_TABLE, "&e進階工作台", 0, new String[] {"", "&a&o一個基礎的工作台", "&a&o無法承受強大的力量..." });
 	public static ItemStack CRUCIBLE = new CustomItem(Material.CAULDRON, "&c坩堝", 0, new String[] {"", "&a&o用來把物品變為液體"});
@@ -382,6 +384,7 @@ public class SlimefunItems {
 	public static ItemStack ADVANCED_DIGITAL_MINER = new CustomItem(Material.DIAMOND_PICKAXE, "&6高級挖礦機", 0, new String[] {"", "&a&o挖出所有礦物!", "&a&o自動磨碎礦物"});
 	public static ItemStack AUTOMATED_PANNING_MACHINE = new CustomItem(Material.BOWL, "&a自動淘金機", 0, new String[] {"", "&a&o升級版淘金盤"});
 
+	public static ItemStack OUTPUT_CHEST = new CustomItem(Material.CHEST, "&4輸出箱", "", "&c&o放置在本箱內的物品", "&c&o將會被嘗試送進隔壁的發射器");
 	public static ItemStack HOLOGRAM_PROJECTOR = new CustomItem(new MaterialData(Material.QUARTZ_SLAB), "&b全像投影器", "", "&r投影出可編輯的文字");
 
 	/* Enhanced Furnaces */
