@@ -384,7 +384,7 @@ public class SlimefunItems {
 	public static ItemStack ADVANCED_DIGITAL_MINER = new CustomItem(Material.DIAMOND_PICKAXE, "&6高級挖礦機", 0, new String[] {"", "&a&o挖出所有礦物!", "&a&o自動磨碎礦物"});
 	public static ItemStack AUTOMATED_PANNING_MACHINE = new CustomItem(Material.BOWL, "&a自動淘金機", 0, new String[] {"", "&a&o升級版淘金盤"});
 
-	public static ItemStack OUTPUT_CHEST = new CustomItem(Material.CHEST, "&4輸出箱", "", "&c&o放置在本箱內的物品", "&c&o將會被嘗試送進隔壁的發射器");
+	public static ItemStack OUTPUT_CHEST = new CustomItem(Material.CHEST, "&4輸出箱", "", "&c&o將旁邊基礎機器內發射器的成品", "&c&o移動到此箱內");
 	public static ItemStack HOLOGRAM_PROJECTOR = new CustomItem(new MaterialData(Material.QUARTZ_SLAB), "&b全像投影器", "", "&r投影出可編輯的文字");
 
 	/* Enhanced Furnaces */

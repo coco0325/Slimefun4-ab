@@ -84,12 +84,15 @@ public abstract class ProgrammableAndroid extends SlimefunItem {
 		blockblacklist.add(Material.CHAIN_COMMAND_BLOCK);
 		blockblacklist.add(Material.REPEATING_COMMAND_BLOCK);
 		blockblacklist.add(Material.STRUCTURE_BLOCK);
+		blockblacklist.add(Material.DISPENSER);
+		blockblacklist.add(Material.PLAYER_HEAD);
+		blockblacklist.add(Material.PLAYER_WALL_HEAD);
 	}
 
 	private Set<MachineFuel> recipes = new HashSet<>();
 
 	public String getInventoryTitle() {
-		return "Programmable Android";
+		return "編程機器人";
 	}
 
 	public int[] getOutputSlots() {
@@ -984,7 +987,7 @@ public abstract class ProgrammableAndroid extends SlimefunItem {
 	}
 
 	public void openScript(final Player p, final Block b, final String script) throws Exception {
-		ChestMenu menu = new ChestMenu("&eScript Editor");
+		ChestMenu menu = new ChestMenu("&e程式編輯器");
 		final String[] commands = script.split("-");
 
 		menu.addItem(0, new CustomItem(ScriptPart.START.toItemStack(), ScriptPart.START.toItemStack().getItemMeta().getDisplayName(), "", "&7\u21E8 &e左鍵 &7回到主介面"));
@@ -1075,7 +1078,7 @@ public abstract class ProgrammableAndroid extends SlimefunItem {
 	}
 
 	private void openScriptDownloader(final Player p, final Block b, final int page) throws Exception {
-		final ChestMenu menu = new ChestMenu("Android Scripts");
+		final ChestMenu menu = new ChestMenu("程式資料庫");
 
 		menu.addMenuOpeningHandler(
 				(pl) -> pl.playSound(pl.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 0.7F, 0.7F)
