@@ -213,7 +213,8 @@ public class GPSNetwork {
 			return;
 		}
 		Config cfg = new Config("data-storage/Slimefun/waypoints/" + p.getUniqueId().toString() + ".yml");
-		String id = ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', name)).toUpperCase().replace(" ", "_");
+		name = name.replace(".", "");
+		String id = (ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&', name)).toUpperCase().replace(" ", "_"));
 		cfg.setValue(id, l);
 		cfg.setValue(id + ".name", name);
 		cfg.save();

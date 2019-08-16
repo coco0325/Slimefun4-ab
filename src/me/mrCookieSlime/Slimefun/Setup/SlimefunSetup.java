@@ -1836,7 +1836,10 @@ public class SlimefunSetup {
 			public boolean onBlockBreak(BlockBreakEvent e, ItemStack item, int fortune, List<ItemStack> drops) {
 				if (SlimefunManager.isItemSimiliar(item, SlimefunItems.PICKAXE_OF_CONTAINMENT, true)) {
 					Block b = e.getBlock(); // Refactored it into this so we don't need to call e.getBlock() all the time.
-					if (b.getType() != Material.SPAWNER || BlockStorage.hasBlockInfo(b)) return true; 
+					if (b.getType() != Material.SPAWNER ) return true;
+					if(BlockStorage.hasBlockInfo(e.getBlock())){
+						BlockStorage.clearBlockInfo(e.getBlock());
+					}
 					// If the spawner's BlockStorage has BlockInfo, then it's not a vanilla spawner and shouldn't give a broken spawner.
 					ItemStack spawner = SlimefunItems.BROKEN_SPAWNER.clone();
 					ItemMeta im = spawner.getItemMeta();
