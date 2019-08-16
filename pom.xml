@@ -60,6 +60,8 @@
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
             <artifactId>worldedit-bukkit</artifactId>
+    		<version>7.0.1</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.TheBusyBiscuit</groupId>
