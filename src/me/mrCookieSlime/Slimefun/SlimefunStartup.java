@@ -347,7 +347,7 @@ public class SlimefunStartup extends JavaPlugin {
 			me.vagdedes.mysql.database.MySQL.update("CREATE TABLE IF NOT EXISTS sf_research " +
 					"(uuid CHAR(36), " + " unlocked TEXT(2000), PRIMARY KEY (uuid))");
 			me.vagdedes.mysql.database.MySQL.update("CREATE TABLE IF NOT EXISTS sf_backpack" +
-					" (uuid CHAR(50), inv TEXT, PRIMARY KEY (uuid))");
+					" (uuid CHAR(50), inv LONGTEXT, PRIMARY KEY (uuid))");
 		}
 	}
 

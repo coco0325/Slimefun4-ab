@@ -30,6 +30,10 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+        <repository>
+            <id>CodeMC</id>
+            <url>https://repo.codemc.org/repository/maven-public</url>
+        </repository>
     </repositories>
     <build>
         <sourceDirectory>${project.basedir}/src</sourceDirectory>
@@ -60,7 +64,6 @@
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
             <artifactId>worldedit-bukkit</artifactId>
-    		<version>7.0.1</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

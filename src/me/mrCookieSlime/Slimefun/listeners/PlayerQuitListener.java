@@ -1,6 +1,7 @@
 package me.mrCookieSlime.Slimefun.listeners;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -13,8 +14,9 @@ public class PlayerQuitListener implements Listener {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onDisconnect(PlayerQuitEvent e) {
+		e.getPlayer().closeInventory();
 		SlimefunGuide.history.remove(e.getPlayer().getUniqueId());
 	}
 
