@@ -19,9 +19,11 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.ItemStack;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Math.DoubleHandler;
@@ -317,20 +319,13 @@ public class BlockStorage {
 	}
 	
 	private static Map<String, String> parseJSON(String json) {
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<>();
 		
 		if (json != null && json.length() > 2) {
-			try {
-				JSONParser parser = new JSONParser();
-				JSONObject obj = (JSONObject) parser.parse(json);
-				for (Object entry: obj.keySet()) {
-					String key = entry.toString();
-					String value = obj.get(entry).toString();
-					map.put(key, value);
-				}
-				
-			} catch (ParseException e) {
-				e.printStackTrace();
+			JsonParser parser = new JsonParser();
+			JsonObject obj = (JsonObject) parser.parse(json);
+			for (Map.Entry<String, JsonElement> entry: obj.entrySet()) {
+				map.put(entry.getKey(), entry.getValue().getAsString());
 			}
 		}
 		return map;
@@ -351,13 +346,12 @@ public class BlockStorage {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private static String serializeBlockInfo(Config cfg) {
-		JSONObject json = new JSONObject();
+		JsonObject json = new JsonObject();
 		for (String key : cfg.getKeys()) {
-			json.put(key, cfg.getString(key));
+			json.add(key, new JsonPrimitive(cfg.getString(key)));
 		}
-		return json.toJSONString();
+		return json.toString();
 	}
 	private static String getJSONData(Chunk chunk) {
 		return map_chunks.get(serializeChunk(chunk));
@@ -573,7 +567,7 @@ public class BlockStorage {
 	}
 	
 	public static Set<String> getTickingChunks() {
-		return new HashSet<String>(loaded_tickers);
+		return new HashSet<>(loaded_tickers);
 	}
 
 	@Deprecated
@@ -587,7 +581,7 @@ public class BlockStorage {
 
 	@Deprecated
 	public static Set<Block> getTickingBlocks(String chunk) {
-		Set<Block> ret = new HashSet<Block>();
+		Set<Block> ret = new HashSet<>();
 		for (Location l: getTickingLocations(chunk)) {
 			ret.add(l.getBlock());
 		}
@@ -595,7 +589,7 @@ public class BlockStorage {
 	}
 
 	public static Set<Location> getTickingLocations(String chunk) {
-		return new HashSet<Location>(ticking_chunks.get(chunk));
+		return new HashSet<>(ticking_chunks.get(chunk));
 	}
 	
 	public BlockMenu loadInventory(Location l, BlockMenuPreset preset) {
@@ -653,10 +647,6 @@ public class BlockStorage {
 		if (!storage.hasInventory(l)) return storage.loadInventory(l, BlockMenuPreset.getPreset(checkID(l)));
 		else return storage.inventories.get(l);
 	}
-	
-	public static JSONParser getParser() {
-		return new JSONParser();
-	}
 
 	public static Config getChunkInfo(Chunk chunk) {
 		try {
@@ -685,18 +675,17 @@ public class BlockStorage {
 		return map_chunks.containsKey(serializeChunk(chunk));
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static void setChunkInfo(Chunk chunk, String key, String value) {
 		Config cfg = new Config("data-storage/Slimefun/temp.yml");
 		if (hasChunkInfo(chunk)) cfg = getChunkInfo(chunk);
 		cfg.setValue(key, value);
 		
-		JSONObject json = new JSONObject();
+		JsonObject json = new JsonObject();
 		for (String path: cfg.getKeys()) {
-			json.put(path, cfg.getString(path));
+			json.add(path, new JsonPrimitive(cfg.getString(path)));
 		}
 		
-		map_chunks.put(serializeChunk(chunk), json.toJSONString());
+		map_chunks.put(serializeChunk(chunk), json.toString());
 		
 		chunk_changes++;
 	}

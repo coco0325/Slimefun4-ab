@@ -18,6 +18,7 @@ import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunBlockHandler;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.UnregisterReason;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AReactor;
 import me.mrCookieSlime.Slimefun.Setup.SlimefunManager;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
@@ -47,6 +48,33 @@ public class ReactorAccessPort extends SlimefunItem {
 
 			@Override
 			public boolean canOpen(Block b, Player p) {
+				if(p.hasPermission("slimefun.inventory.bypass") || CSCoreLib.getLib().getProtectionManager().canAccessChest(p.getUniqueId(),b,true)) {
+					return false;
+				}
+				
+				
+				AReactor reactor = getReactor(b.getLocation());
+				if(reactor != null) {
+					boolean empty = true;
+					BlockMenu bm = getReactorMenu(b.getLocation());
+					if(bm != null) {
+						for(int slot:reactor.getCoolantSlots())
+							if(bm.getItemInSlot(slot) != null)
+								empty = false;
+						for(int slot:reactor.getFuelSlots())
+							if(bm.getItemInSlot(slot) != null)
+								empty = false;
+					
+						if(!empty || !p.isSneaking()) {
+							//reactor is not empty, lets view it's inventory instead.
+							bm.open(p);
+							return false;
+						}
+					}
+					
+					
+						
+				}
 				return p.hasPermission("slimefun.inventory.bypass") || CSCoreLib.getLib().getProtectionManager().canAccessChest(p.getUniqueId(), b, true);
 			}
 
@@ -126,7 +154,7 @@ public class ReactorAccessPort extends SlimefunItem {
 			);
 		}
 		
-		preset.addItem(1, new CustomItem(SlimefunItems.URANIUM, "&r接受:", "&2鈾 &r或 &a錼"),
+		preset.addItem(1, new CustomItem(SlimefunItems.URANIUM, "&7燃料槽", "", "&r接受:", "&2鈾 &r或 &a錼"),
 			(p, slot, item, action) -> false
 		);
 		
@@ -157,6 +185,27 @@ public class ReactorAccessPort extends SlimefunItem {
 	
 	public static int[] getOutputSlots() {
 		return new int[] {40};
+	}
+	
+	public AReactor getReactor(Location l) {
+		Location reactorL = new Location(l.getWorld(), l.getX(), l.getY() - 3, l.getZ());
+		
+		SlimefunItem item = BlockStorage.check(reactorL.getBlock());
+		if(item instanceof AReactor)
+			return (AReactor) item;
+	
+		return null;
+	}
+	
+	public BlockMenu getReactorMenu(Location l) {
+		Location reactorL = new Location(l.getWorld(), l.getX(), l.getY() - 3, l.getZ());
+		
+		String id = BlockStorage.checkID(reactorL);
+		
+		if(id.equals("NUCLEAR_REACTOR") || id.equals("NETHERSTAR_REACTOR"))
+			return BlockStorage.getInventory(reactorL);
+		
+		return null;
 	}
 	
 	private static Inventory inject(Location l) {
