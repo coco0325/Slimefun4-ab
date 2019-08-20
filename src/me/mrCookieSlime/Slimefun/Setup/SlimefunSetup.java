@@ -2416,7 +2416,7 @@ public class SlimefunSetup {
 		.register(true);
 
 		new SlimefunBackpack(54, Categories.PORTABLE, SlimefunItems.RADIANT_BACKPACK, "RADIANT_BACKPACK", RecipeType.ENHANCED_CRAFTING_TABLE,
-		new ItemStack[] {SlimefunItems.GOLD_24K, null, SlimefunItems.GOLD_24K, new ItemStack(Material.LEATHER), SlimefunItems.GILDED_BACKPACK, new ItemStack(Material.LEATHER), SlimefunItems.GOLD_24K, null, SlimefunItems.GOLD_24K})
+		new ItemStack[] {SlimefunItems.GOLD_24K, SlimefunItems.SYNTHETIC_DIAMOND, SlimefunItems.GOLD_24K, new ItemStack(Material.LEATHER), SlimefunItems.GILDED_BACKPACK, new ItemStack(Material.LEATHER), SlimefunItems.GOLD_24K, SlimefunItems.CARBONADO, SlimefunItems.GOLD_24K})
 		.register(true);
 
 		new Alloy(Categories.TECH_MISC, SlimefunItems.MAGNET, "MAGNET",

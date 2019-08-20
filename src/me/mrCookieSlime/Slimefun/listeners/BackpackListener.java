@@ -218,7 +218,7 @@ public class BackpackListener implements Listener {
 							if (item.getItemMeta().getLore().get(line).equals(ChatColor.translateAlternateColorCodes('&', "&7ID: <ID>"))) {
 								ItemMeta im = item.getItemMeta();
 								List<String> lore = im.getLore();
-								lore.set(line, lore.get(line).replace("<ID>", Backpacks.createBackpack(p, 54)));
+								lore.set(line, lore.get(line).replace("<ID>", Backpacks.createBackpack(p)));
 								im.setLore(lore);
 								item.setItemMeta(im);
 								break;
