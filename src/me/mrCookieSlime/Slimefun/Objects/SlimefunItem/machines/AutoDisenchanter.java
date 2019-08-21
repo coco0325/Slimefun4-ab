@@ -56,16 +56,16 @@ public class AutoDisenchanter extends AContainer {
 	@Override
 	protected void tick(Block b) {
 		if (isProcessing(b)) {
-			int timeleft = progress.get(b);
+			int timeleft = progress.get(b)-Math.toIntExact(System.currentTimeMillis()/1000);
 			if (timeleft > 0) {
 				ItemStack item = getProgressBar().clone();
 				ItemMeta im = item.getItemMeta();
-				((Damageable) im).setDamage(MachineHelper.getDurability(item, timeleft, processing.get(b).getTicks()));
+				((Damageable) im).setDamage(MachineHelper.getDurability(item, timeleft*2, processing.get(b).getTicks()));
 				im.setDisplayName(" ");
 				List<String> lore = new ArrayList<String>();
-				lore.add(MachineHelper.getProgress(timeleft, processing.get(b).getTicks()));
+				lore.add(MachineHelper.getProgress(timeleft*2, processing.get(b).getTicks()));
 				lore.add("");
-				lore.add(MachineHelper.getTimeLeft(timeleft / 2));
+				lore.add(MachineHelper.getTimeLeft(timeleft));
 				im.setLore(lore);
 				item.setItemMeta(im);
 
@@ -74,11 +74,10 @@ public class AutoDisenchanter extends AContainer {
 				if (ChargableBlock.isChargable(b)) {
 					if (ChargableBlock.getCharge(b) < getEnergyConsumption()) return;
 					ChargableBlock.addCharge(b, -getEnergyConsumption());
-					progress.put(b, timeleft - 1);
 				}
-				else progress.put(b, timeleft - 1);
 			}
 			else {
+				processing_items.remove(b);
 				BlockStorage.getInventory(b).replaceExistingItem(22, new CustomItem(new ItemStack(Material.BLACK_STAINED_GLASS_PANE), " "));
 				pushItems(b, processing.get(b).getOutput());
 
@@ -141,11 +140,14 @@ public class AutoDisenchanter extends AContainer {
 
 			if (r != null) {
 				if (!fits(b, r.getOutput())) return;
+				ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 				for (int slot: getInputSlots()) {
+					items.add(BlockStorage.getInventory(b).getItemInSlot(slot));
 					BlockStorage.getInventory(b).replaceExistingItem(slot, InvUtils.decreaseItem(BlockStorage.getInventory(b).getItemInSlot(slot), 1));
 				}
+				processing_items.put(b, items);
 				processing.put(b, r);
-				progress.put(b, r.getTicks());
+				progress.put(b, Math.toIntExact(System.currentTimeMillis()/1000)+(r.getTicks()/2));
 			}
 		}
 	}

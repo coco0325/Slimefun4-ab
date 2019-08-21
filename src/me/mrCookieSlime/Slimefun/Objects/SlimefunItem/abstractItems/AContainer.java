@@ -38,6 +38,7 @@ public abstract class AContainer extends SlimefunItem {
 	
 	public static Map<Block, MachineRecipe> processing = new HashMap<Block, MachineRecipe>();
 	public static Map<Block, Integer> progress = new HashMap<Block, Integer>();
+	public static Map<Block, ArrayList<ItemStack>> processing_items = new HashMap<Block, ArrayList<ItemStack>>();
 	
 	protected List<MachineRecipe> recipes = new ArrayList<MachineRecipe>();
 	
@@ -92,6 +93,14 @@ public abstract class AContainer extends SlimefunItem {
 							b.getWorld().dropItemNaturally(b.getLocation(), inv.getItemInSlot(slot));
 							inv.replaceExistingItem(slot, null);
 						}
+					}
+					if(processing_items.containsKey(b)){
+						for (ItemStack i :  processing_items.get(b)) {
+							if (i != null) {
+								b.getWorld().dropItemNaturally(b.getLocation(), i);
+							}
+						}
+						processing_items.remove(b);
 					}
 				}
 				progress.remove(b);
@@ -152,7 +161,13 @@ public abstract class AContainer extends SlimefunItem {
 							inv.replaceExistingItem(slot, null);
 						}
 					}
+					for (ItemStack i :  processing_items.get(b)) {
+						if (i != null) {
+							b.getWorld().dropItemNaturally(b.getLocation(), i);
+						}
+						}
 				}
+				processing_items.remove(b);
 				processing.remove(b);
 				progress.remove(b);
 				return true;
@@ -341,5 +356,6 @@ public abstract class AContainer extends SlimefunItem {
 			}
 		}
 	}
+
 
 }

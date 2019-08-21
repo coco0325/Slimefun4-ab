@@ -2,11 +2,9 @@ package me.mrCookieSlime.Slimefun;
 
 import java.io.*;
 
-import me.vagdedes.mysql.database.MySQL;
-import me.vagdedes.mysql.database.SQL;
-
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -97,8 +95,6 @@ public class SlimefunStartup extends JavaPlugin {
 	private boolean clearlag = false;
 	private boolean exoticGarden = false;
 	private boolean coreProtect = false;
-
-	public static SQL sql;
 
 	// Supported Versions of Minecraft
 	final String[] supported = {"v1_14_"};
@@ -344,15 +340,26 @@ public class SlimefunStartup extends JavaPlugin {
 
 			// Do not show /sf elevator command in our Log, it could get quite spammy
 			CSCoreLib.getLib().filterLog("([A-Za-z0-9_]{3,16}) issued server command: /sf elevator (.{0,})");
-			me.vagdedes.mysql.database.MySQL.update("CREATE TABLE IF NOT EXISTS sf_research " +
-					"(uuid CHAR(36), " + " unlocked TEXT(2000), PRIMARY KEY (uuid))");
-			me.vagdedes.mysql.database.MySQL.update("CREATE TABLE IF NOT EXISTS sf_backpack" +
-					" (uuid CHAR(50), inv LONGTEXT, PRIMARY KEY (uuid))");
+			createTable();
 		}
+	}
+
+	private void createTable(){
+		me.vagdedes.mysql.database.MySQL.update("CREATE TABLE IF NOT EXISTS sf_research " +
+				"(uuid CHAR(36), " + " unlocked TEXT(2000), PRIMARY KEY (uuid))");
+		me.vagdedes.mysql.database.MySQL.update("CREATE TABLE IF NOT EXISTS sf_backpack" +
+				" (uuid CHAR(50), inv LONGTEXT, PRIMARY KEY (uuid))");
 	}
 
 	@Override
 	public void onDisable() {
+
+		for(Block b : AContainer.processing_items.keySet()){
+			BlockStorage.getInventory(b).replaceExistingItem(19, AContainer.processing_items.get(b).get(0));
+			BlockStorage.getInventory(b).replaceExistingItem(20, AContainer.processing_items.get(b).get(1));
+			AContainer.processing_items.remove(b);
+		}
+
 		Bukkit.getScheduler().cancelTasks(this);
 
 		if (ticker != null) {

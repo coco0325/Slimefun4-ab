@@ -107,7 +107,7 @@ public abstract class AReactor extends SlimefunItem {
 							return false;
 						});
 					} else {
-						menu.replaceExistingItem(infoSlot, new CustomItem(new ItemStack(Material.RED_WOOL), "&7反應堆接口", "", "&c未接通", "", "&7接口必須擺放在", "&7反應堆上面第三格的位置"));
+						menu.replaceExistingItem(infoSlot, new CustomItem(new ItemStack(Material.RED_WOOL), "&7反應堆接口", "", "&c未接通 (點擊更新狀態)", "", "&7接口必須擺放在", "&7反應堆上面第三格的位置"));
 						menu.addMenuClickHandler(infoSlot, (p, slot, item, action) -> {
 							newInstance(menu, b);
 							menu.open(p);

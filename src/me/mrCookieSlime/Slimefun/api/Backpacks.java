@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Date;
 
-import me.mrCookieSlime.Slimefun.api.energy.ItemEnergy;
+import me.mrCookieSlime.Slimefun.SlimefunStartup;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -19,12 +19,14 @@ import me.vagdedes.mysql.database.SQL;
 
 public class Backpacks {
 
-	public static String tablename = "sf_backpack";
+	private static String tablename = "sf_backpack";
 
 	public static String createBackpack(Player p) {
 		Date date = new Date();
 		long id = date.getTime();
-		SQL.insertData("uuid", " '"+p.getUniqueId().toString()+"#"+id+"' ", tablename);
+		Bukkit.getScheduler().runTaskAsynchronously(SlimefunStartup.instance, () -> {
+            SQL.insertData("uuid", " '"+p.getUniqueId().toString()+"#"+id+"' ", tablename);
+		});
 		return p.getUniqueId() + "#" + id;
 	}
 	
@@ -81,7 +83,11 @@ public class Backpacks {
 			}
 		}
 		String baseinv = toBase64(inv);
-		SQL.set("inv", baseinv, "uuid", "=", uuid+"#"+id, tablename);
+		String finalUuid = uuid;
+		long finalId = id;
+		Bukkit.getScheduler().runTaskAsynchronously(SlimefunStartup.instance, () -> {
+            SQL.set("inv", baseinv, "uuid", "=", finalUuid+"#"+finalId, tablename);
+		});
 	}
 
 	public static String toBase64(Inventory inventory) throws IllegalStateException {
