@@ -24,6 +24,7 @@ import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Item;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.EnchantmentStorageMeta;
@@ -91,7 +92,9 @@ public class AutoEnchanter extends AContainer {
 			MachineRecipe r = null;
 			slots:
 			for (int slot: getInputSlots()) {
-				ItemStack target = BlockStorage.getInventory(b).getItemInSlot(slot == getInputSlots()[0] ? getInputSlots()[1]: getInputSlots()[0]);
+				ItemStack targets = BlockStorage.getInventory(b).getItemInSlot(slot == getInputSlots()[0] ? getInputSlots()[1]: getInputSlots()[0]);
+				ItemStack target = targets.clone();
+				target.setAmount(1);
 				// Check if enchantable
 				SlimefunItem sfTarget = SlimefunItem.getByItem(target);
 				if(sfTarget != null && !sfTarget.isEnchantable()) return;
