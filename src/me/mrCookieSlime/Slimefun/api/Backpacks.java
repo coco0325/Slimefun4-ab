@@ -24,9 +24,7 @@ public class Backpacks {
 	public static String createBackpack(Player p) {
 		Date date = new Date();
 		long id = date.getTime();
-		Bukkit.getScheduler().runTaskAsynchronously(SlimefunStartup.instance, () -> {
-            SQL.insertData("uuid", " '"+p.getUniqueId().toString()+"#"+id+"' ", tablename);
-		});
+		SQL.insertData("uuid", " '"+p.getUniqueId().toString()+"#"+id+"' ", tablename);
 		return p.getUniqueId() + "#" + id;
 	}
 	
@@ -85,9 +83,7 @@ public class Backpacks {
 		String baseinv = toBase64(inv);
 		String finalUuid = uuid;
 		long finalId = id;
-		Bukkit.getScheduler().runTaskAsynchronously(SlimefunStartup.instance, () -> {
-            SQL.set("inv", baseinv, "uuid", "=", finalUuid+"#"+finalId, tablename);
-		});
+		SQL.set("inv", baseinv, "uuid", "=", finalUuid+"#"+finalId, tablename);
 	}
 
 	public static String toBase64(Inventory inventory) throws IllegalStateException {
