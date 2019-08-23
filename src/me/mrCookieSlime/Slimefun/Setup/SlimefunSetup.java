@@ -22,7 +22,6 @@ import org.bukkit.block.CreatureSpawner;
 import org.bukkit.block.Dispenser;
 import org.bukkit.block.Hopper;
 import org.bukkit.block.data.Ageable;
-import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Levelled;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.ArmorStand;
@@ -5306,5 +5305,4 @@ public class SlimefunSetup {
 	public static void registerPostHandler(PostSlimefunLoadingHandler handler) {
 		MiscSetup.post_handlers.add(handler);
 	}
-
 }
