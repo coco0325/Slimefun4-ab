@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.ChestedHorse;
 import org.bukkit.entity.Creeper;
@@ -100,7 +101,8 @@ public class DamageListener implements Listener {
                             }
                         } else if (e.getEntity() instanceof Player) {
                             if (SlimefunStartup.chance(100, (Integer) Slimefun.getItemValue("SWORD_OF_BEHEADING", "chance.PLAYER"))) {
-                                e.getDrops().add(new SkullItem(((Player) e.getEntity()).getName()));
+
+                                e.getDrops().add(new SkullItem(((OfflinePlayer) e.getEntity())));
                             }
                         }
                     }

@@ -162,5 +162,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/lib/MySQL-API.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.Zrips</groupId>
+            <artifactId>CMI</artifactId>
+            <version>7.1.3.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/CMIAPI7.6.2.0.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>
