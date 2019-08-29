@@ -1,4 +1,4 @@
-package me.mrCookieSlime.Slimefun.androids;
+package me.mrCookieSlime.Slimefun.Android;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -14,7 +14,6 @@ import java.util.UUID;
 import me.mrCookieSlime.Slimefun.androids.AndroidObject;
 import me.mrCookieSlime.Slimefun.androids.AndroidType;
 import me.mrCookieSlime.Slimefun.androids.ScriptPart;
-import me.mrCookieSlime.Slimefun.androids.comparators.ScriptReputationSorter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;

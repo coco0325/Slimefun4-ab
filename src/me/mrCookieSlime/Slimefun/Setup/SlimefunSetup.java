@@ -8,7 +8,6 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
-import me.mrCookieSlime.Slimefun.Utilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
@@ -160,6 +159,7 @@ import me.mrCookieSlime.Slimefun.holograms.InfusedHopper;
 import me.mrCookieSlime.Slimefun.holograms.Projector;
 import me.mrCookieSlime.Slimefun.holograms.ReactorHologram;
 import me.mrCookieSlime.Slimefun.listeners.AncientAltarListener;
+import me.mrCookieSlime.Slimefun.utils.Utilities;
 
 public final class SlimefunSetup {
 

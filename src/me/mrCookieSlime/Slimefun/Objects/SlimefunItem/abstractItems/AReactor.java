@@ -1,13 +1,6 @@
 package me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -43,22 +36,22 @@ import me.mrCookieSlime.Slimefun.holograms.ReactorHologram;
 
 public abstract class AReactor extends SlimefunItem {
 
-	public static Map<Location, MachineFuel> processing = new HashMap<>();
-	public static Map<Location, Integer> progress = new HashMap<>();
+	public static Map<Location, MachineFuel> processing = new HashMap<Location, MachineFuel>();
+	public static Map<Location, Integer> progress = new HashMap<Location, Integer>();
 
 	private static final BlockFace[] cooling =
-			{
-					BlockFace.NORTH,
-					BlockFace.NORTH_EAST,
-					BlockFace.EAST,
-					BlockFace.SOUTH_EAST,
-					BlockFace.SOUTH,
-					BlockFace.SOUTH_WEST,
-					BlockFace.WEST,
-					BlockFace.NORTH_WEST
-			};
+		{
+				BlockFace.NORTH,
+				BlockFace.NORTH_EAST,
+				BlockFace.EAST,
+				BlockFace.SOUTH_EAST,
+				BlockFace.SOUTH,
+				BlockFace.SOUTH_WEST,
+				BlockFace.WEST,
+				BlockFace.NORTH_WEST
+		};
 
-	private Set<MachineFuel> recipes = new HashSet<>();
+	private Set<MachineFuel> recipes = new HashSet<MachineFuel>();
 
 	private static final int[] border = {0, 1, 2, 3, 5, 6, 7, 8, 12, 13, 14, 21, 23};
 	private static final int[] border_1 = {9, 10, 11, 18, 20, 27, 29, 36, 38, 45, 46, 47};
@@ -176,33 +169,33 @@ public abstract class AReactor extends SlimefunItem {
 		for (int i : border) {
 			preset.addItem(i, new CustomItem(new ItemStack(Material.GRAY_STAINED_GLASS_PANE), " "),
 					(p, slot, item, action) -> false
-			);
+					);
 		}
 
 		for (int i : border_1) {
 			preset.addItem(i, new CustomItem(new ItemStack(Material.LIME_STAINED_GLASS_PANE), " "),
 					(p, slot, item, action) -> false
-			);
+					);
 		}
 
 		for (int i : border_3) {
 			preset.addItem(i, new CustomItem(new ItemStack(Material.GREEN_STAINED_GLASS_PANE), " "),
 					(p, slot, item, action) -> false
-			);
+					);
 		}
 
 		preset.addItem(22, new CustomItem(new ItemStack(Material.BLACK_STAINED_GLASS_PANE), " "),
 				(p, slot, item, action) -> false
-		);
+				);
 
 		preset.addItem(1, new CustomItem(SlimefunItems.URANIUM, "&7燃料槽", "", "&r接受:", "&2鈾 &r或 &a錼"),
 				(p, slot, item, action) -> false
-		);
-		
+				);
+
 		for (int i : border_2) {
 			preset.addItem(i, new CustomItem(new ItemStack(Material.CYAN_STAINED_GLASS_PANE), " "),
 					(p, slot, item, action) -> false
-			);
+					);
 		}
 
 		if (needsCooling()) {
@@ -214,7 +207,7 @@ public abstract class AReactor extends SlimefunItem {
 			for (int i : border_4) {
 				preset.addItem(i, new CustomItem(new ItemStack(Material.BARRIER), "&c不需冷卻劑"),
 						(p, slot, item, action) -> false
-				);
+						);
 			}
 		}
 	}
@@ -286,7 +279,6 @@ public abstract class AReactor extends SlimefunItem {
 
 							Bukkit.getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, () -> {
 								if (!l.getBlock().getRelative(cooling[new Random().nextInt(cooling.length)]).isLiquid()) explode.add(l);
-							});
 
 							ItemStack item = getProgressBar().clone();
 							ItemMeta im = item.getItemMeta();
@@ -354,38 +346,37 @@ public abstract class AReactor extends SlimefunItem {
 				}
 				else {
 					MachineFuel r = null;
-					Map<Integer, Integer> found = new HashMap<>();
+						Map<Integer, Integer> found = new HashMap<>();
 
 					if (port != null) {
 						refill:
-						for (int slot: getFuelSlots()) {
-							for (MachineFuel recipe: recipes) {
-								if (SlimefunManager.isItemSimiliar(port.getItemInSlot(slot), recipe.getInput(), true)) {
-									if (pushItems(l, new CustomItem(port.getItemInSlot(slot), 1), getFuelSlots()) == null) {
-										port.replaceExistingItem(slot, InvUtils.decreaseItem(port.getItemInSlot(slot), 1));
-										break refill;
+							for (int slot: getFuelSlots()) {
+								for (MachineFuel recipe: recipes) {
+									if (SlimefunManager.isItemSimiliar(port.getItemInSlot(slot), recipe.getInput(), true)) {
+										if (pushItems(l, new CustomItem(port.getItemInSlot(slot), 1), getFuelSlots()) == null) {
+											port.replaceExistingItem(slot, InvUtils.decreaseItem(port.getItemInSlot(slot), 1));
+											break refill;
+										}
 									}
 								}
 							}
-						}
 					}
 
 					outer:
-					for (MachineFuel recipe: recipes) {
-						for (int slot: getFuelSlots()) {
-							if (SlimefunManager.isItemSimiliar(BlockStorage.getInventory(l).getItemInSlot(slot), recipe.getInput(), true)) {
-								found.put(slot, recipe.getInput().getAmount());
-								r = recipe;
-								break outer;
+						for (MachineFuel recipe: recipes) {
+							for (int slot: getFuelSlots()) {
+								if (SlimefunManager.isItemSimiliar(BlockStorage.getInventory(l).getItemInSlot(slot), recipe.getInput(), true)) {
+									found.put(slot, recipe.getInput().getAmount());
+									r = recipe;
+									break outer;
+								}
 							}
 						}
-					}
 
 					if (r != null) {
 						for (Map.Entry<Integer, Integer> entry: found.entrySet()) {
 							BlockStorage.getInventory(l).replaceExistingItem(entry.getKey(), InvUtils.decreaseItem(BlockStorage.getInventory(l).getItemInSlot(entry.getKey()), entry.getValue()));
 						}
-
 						processing.put(l, r);
 						progress.put(l, r.getTicks());
 					}
@@ -449,14 +440,17 @@ public abstract class AReactor extends SlimefunItem {
 
 	public ItemStack pushItems(Location l, ItemStack item, int[] slots) {
 		Inventory inv = inject(l, slots);
-		Optional<ItemStack> optional = inv.addItem(item).values().stream().findFirst();
+		Map<Integer, ItemStack> map = inv.addItem(item);
 
 		for (int slot : slots) {
 			BlockStorage.getInventory(l).replaceExistingItem(slot, inv.getItem(slot));
 		}
 
-		if (optional.isPresent()) return optional.get();
-		else return null;
+		for (Map.Entry<Integer, ItemStack> entry : map.entrySet()) {
+			return entry.getValue();
+		}
+
+		return null;
 	}
 
 	public abstract ItemStack getProgressBar();
