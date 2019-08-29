@@ -18,6 +18,10 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import javax.crypto.CipherSpi;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomArmor;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomPotion;
+import me.mrCookieSlime.CSCoreLibPlugin.general.String.Christmas;
 
 public final class SlimefunItems {
 	
@@ -614,12 +618,11 @@ public final class SlimefunItems {
 	public static ItemStack FOOD_FABRICATOR = null;
 	public static ItemStack FOOD_FABRICATOR_2 = null;
 
-	public static ItemStack FOOD_COMPOSTER = null;
-	public static ItemStack FOOD_COMPOSTER_2 = null;
-
 	public static ItemStack XP_COLLECTOR = null;
 	public static ItemStack REACTOR_COOLANT_CELL = null;
 
+	public static ItemStack FOOD_COMPOSTER = null;
+	public static ItemStack FOOD_COMPOSTER_2 = null;
 	public static ItemStack NUCLEAR_REACTOR = null;
 	public static ItemStack NETHERSTAR_REACTOR = null;
 	public static ItemStack REACTOR_ACCESS_PORT = null;
