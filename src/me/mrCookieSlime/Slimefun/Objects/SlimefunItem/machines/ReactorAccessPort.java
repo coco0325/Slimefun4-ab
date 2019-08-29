@@ -44,13 +44,12 @@ public class ReactorAccessPort extends SlimefunItem {
 
 			@Override
 			public void newInstance(BlockMenu menu, Block b) {
+
 			}
 
 			@Override
 			public boolean canOpen(Block b, Player p) {
 				if(p.hasPermission("slimefun.inventory.bypass") || CSCoreLib.getLib().getProtectionManager().canAccessChest(p.getUniqueId(),b,true)) {
-
-
 					AReactor reactor = getReactor(b.getLocation());
 					if(reactor != null) {
 						boolean empty = true;
@@ -228,11 +227,7 @@ public class ReactorAccessPort extends SlimefunItem {
 		for (int slot: getOutputSlots()) {
 			BlockStorage.getInventory(l).replaceExistingItem(slot, inv.getItem(slot));
 		}
-
-		for (Map.Entry<Integer, ItemStack> entry: map.entrySet()) {
-			return entry.getValue();
-		}
-		return null;
+		return map.values().stream().findAny().orElse(null);
 	}
 
 }

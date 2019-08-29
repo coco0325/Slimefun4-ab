@@ -96,7 +96,7 @@ public abstract class ADrill extends AContainer {
 
 			@Override
 			public int[] getSlotsAccessedByItemTransport(ItemTransportFlow flow) {
-				if (flow.equals(ItemTransportFlow.INSERT)) return getInputSlots();
+				if (flow == ItemTransportFlow.INSERT) return getInputSlots();
 				else return getOutputSlots();
 			}
 		};
@@ -118,7 +118,7 @@ public abstract class ADrill extends AContainer {
 				ItemMeta im = item.getItemMeta();
 				((Damageable) im).setDamage(MachineHelper.getDurability(item, timeleft, processing.get(b).getTicks()));
 				im.setDisplayName(" ");
-				List<String> lore = new ArrayList<String>();
+				List<String> lore = new ArrayList<>();
 				lore.add(MachineHelper.getProgress(timeleft, processing.get(b).getTicks()));
 				lore.add("");
 				lore.add(MachineHelper.getTimeLeft(timeleft / 2));

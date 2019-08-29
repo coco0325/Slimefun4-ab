@@ -1,22 +1,20 @@
 package me.mrCookieSlime.Slimefun.api.energy;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
-
-import me.mrCookieSlime.Slimefun.api.network.Network;
-import me.mrCookieSlime.CSCoreLibPlugin.general.Math.DoubleHandler;
-import me.mrCookieSlime.Slimefun.SlimefunStartup;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.BlockStorage;
-import me.mrCookieSlime.Slimefun.api.TickerTask;
-import me.mrCookieSlime.Slimefun.holograms.EnergyHologram;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+
+import me.mrCookieSlime.CSCoreLibPlugin.general.Math.DoubleHandler;
+import me.mrCookieSlime.Slimefun.SlimefunStartup;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
+import me.mrCookieSlime.Slimefun.api.TickerTask;
+import me.mrCookieSlime.Slimefun.api.network.Network;
+import me.mrCookieSlime.Slimefun.holograms.EnergyHologram;
 
 public class EnergyNet extends Network {
 	public enum NetworkComponent {
@@ -28,12 +26,10 @@ public class EnergyNet extends Network {
 
 	private static final int RANGE = 6;
 
-	public static Set<String> machines_input = new HashSet<String>();
-	public static Set<String> machines_storage = new HashSet<String>();
-	public static Set<String> machines_output = new HashSet<String>();
-
-	public static Map<String, EnergyFlowListener> listeners = new HashMap<String, EnergyFlowListener>();
-
+	public static Set<String> machines_input = new HashSet<>();
+	public static Set<String> machines_storage = new HashSet<>();
+	public static Set<String> machines_output = new HashSet<>();
+	
 	public static NetworkComponent getComponent(Block b) {
 		return getComponent(b.getLocation());
 	}
@@ -83,9 +79,9 @@ public class EnergyNet extends Network {
 		return energy_network;
 	}
 
-	private Set<Location> input = new HashSet<Location>();
-	private Set<Location> storage = new HashSet<Location>();
-	private Set<Location> output = new HashSet<Location>();
+	private Set<Location> input = new HashSet<>();
+	private Set<Location> storage = new HashSet<>();
+	private Set<Location> output = new HashSet<>();
 
 	protected EnergyNet(Location l) {
 		super(l);

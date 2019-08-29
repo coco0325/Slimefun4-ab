@@ -2,7 +2,9 @@ package me.mrCookieSlime.Slimefun.Setup;
 
 import java.io.File;
 
-public class Files {
+public final class Files {
+	
+	private Files() {}
 	
 	public static File RESEARCHES = new File("plugins/Slimefun/Researches.yml");
 	public static File CONFIG = new File("plugins/Slimefun/config.yml");
@@ -32,19 +34,20 @@ public class Files {
 		}
 	}
 	
-	public static void delete(File folder) {
+	public static boolean delete(File folder) {
 		File[] files = folder.listFiles();
 		if (files != null) {
 			for (File current: files) {
 				if (current.isDirectory()) {
-					delete(current);
+					if (!delete(current)) return false;;
 				}
 				else {
-					current.delete();
+					if (!current.delete()) return false;
 				}
 			}
 		}
-		folder.delete();
+		
+		return folder.delete();
 	}
 
 }
