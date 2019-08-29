@@ -26,7 +26,7 @@ import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineRecipe;
-import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.Setup.SlimefunManager;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
@@ -36,8 +36,8 @@ import me.mrCookieSlime.Slimefun.api.item_transport.ItemTransportFlow;
 
 public class FluidPump extends SlimefunItem{
 	
-	public static Map<Block, MachineRecipe> processing = new HashMap<>();
-	public static Map<Block, Integer> progress = new HashMap<>();
+	public static Map<Block, MachineRecipe> processing = new HashMap<Block, MachineRecipe>();
+	public static Map<Block, Integer> progress = new HashMap<Block, Integer>();
 	
 	private static final int[] border = {0, 1, 2, 3, 4, 5, 6, 7, 8, 13, 31, 36, 37, 38, 39, 40, 41, 42, 43, 44, 22};
 	private static final int[] border_in = {9, 10, 11, 12, 18, 21, 27, 28, 29, 30};
@@ -124,13 +124,13 @@ public class FluidPump extends SlimefunItem{
 					
 					ItemStack output = new ItemStack(Material.LAVA_BUCKET);
 					
-					if (!fits(b, output)) return;
+					if (!fits(b, new ItemStack[] {output})) return;
 
 					ChargableBlock.addCharge(b, -getEnergyConsumption());
 					BlockStorage.getInventory(b).replaceExistingItem(slot, InvUtils.decreaseItem(BlockStorage.getInventory(b).getItemInSlot(slot), 1));
-					pushItems(b, output);
+					pushItems(b, new ItemStack[] {output});
 					
-					List<Location> list = new ArrayList<>();
+					List<Location> list = new ArrayList<Location>();
 		        	list.add(fluid.getLocation());
 		        	Vein.calculate(fluid.getLocation(), fluid.getLocation(), list, 64);
 		        	list.get(list.size() - 1).getBlock().setType(Material.AIR);
@@ -146,11 +146,11 @@ public class FluidPump extends SlimefunItem{
 					
 					ItemStack output = new ItemStack(Material.WATER_BUCKET);
 					
-					if (!fits(b, output)) return;
+					if (!fits(b, new ItemStack[] {output})) return;
 
 					ChargableBlock.addCharge(b, -getEnergyConsumption());
 					BlockStorage.getInventory(b).replaceExistingItem(slot, InvUtils.decreaseItem(BlockStorage.getInventory(b).getItemInSlot(slot), 1));
-					pushItems(b, output);
+					pushItems(b, new ItemStack[] {output});
 					
 					fluid.setType(Material.AIR);
 					
@@ -198,11 +198,11 @@ public class FluidPump extends SlimefunItem{
 		return inv;
 	}
 	
-	protected boolean fits(Block b, ItemStack... items) {
+	protected boolean fits(Block b, ItemStack[] items) {
 		return inject(b).addItem(items).isEmpty();
 	}
 	
-	protected void pushItems(Block b, ItemStack... items) {
+	protected void pushItems(Block b, ItemStack[] items) {
 		Inventory inv = inject(b);
 		inv.addItem(items);
 		

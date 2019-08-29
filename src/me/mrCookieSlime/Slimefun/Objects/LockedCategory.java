@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.PlayerProfile;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 import org.bukkit.entity.Player;
@@ -112,13 +111,11 @@ public class LockedCategory extends Category {
 	 * @since 4.0
 	 */
 	public boolean hasUnlocked(Player p) {
-		PlayerProfile profile = PlayerProfile.fromUUID(p.getUniqueId());
-		
 		for (Category category: parents) {
 			for (SlimefunItem item: category.getItems()) {
 				if (Slimefun.isEnabled(p, item.getItem(), false) && Slimefun.hasPermission(p, item, false)) {
 					if (item.getResearch() != null) {
-						if (!profile.hasUnlocked(item.getResearch())) return false;
+						if (!item.getResearch().hasUnlocked(p)) return false;
 					}
 				}
 			}

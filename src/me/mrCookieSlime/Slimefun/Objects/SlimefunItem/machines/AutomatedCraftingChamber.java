@@ -27,7 +27,7 @@ import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunBlockHandler;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.UnregisterReason;
-import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.energy.ChargableBlock;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
@@ -41,7 +41,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem {
 	private static final int[] border_in = {9, 10, 11, 12, 13, 18, 22, 27, 31, 36, 40, 45, 46, 47, 48, 49};
 	private static final int[] border_out = {23, 24, 25, 26, 32, 35, 41, 42, 43, 44};
 	
-	public static Map<String, ItemStack> recipes = new HashMap<>();
+	public static Map<String, ItemStack> recipes = new HashMap<String, ItemStack>();
 
 	public AutomatedCraftingChamber(Category category, ItemStack item, String name, RecipeType recipeType, ItemStack[] recipe) {
 		super(category, item, name, recipeType, recipe);
@@ -87,7 +87,7 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem {
 			public int[] getSlotsAccessedByItemTransport(BlockMenu menu, ItemTransportFlow flow, ItemStack item) {
 				if (flow.equals(ItemTransportFlow.WITHDRAW)) return getOutputSlots();
 				
-				List<Integer> slots = new ArrayList<>();
+				List<Integer> slots = new ArrayList<Integer>();
 				for (int slot : getInputSlots()) {
 					if (menu.getItemInSlot(slot) != null) slots.add(slot);
 				}
@@ -134,15 +134,19 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem {
 	
 	protected void constructMenu(BlockMenuPreset preset) {
 		for (int i : border) {
-			preset.addItem(i, new CustomItem(new ItemStack(Material.GRAY_STAINED_GLASS_PANE), " "), (p, slot, item, action) -> false);
+			preset.addItem(i, new CustomItem(new ItemStack(Material.GRAY_STAINED_GLASS_PANE), " "),
+				(p, slot, item, action) -> false
+			);
 		}
-		
 		for (int i : border_in) {
-			preset.addItem(i, new CustomItem(new ItemStack(Material.BLUE_STAINED_GLASS_PANE), " "), (p, slot, item, action) -> false);
+			preset.addItem(i, new CustomItem(new ItemStack(Material.BLUE_STAINED_GLASS_PANE), " "),
+				(p, slot, item, action) -> false
+			);
 		}
-		
 		for (int i : border_out) {
-			preset.addItem(i, new CustomItem(new ItemStack(Material.ORANGE_STAINED_GLASS_PANE), " "), (p, slot, item, action) -> false);
+			preset.addItem(i, new CustomItem(new ItemStack(Material.ORANGE_STAINED_GLASS_PANE), " "),
+				(p, slot, item, action) -> false
+			);
 		}
 		
 		for (int i : getOutputSlots()) {
@@ -160,7 +164,9 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem {
 			});
 		}
 
-		preset.addItem(2, new CustomItem(new ItemStack(Material.CRAFTING_TABLE), "&e合成表", "", "&b請放入想合成物品的合成表", "&4僅限進階工作台合成表"), (p, slot, item, action) -> false);
+		preset.addItem(2, new CustomItem(new ItemStack(Material.CRAFTING_TABLE), "&e合成表", "", "&b請放入想合成物品的合成表", "&4僅限進階工作台合成表"),
+			(p, slot, item, action) -> false
+		);
 	}
 	
 	public abstract int getEnergyConsumption();
@@ -176,15 +182,12 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem {
 	private Inventory inject(Block b) {
 		int size = BlockStorage.getInventory(b).toInventory().getSize();
 		Inventory inv = Bukkit.createInventory(null, size);
-		
 		for (int i = 0; i < size; i++) {
 			inv.setItem(i, new CustomItem(Material.COMMAND_BLOCK, " &4ALL YOUR PLACEHOLDERS ARE BELONG TO US"));
 		}
-		
 		for (int slot : getOutputSlots()) {
 			inv.setItem(slot, BlockStorage.getInventory(b).getItemInSlot(slot));
 		}
-		
 		return inv;
 	}
 	
@@ -237,7 +240,9 @@ public abstract class AutomatedCraftingChamber extends SlimefunItem {
 			}
 			
 			ItemStack item = menu.getItemInSlot(getInputSlots()[j]);
+			
 			if (item != null && item.getAmount() == 1) return;
+			
 			builder.append(CustomItemSerializer.serialize(item, ItemFlag.MATERIAL, ItemFlag.ITEMMETA_DISPLAY_NAME, ItemFlag.ITEMMETA_LORE));
 			
 			i++;

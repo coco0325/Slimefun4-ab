@@ -3,17 +3,20 @@ package me.mrCookieSlime.Slimefun.api.inventory;
 import java.io.File;
 import java.util.ArrayList;
 
+import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
+
 import org.bukkit.block.Block;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
-
-public class UniversalBlockMenu extends DirtyChestMenu {
+public class UniversalBlockMenu extends ChestMenu {
 	
-	private BlockMenuPreset preset;
-	private ItemManipulationEvent event;
+	BlockMenuPreset preset;
+	ItemManipulationEvent event;
+	
+	public int changes = 0;
 	
 	public UniversalBlockMenu(BlockMenuPreset preset) {
 		super(preset.getTitle());
@@ -47,7 +50,7 @@ public class UniversalBlockMenu extends DirtyChestMenu {
 	}
 	
 	public void save() {
-		if (!isDirty()) return;
+		if (changes == 0) return;
 		// To force CS-CoreLib to build the Inventory
 		this.getContents();
 		
@@ -82,7 +85,8 @@ public class UniversalBlockMenu extends DirtyChestMenu {
 			item = this.event.onEvent(slot, previous, item);
 		}
 		super.replaceExistingItem(slot, item);
-		markDirty();
+		
+		changes++;
 	}
 	
 	public void close() {

@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -33,6 +32,8 @@ import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Math.DoubleHandler;
 import me.mrCookieSlime.CSCoreLibPlugin.general.String.StringUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.general.World.CustomSkull;
+import me.mrCookieSlime.Slimefun.GitHub.Contributor;
+import me.mrCookieSlime.Slimefun.GitHub.IntegerFormat;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Misc.BookDesign;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -48,14 +49,9 @@ import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
 import me.mrCookieSlime.Slimefun.Setup.Messages;
 import me.mrCookieSlime.Slimefun.Setup.SlimefunManager;
 import me.mrCookieSlime.Slimefun.api.GuideHandler;
-import me.mrCookieSlime.Slimefun.api.PlayerProfile;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
-import me.mrCookieSlime.Slimefun.hooks.github.Contributor;
-import me.mrCookieSlime.Slimefun.hooks.github.IntegerFormat;
 
-public final class SlimefunGuide {
-	
-	private SlimefunGuide() {}
+public class SlimefunGuide {
 	
 	public static Map<UUID, List<Object>> history = new HashMap<>();
 	public static int month = 0;
@@ -71,7 +67,7 @@ public final class SlimefunGuide {
 	public static int code_bytes = 0;
 	public static Date last_update = new Date();
 
-	protected static boolean all_recipes = true;
+	static boolean all_recipes = true;
 	private static final int category_size = 36;
 
 	@Deprecated
@@ -225,11 +221,11 @@ public final class SlimefunGuide {
 		int index = 9;
 		double total = 0;
 
-		for (Contributor contributor : SlimefunStartup.instance.getUtilities().contributors) {
+		for (Contributor contributor : contributors) {
 			total += contributor.getCommits();
 		}
-		
-		for (final Contributor contributor: SlimefunStartup.instance.getUtilities().contributors) {
+
+		for (final Contributor contributor: contributors) {
 			ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
 			
 			try {
@@ -291,10 +287,10 @@ public final class SlimefunGuide {
 			clearHistory(p.getUniqueId());
 
 		if (book) {
-			List<TellRawMessage> pages = new ArrayList<>();
-			List<String> texts = new ArrayList<>();
-			List<String> tooltips = new ArrayList<>();
-			List<PlayerRunnable> actions = new ArrayList<>();
+			List<TellRawMessage> pages = new ArrayList<TellRawMessage>();
+			List<String> texts = new ArrayList<String>();
+			List<String> tooltips = new ArrayList<String>();
+			List<PlayerRunnable> actions = new ArrayList<PlayerRunnable>();
 
 			int tier = 0;
 
@@ -426,7 +422,7 @@ public final class SlimefunGuide {
 			);
 
 			List<Category> categories = Slimefun.current_categories;
-			List<GuideHandler> handlers = Slimefun.guide_handlers.values().stream().flatMap(list -> list.stream()).collect(Collectors.toList());
+			List<GuideHandler> handlers = Slimefun.guide_handlers2;
 
 			int index = 9;
 			int pages = 1;
@@ -503,7 +499,7 @@ public final class SlimefunGuide {
 						index++;
 					}
 					else {
-						List<String> parents = new ArrayList<>();
+						List<String> parents = new ArrayList<String>();
 						parents.add("");
 						parents.add(ChatColor.translateAlternateColorCodes('&', "&r你需要先解鎖所有物品"));
 						parents.add(ChatColor.translateAlternateColorCodes('&', "&r來自以下類別:"));
@@ -565,16 +561,12 @@ public final class SlimefunGuide {
 							texts.add(ChatColor.translateAlternateColorCodes('&', shorten("&7", StringUtils.formatItemName(item.getItem(), false))));
 							tooltips.add(ChatColor.translateAlternateColorCodes('&', StringUtils.formatItemName(item.getItem(), false) + "\n&c&l已鎖定\n\n&7需花費: " + (p.getLevel() >= research.getCost() ? "&b": "&4") + research.getCost() + "經驗等級\n\n&a> 點擊解鎖"));
 							actions.add(new PlayerRunnable(2) {
-								
 								@Override
 								public void run(final Player p) {
 									if (!Research.isResearching(p)) {
 										if (research.canUnlock(p)) {
-											PlayerProfile profile = PlayerProfile.fromUUID(p.getUniqueId());
-											
-											if (profile.hasUnlocked(research)) {
+											if (research.hasUnlocked(p))
 												openCategory(p, category, true, selected_page, book);
-											}
 											else {
 												if (!(p.getGameMode() == GameMode.CREATIVE && Research.creative_research)) {
 													p.setLevel(p.getLevel() - research.getCost());
@@ -582,14 +574,11 @@ public final class SlimefunGuide {
 
 												if (p.getGameMode() == GameMode.CREATIVE) {
 													research.unlock(p, true);
-													
 													Bukkit.getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, () -> {
 														openCategory(p, category, survival, selected_page, book);
 													}, 1L);
-												} 
-												else {
+												} else {
 													research.unlock(p, false);
-													
 													Bukkit.getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, () -> {
 														openCategory(p, category, survival, selected_page, book);
 													}, 103L);
@@ -723,11 +712,8 @@ public final class SlimefunGuide {
 							menu.addMenuClickHandler(index, (pl, slot, item, action) -> {
 								if (!Research.isResearching(pl)) {
 									if (research.canUnlock(pl)) {
-										PlayerProfile profile = PlayerProfile.fromUUID(p.getUniqueId());
-										
-										if (profile.hasUnlocked(research)) {
-											openCategory(p, category, true, selected_page, book);
-										}
+										if (research.hasUnlocked(pl))
+											openCategory(pl, category, true, selected_page, book);
 										else {
 											if (!(pl.getGameMode() == GameMode.CREATIVE && Research.creative_research)) {
 												pl.setLevel(pl.getLevel() - research.getCost());
@@ -736,8 +722,7 @@ public final class SlimefunGuide {
 											if (pl.getGameMode() == GameMode.CREATIVE) {
 												research.unlock(pl, Research.creative_research);
 												openCategory(pl, category, survival, selected_page, book);
-											} 
-											else {
+											} else {
 												research.unlock(pl, false);
 												Bukkit.getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, () -> {
 													openCategory(pl, category, survival, selected_page, book);
@@ -752,7 +737,9 @@ public final class SlimefunGuide {
 						}
 						else {
 							menu.addItem(index, new CustomItem(Material.BARRIER, StringUtils.formatItemName(sfitem.getItem(), false), new String[] {"", "&r你沒有權限", "&r使用此物品"}));
-							menu.addMenuClickHandler(index, (pl, slot, item, action) -> false);
+							menu.addMenuClickHandler(index,
+								(pl, slot, item, action) -> false
+							);
 							index++;
 						}
 					}
@@ -786,15 +773,12 @@ public final class SlimefunGuide {
 	private static Object getLastEntry(Player p, boolean remove) {
 		List<Object> list = new ArrayList<>();
 		if (history.containsKey(p.getUniqueId())) list = history.get(p.getUniqueId());
-		
 		if (remove && list.size() >= 1) {
 			Object obj = list.get(list.size() - 1);
 			list.remove(obj);
 		}
-		
 		if (list.isEmpty()) history.remove(p.getUniqueId());
 		else history.put(p.getUniqueId(), list);
-		
 		return list.isEmpty() ? null: list.get(list.size() - 1);
 	}
 
@@ -802,7 +786,6 @@ public final class SlimefunGuide {
 		if (item == null || item.getType() == Material.AIR) return;
 
 		final SlimefunItem sfItem = SlimefunItem.getByItem(item);
-		
 		if (sfItem == null) {
 			if (!all_recipes) return;
 		}
@@ -814,7 +797,9 @@ public final class SlimefunGuide {
 		ChestMenu menu = new ChestMenu("【Slimefun 科技指南】");
 
 		menu.setEmptySlotsClickable(false);
-		menu.addMenuOpeningHandler(pl -> pl.playSound(pl.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 0.7F, 0.7F));
+		menu.addMenuOpeningHandler(
+			pl -> pl.playSound(pl.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 0.7F, 0.7F)
+		);
 
 		if (sfItem != null) {
 			recipe = sfItem.getRecipe();
@@ -822,7 +807,7 @@ public final class SlimefunGuide {
 			recipeOutput = sfItem.getRecipeOutput() != null ? sfItem.getRecipeOutput(): sfItem.getItem();
 		}
 		else {
-			List<Recipe> recipes = new ArrayList<>();
+			List<Recipe> recipes = new ArrayList<Recipe>();
 			Iterator<Recipe> iterator = Bukkit.recipeIterator();
 			while (iterator.hasNext()) {
 				Recipe r = iterator.next();
@@ -918,7 +903,6 @@ public final class SlimefunGuide {
 					e.printStackTrace();
 				}
 			}
-			
 			if (Slimefun.getItemConfig().contains(sfItem.getID() + ".youtube")) {
 				try {
 					menu.addItem(7, new CustomItem(CustomSkull.getItem("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjQzNTNmZDBmODYzMTQzNTM4NzY1ODYwNzViOWJkZjBjNDg0YWFiMDMzMWI4NzJkZjExYmQ1NjRmY2IwMjllZCJ9fX0="), "&r教學影片 &7(Youtube)", "", "&7⇨ 點擊觀看"));

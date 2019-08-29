@@ -3,8 +3,6 @@ package me.mrCookieSlime.Slimefun.Objects.SlimefunItem.machines;
 import java.util.Iterator;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Tag;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -28,10 +26,6 @@ public abstract class ElectricFurnace extends AContainer {
 				registerRecipe(4, new ItemStack[] {((FurnaceRecipe) r).getInput()}, new ItemStack[] {r.getResult()});
 			}
 		}
-		
-		//Bukkit Recipe Iterator does not seem to include _LOG's of any type for charcoal... Manually adding them all.
-		for(Material mat:Tag.LOGS.getValues())
-			registerRecipe(4, new ItemStack[] {new ItemStack(mat,1)}, new ItemStack[] {new ItemStack(Material.CHARCOAL, 1)});
 	}
 	
 	@Override

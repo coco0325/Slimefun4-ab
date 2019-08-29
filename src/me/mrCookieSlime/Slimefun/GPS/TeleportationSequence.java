@@ -1,5 +1,7 @@
 package me.mrCookieSlime.Slimefun.GPS;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
@@ -15,12 +17,12 @@ import me.mrCookieSlime.CSCoreLibPlugin.general.World.TitleBuilder;
 import me.mrCookieSlime.CSCoreLibPlugin.general.World.TitleBuilder.TitleType;
 import me.mrCookieSlime.Slimefun.SlimefunStartup;
 
-public final class TeleportationSequence {
-	
-	private TeleportationSequence() {}
+public class TeleportationSequence {
+
+	public static Set<UUID> players = new HashSet<>();
 	
 	public static void start(UUID uuid, int complexity, Location source, Location destination, boolean resistance) {
-		SlimefunStartup.instance.getUtilities().teleporterUsers.add(uuid);
+		players.add(uuid);
 		
 		updateProgress(uuid, getSpeed(complexity, source, destination), 1, source, destination, resistance);
 	}
@@ -48,8 +50,7 @@ public final class TeleportationSequence {
 	}
 	
 	private static void cancel(UUID uuid, Player p) {
-		SlimefunStartup.instance.getUtilities().teleporterUsers.remove(uuid);
-		
+		players.remove(uuid);
 		if (p != null) {
 			try {
 				TitleBuilder title = (TitleBuilder) new TitleBuilder(20, 60, 20).addText(ChatColor.translateAlternateColorCodes('&', "&4傳送取消"));
@@ -83,7 +84,7 @@ public final class TeleportationSequence {
 					
 					destination.getWorld().spawnParticle(Particle.PORTAL,new Location(destination.getWorld(), destination.getX(), destination.getY() + 1, destination.getZ()),progress * 2, 0.2F, 0.8F, 0.2F );
 					destination.getWorld().playSound(destination, Sound.ENTITY_BLAZE_DEATH, 2F, 1.4F);
-					SlimefunStartup.instance.getUtilities().teleporterUsers.remove(uuid);
+					players.remove(uuid);
 				}
 				else {
 					TitleBuilder title = (TitleBuilder) new TitleBuilder(0, 60, 0).addText(ChatColor.translateAlternateColorCodes('&', "&3傳送中..."));
@@ -95,7 +96,9 @@ public final class TeleportationSequence {
 					source.getWorld().spawnParticle(Particle.PORTAL, source, progress * 2, 0.2F, 0.8F, 0.2F);
 					source.getWorld().playSound(source, Sound.UI_BUTTON_CLICK, 1.7F, 0.6F);
 					
-					Bukkit.getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, () -> updateProgress(uuid, speed, progress + speed, source, destination, resistance), 10L);
+					Bukkit.getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, () -> {
+						updateProgress(uuid, speed, progress + speed, source, destination, resistance);
+					}, 10l);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

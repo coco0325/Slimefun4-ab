@@ -79,7 +79,6 @@ public class Category {
 			if (((SeasonCategory) this).isUnlocked()) Slimefun.current_categories.add(this);
 		}
 		else Slimefun.current_categories.add(this);
-		
 		Collections.sort(Slimefun.current_categories, new CategorySorter());
 	}
 

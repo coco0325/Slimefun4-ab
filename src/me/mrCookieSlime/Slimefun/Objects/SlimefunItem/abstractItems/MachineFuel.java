@@ -4,9 +4,9 @@ import org.bukkit.inventory.ItemStack;
 
 public class MachineFuel {
 	
-	private int seconds;
-	private ItemStack fuel;
-	private ItemStack output;
+	int seconds;
+	ItemStack fuel;
+	ItemStack output;
 	
 	public MachineFuel(int seconds, ItemStack fuel) {
 		this.seconds = seconds * 2;

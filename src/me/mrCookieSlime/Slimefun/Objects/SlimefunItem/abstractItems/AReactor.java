@@ -1,6 +1,11 @@
 package me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -258,7 +263,7 @@ public abstract class AReactor extends SlimefunItem {
 	public void register(boolean slimefun) {
 		addItemHandler(new EnergyTicker() {
 
-			private Set<Location> explode = new HashSet<>();
+			Set<Location> explode = new HashSet<Location>();
 
 			@Override
 			public double generateEnergy(final Location l, SlimefunItem sf, Config data) {
@@ -278,12 +283,13 @@ public abstract class AReactor extends SlimefunItem {
 							progress.put(l, timeleft - 1);
 
 							Bukkit.getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, () -> {
-								if (!l.getBlock().getRelative(cooling[new Random().nextInt(cooling.length)]).isLiquid()) explode.add(l);
+								if (!l.getBlock().getRelative(cooling[CSCoreLib.randomizer().nextInt(cooling.length)]).isLiquid()) explode.add(l);
+							});
 
 							ItemStack item = getProgressBar().clone();
 							ItemMeta im = item.getItemMeta();
 							im.setDisplayName(" ");
-							List<String> lore = new ArrayList<>();
+							List<String> lore = new ArrayList<String>();
 							lore.add(MachineHelper.getProgress(timeleft, processing.get(l).getTicks()));
 							lore.add(MachineHelper.getCoolant(timeleft, processing.get(l).getTicks()));
 							lore.add("");
@@ -346,7 +352,7 @@ public abstract class AReactor extends SlimefunItem {
 				}
 				else {
 					MachineFuel r = null;
-						Map<Integer, Integer> found = new HashMap<>();
+					Map<Integer, Integer> found = new HashMap<Integer, Integer>();
 
 					if (port != null) {
 						refill:

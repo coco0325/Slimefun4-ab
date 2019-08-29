@@ -103,8 +103,8 @@ public class AutoEnchanter extends AContainer {
 				
 				// Enchant
 				if (item != null && item.getType() == Material.ENCHANTED_BOOK && target != null) {
-					Map<Enchantment, Integer> enchantments = new HashMap<>();
-					Set<ItemEnchantment> enchantments2 = new HashSet<>();
+					Map<Enchantment, Integer> enchantments = new HashMap<Enchantment, Integer>();
+					Set<ItemEnchantment> enchantments2 = new HashSet<ItemEnchantment>();
 					int amount = 0;
 					int special_amount = 0;
 					EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();

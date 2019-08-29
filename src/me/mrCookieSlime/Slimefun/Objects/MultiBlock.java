@@ -11,10 +11,10 @@ import org.bukkit.Material;
 
 public class MultiBlock {
 	
-	public static List<MultiBlock> list = new ArrayList<>();
+	public static List<MultiBlock> list = new ArrayList<MultiBlock>();
 	
-	private Material[] blocks;
-	private Material trigger;
+	Material[] blocks;
+	Material trigger;
 	
 	public MultiBlock(Material[] build, Material trigger) {
 		this.blocks = build;

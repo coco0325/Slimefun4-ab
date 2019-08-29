@@ -7,10 +7,8 @@ import me.mrCookieSlime.Slimefun.api.Slimefun;
  *
  * @since 4.1.2
  */
-public final class WikiSetup {
+public class WikiSetup {
 
-	private WikiSetup() {}
-	
 	/**
 	 * Setups the official Wiki links.
 	 */

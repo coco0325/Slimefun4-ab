@@ -1,13 +1,13 @@
 package me.mrCookieSlime.Slimefun.Objects.SlimefunItem;
 
-import org.bukkit.inventory.ItemStack;
-
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 
+import org.bukkit.inventory.ItemStack;
+
 public class ChargedItem extends SlimefunItem {
 	
-	private String chargeType;
+	String chargeType;
 
 	public ChargedItem(Category category, ItemStack item, String id, RecipeType recipeType, ItemStack[] recipe, String chargeType) {
 		super(category, item, id, recipeType, recipe);
@@ -19,8 +19,6 @@ public class ChargedItem extends SlimefunItem {
 		this.chargeType = chargeType;
 	}
 	
-	public String getChargeType() {
-		return chargeType;
-	}
+	public String getChargeType()		{		return this.chargeType;		}
 
 }

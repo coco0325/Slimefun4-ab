@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class MultiTool extends DamagableChargableItem {
 	
-	private List<Integer> modes;
+	List<Integer> modes;
 
 	public MultiTool(ItemStack item, String id, RecipeType recipeType, ItemStack[] recipe, String[] keys, Object[] values) {
 		super(Categories.TECH, item, id, recipeType, recipe, "Multi Tool", keys, values);
@@ -19,7 +19,7 @@ public class MultiTool extends DamagableChargableItem {
 	
 	@Override
 	public void create() {
-		List<Integer> list = new ArrayList<>();
+		List<Integer> list = new ArrayList<Integer>();
 		for (int i = 0; i < 50; i++) {
 			if (Slimefun.getItemValue(this.getID(), "mode." + i + ".enabled") != null) {
 				if ((Boolean) Slimefun.getItemValue(this.getID(), "mode." + i + ".enabled")) list.add(i);

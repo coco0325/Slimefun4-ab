@@ -62,8 +62,8 @@ public class AutoDisenchanter extends AContainer {
 				ItemMeta im = item.getItemMeta();
 				((Damageable) im).setDamage(MachineHelper.getDurability(item, timeleft*2, processing.get(b).getTicks()));
 				im.setDisplayName(" ");
-				List<String> lore = new ArrayList<>();
-				lore.add(MachineHelper.getProgress(timeleft, processing.get(b).getTicks()));
+				List<String> lore = new ArrayList<String>();
+				lore.add(MachineHelper.getProgress(timeleft*2, processing.get(b).getTicks()));
 				lore.add("");
 				lore.add(MachineHelper.getTimeLeft(timeleft));
 				im.setLore(lore);
@@ -87,8 +87,8 @@ public class AutoDisenchanter extends AContainer {
 		}
 		else {
 			MachineRecipe r = null;
-			Map<Enchantment, Integer> enchantments = new HashMap<>();
-			Set<ItemEnchantment> enchantments2 = new HashSet<>();
+			Map<Enchantment, Integer> enchantments = new HashMap<Enchantment, Integer>();
+			Set<ItemEnchantment> enchantments2 = new HashSet<ItemEnchantment>();
 			slots:
 			for (int slot: getInputSlots()) {
 				ItemStack target = BlockStorage.getInventory(b).getItemInSlot(slot == getInputSlots()[0] ? getInputSlots()[1]: getInputSlots()[0]);

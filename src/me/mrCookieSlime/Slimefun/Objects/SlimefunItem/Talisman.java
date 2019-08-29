@@ -2,7 +2,14 @@ package me.mrCookieSlime.Slimefun.Objects.SlimefunItem;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
+import me.mrCookieSlime.Slimefun.SlimefunStartup;
+import me.mrCookieSlime.Slimefun.Lists.Categories;
+import me.mrCookieSlime.Slimefun.Lists.RecipeType;
+import me.mrCookieSlime.Slimefun.Objects.Research;
+import me.mrCookieSlime.Slimefun.Setup.Messages;
+import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -15,13 +22,6 @@ import org.bukkit.event.entity.EntityEvent;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-
-import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
-import me.mrCookieSlime.Slimefun.Lists.Categories;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Research;
-import me.mrCookieSlime.Slimefun.Setup.Messages;
-import me.mrCookieSlime.Slimefun.api.Slimefun;
 
 /**
  * @since 4.0
@@ -84,12 +84,12 @@ public class Talisman extends SlimefunItem {
         }
 
         Talisman talisman = (Talisman) item;
-        if (new Random().nextInt(100) < talisman.getChance()) {
+        if (!SlimefunStartup.chance(100, talisman.getChance())) {
             return false;
         }
 
         Player p = getPlayerByEventType(e);
-        if (p == null || !pass(p, talisman)) {
+        if (!pass(p, talisman)) {
             return false;
         }
 
@@ -97,17 +97,13 @@ public class Talisman extends SlimefunItem {
             if (Slimefun.hasUnlocked(p, talisman.getItem(), true)) {
                 executeTalismanAttributes(e,p,talisman);
                 return true;
-            } 
-            else return false;
-        } 
-        else if (p.getEnderChest().containsAtLeast(talisman.upgrade(), 1)) {
+            } else return false;
+        } else if (p.getEnderChest().containsAtLeast(talisman.upgrade(), 1)) {
             if (Slimefun.hasUnlocked(p, talisman.upgrade(), true)) {
                 executeTalismanAttributes(e,p,talisman);
                 return true;
-            } 
-            else return false;
-        } 
-        else return false;
+            } else return false;
+        } else return false;
 
     }
 
@@ -177,7 +173,6 @@ public class Talisman extends SlimefunItem {
         else if (e instanceof PlayerEvent) return ((PlayerEvent) e).getPlayer();
         else if (e instanceof EntityEvent) return (Player) ((EntityEvent) e).getEntity();
         else if (e instanceof EnchantItemEvent) return ((EnchantItemEvent) e).getEnchanter();
-        
         return null;
     }
 
@@ -185,7 +180,6 @@ public class Talisman extends SlimefunItem {
         for (PotionEffect effect : ((Talisman) talisman).getEffects()) {
             if (effect != null && p.hasPotionEffect(effect.getType())) return false;
         }
-        
         return true;
     }
 

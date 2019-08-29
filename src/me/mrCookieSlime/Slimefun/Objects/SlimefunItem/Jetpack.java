@@ -7,7 +7,7 @@ import org.bukkit.inventory.ItemStack;
 
 public class Jetpack extends DamagableChargableItem {
 	
-	private double thrust;
+	double thrust;
 
 	public Jetpack(ItemStack item, String id, ItemStack[] recipe, double thrust) {
 		super(Categories.TECH, item, id, RecipeType.ENHANCED_CRAFTING_TABLE, recipe, "Jetpack");

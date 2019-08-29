@@ -10,11 +10,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
+import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.ChestMenu;
 
-public class BlockMenu extends DirtyChestMenu {
+public class BlockMenu extends ChestMenu {
 	
-	private BlockMenuPreset preset;
-	private Location l;
+	BlockMenuPreset preset;
+	Location l;
+	
+	public int changes = 0;
 	
 	private ItemManipulationEvent event;
 	
@@ -56,7 +59,7 @@ public class BlockMenu extends DirtyChestMenu {
 	}
 	
 	public void save(Location l) {
-		if (!isDirty()) {
+		if (changes == 0) {
 			return;
 		}
 		
@@ -118,12 +121,41 @@ public class BlockMenu extends DirtyChestMenu {
 			item = this.event.onEvent(slot, previous, item);
 		}
 		super.replaceExistingItem(slot, item);
-		markDirty();
+		
+		changes++;
+	}
+	
+	@Override
+	public ChestMenu addMenuOpeningHandler(MenuOpeningHandler handler) {
+		if (handler instanceof SaveHandler) {
+			return super.addMenuOpeningHandler(new SaveHandler(this, ((SaveHandler) handler).handler));
+		}
+		else {
+			return super.addMenuOpeningHandler(new SaveHandler(this, handler));
+		}
 	}
 	
 	public void close() {
-		for (HumanEntity human: new ArrayList<>(toInventory().getViewers())) {
+		for(HumanEntity human: new ArrayList<>(toInventory().getViewers())) {
 			human.closeInventory();
 		}
+	}
+	
+	public class SaveHandler implements MenuOpeningHandler {
+		
+		BlockMenu menu;
+		MenuOpeningHandler handler;
+		
+		public SaveHandler(BlockMenu menu, MenuOpeningHandler handler) {
+			this.handler = handler;
+			this.menu = menu;
+		}
+
+		@Override
+		public void onOpen(Player p) {
+			handler.onOpen(p);
+			menu.changes++;
+		}
+		
 	}
 }
