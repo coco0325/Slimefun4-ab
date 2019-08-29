@@ -1,6 +1,7 @@
 package me.mrCookieSlime.Slimefun.androids;
 
 import org.bukkit.block.Block;
+import me.mrCookieSlime.Slimefun.Android.ProgrammableAndroid;
 
 public class AndroidObject {
 	

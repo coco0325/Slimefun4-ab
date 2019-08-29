@@ -1,12 +1,6 @@
 package me.mrCookieSlime.Slimefun.Objects;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -61,6 +55,7 @@ public class Research {
 	 * Contains all Research Titles
 	 */
 	public static List<String> titles;
+	public static List<UUID> researching = new ArrayList<>();
 	
 	/**
 	 * Whether researching in creative is free.
