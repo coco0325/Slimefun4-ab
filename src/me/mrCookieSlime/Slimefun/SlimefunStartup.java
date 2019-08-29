@@ -42,7 +42,7 @@ import me.mrCookieSlime.Slimefun.Setup.MiscSetup;
 import me.mrCookieSlime.Slimefun.Setup.ResearchSetup;
 import me.mrCookieSlime.Slimefun.Setup.SlimefunManager;
 import me.mrCookieSlime.Slimefun.Setup.SlimefunSetup;
-import me.mrCookieSlime.Slimefun.WorldEdit.WESlimefunManager;
+import me.mrCookieSlime.Slimefun.hooks.WorldEditHook;
 import me.mrCookieSlime.Slimefun.api.AutoSavingTask;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.Slimefun;
@@ -243,7 +243,7 @@ public class SlimefunStartup extends JavaPlugin {
 			if (getServer().getPluginManager().isPluginEnabled("WorldEdit")) {
 				try {
 					Class.forName("com.sk89q.worldedit.extent.Extent");
-					new WESlimefunManager();
+					new WorldEditHook();
 					System.out.println("[Slimefun] Successfully hooked into WorldEdit!");
 				} catch (Exception x) {
 					System.err.println("[Slimefun] Failed to hook into WorldEdit!");
