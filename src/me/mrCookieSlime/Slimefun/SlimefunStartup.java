@@ -312,26 +312,23 @@ public class SlimefunStartup extends JavaPlugin {
 
 			// Starting all ASYNC Tasks
 			getServer().getScheduler().runTaskTimerAsynchronously(this, new AutoSavingTask(), 1200L, config.getInt("options.auto-save-delay-in-minutes") * 60L * 20L);
-			getServer().getScheduler().runTaskTimerAsynchronously(this, new Runnable() {
-				@Override
-				public void run() {
-					tick[0] = tick[0]+1;
-					Integer LagQuotient = (int)Math.round(Math.pow((20 - CMI.getInstance().getLagMeter().getTPS(600)), 2));
-					if(LagQuotient <= 10){
-						if(tick[0]>=4){
-							getServer().getScheduler().runTaskAsynchronously(SlimefunStartup.instance, ticker);
-							tick[0] = 0;
-						}
-					}else if(LagQuotient >= 50){
-						tick[0] = tick[0]-LagQuotient;
-					}else{
-						if(tick[0] >= LagQuotient){
-							getServer().getScheduler().runTaskAsynchronously(SlimefunStartup.instance, ticker);
-							tick[0] = 0;
-						}
-					}
-				}
-			}, 100L, 3L);
+			getServer().getScheduler().runTaskTimerAsynchronously(this, () -> {
+                tick[0] = tick[0]+1;
+                Integer LagQuotient = (int)Math.round(Math.pow((20 - CMI.getInstance().getLagMeter().getTPS(600)), 2));
+                if(LagQuotient <= 10){
+                    if(tick[0]>=4){
+                        getServer().getScheduler().runTaskAsynchronously(SlimefunStartup.instance, ticker);
+                        tick[0] = 0;
+                    }
+                }else if(LagQuotient >= 50){
+                    tick[0] = -LagQuotient;
+                }else{
+                    if(tick[0] >= LagQuotient){
+                        getServer().getScheduler().runTaskAsynchronously(SlimefunStartup.instance, ticker);
+                        tick[0] = 0;
+                    }
+                }
+            }, 100L, 3L);
 
 			getServer().getScheduler().runTaskTimerAsynchronously(this, () -> {
 				for (GitHubConnector connector : GitHubConnector.connectors) {

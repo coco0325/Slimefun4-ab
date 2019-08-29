@@ -23,6 +23,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
@@ -33,7 +34,14 @@ public class BlockListener implements Listener {
 	public BlockListener(SlimefunStartup plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 	}
-	
+
+	@EventHandler
+	public void onMobSpawn(CreatureSpawnEvent e){
+		if(e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.SPAWNER){
+			e.getEntity().setAI(false);
+		}
+	}
+
 	@EventHandler
 	public void onBlockFall(EntityChangeBlockEvent event) {
 		if (event.getEntity() instanceof FallingBlock) {

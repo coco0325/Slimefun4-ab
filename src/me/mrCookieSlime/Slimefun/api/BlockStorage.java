@@ -120,10 +120,7 @@ public class BlockStorage {
 								if (storage.containsKey(l)) {
 									// It should not be possible to have two blocks on the same location. Ignore the
 									// new entry if a block is already present and print an error to the console.
-
-									System.out.println("[Slimefun] Ignoring duplicate block @ " + l.getBlockX() + ", " + l.getBlockY() + ", " + l.getBlockZ());
-									System.out.println("[Slimefun] Old block data: " + serializeBlockInfo(storage.get(l)));
-									System.out.println("[Slimefun] New block data (" + key + "): " + json);
+									BlockStorage.clearBlockInfo(l);
 									continue;
 								}
 								storage.put(l, blockInfo);
