@@ -12,7 +12,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.InvUtils;
 import me.mrCookieSlime.CSCoreLibPlugin.general.Inventory.Item.CustomItem;
-import me.mrCookieSlime.Slimefun.SlimefunStartup;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Lists.SlimefunItems;
 import me.mrCookieSlime.Slimefun.Objects.Category;
@@ -43,6 +42,7 @@ public abstract class ElectricDustWasher extends AContainer {
 	public void registerDefaultRecipes() {}
 	
 	public abstract int getSpeed();
+	public static boolean legacy_dust_washer = false;
 	
 	protected void tick(Block b) {
 		if (isProcessing(b)) {
@@ -82,7 +82,7 @@ public abstract class ElectricDustWasher extends AContainer {
 		else {
 			for (int slot: getInputSlots()) {
 				if (SlimefunManager.isItemSimiliar(BlockStorage.getInventory(b).getItemInSlot(slot), SlimefunItems.SIFTED_ORE, true)) {
-					if (!SlimefunStartup.instance.getSettings().DUST_WASHER_LEGACY) {
+					if (!legacy_dust_washer) {
 						boolean empty_slot = false;
 						for (int output_slot: getOutputSlots()) {
 							if (BlockStorage.getInventory(b).getItemInSlot(output_slot) == null) {
@@ -95,7 +95,7 @@ public abstract class ElectricDustWasher extends AContainer {
 					
 					ItemStack adding = OreWasher.items[new Random().nextInt(OreWasher.items.length)];
 					MachineRecipe r = new MachineRecipe(4 / getSpeed(), new ItemStack[0], new ItemStack[] {adding});
-					if (SlimefunStartup.instance.getSettings().DUST_WASHER_LEGACY && !fits(b, r.getOutput())) return;
+					if (legacy_dust_washer && !fits(b, r.getOutput())) return;
 					BlockStorage.getInventory(b).replaceExistingItem(slot, InvUtils.decreaseItem(BlockStorage.getInventory(b).getItemInSlot(slot), 1));
 					processing.put(b, r);
 					progress.put(b, r.getTicks());

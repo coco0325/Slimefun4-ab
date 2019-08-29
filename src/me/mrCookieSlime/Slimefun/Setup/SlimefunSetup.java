@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 
+import me.mrCookieSlime.Slimefun.Utilities;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Effect;
@@ -159,7 +160,6 @@ import me.mrCookieSlime.Slimefun.holograms.InfusedHopper;
 import me.mrCookieSlime.Slimefun.holograms.Projector;
 import me.mrCookieSlime.Slimefun.holograms.ReactorHologram;
 import me.mrCookieSlime.Slimefun.listeners.AncientAltarListener;
-import me.mrCookieSlime.Slimefun.utils.Utilities;
 
 public final class SlimefunSetup {
 
@@ -1235,21 +1235,21 @@ public final class SlimefunSetup {
 		SlimefunManager.registerArmorSet(SlimefunItems.GILDED_IRON, new ItemStack[] {SlimefunItems.GILDED_IRON_HELMET, SlimefunItems.GILDED_IRON_CHESTPLATE, SlimefunItems.GILDED_IRON_LEGGINGS, SlimefunItems.GILDED_IRON_BOOTS}, "GILDED_IRON", true, false);
 
 		new SlimefunArmorPiece(Categories.ARMOR, SlimefunItems.SCUBA_HELMET, "SCUBA_HELMET", RecipeType.ARMOR_FORGE,
-				new ItemStack[] {new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.ORANGE_WOOL), SlimefunItems.PLASTIC_SHEET, new ItemStack(Material.GLASS_PANE), SlimefunItems.PLASTIC_SHEET, null, null, null},
-				new PotionEffect[] {new PotionEffect(PotionEffectType.WATER_BREATHING, 400, 1)})
+				new ItemStack[] {new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.BLACK_WOOL), new ItemStack(Material.GLASS_PANE), new ItemStack(Material.BLACK_WOOL), null, null, null},
+				new PotionEffect[] {new PotionEffect(PotionEffectType.WATER_BREATHING, 300, 1)})
 				.register(true);
 
 		new SlimefunArmorPiece(Categories.ARMOR, SlimefunItems.HAZMATSUIT_CHESTPLATE, "HAZMAT_CHESTPLATE", RecipeType.ARMOR_FORGE,
-				new ItemStack[] {new ItemStack(Material.ORANGE_WOOL), null, new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.ORANGE_WOOL), SlimefunItems.PLASTIC_SHEET, SlimefunItems.PLASTIC_SHEET, SlimefunItems.PLASTIC_SHEET},
-				new PotionEffect[] {new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 400, 1)})
+				new ItemStack[] {new ItemStack(Material.ORANGE_WOOL), null, new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.BLACK_WOOL), new ItemStack(Material.BLACK_WOOL), new ItemStack(Material.BLACK_WOOL)},
+				new PotionEffect[] {new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 300, 1)})
 				.register(true);
 
 		new SlimefunItem(Categories.ARMOR, SlimefunItems.HAZMATSUIT_LEGGINGS, "HAZMAT_LEGGINGS", RecipeType.ARMOR_FORGE,
-				new ItemStack [] {SlimefunItems.PLASTIC_SHEET, SlimefunItems.PLASTIC_SHEET, SlimefunItems.PLASTIC_SHEET, new ItemStack(Material.ORANGE_WOOL), null, new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.ORANGE_WOOL), null, new ItemStack(Material.ORANGE_WOOL)})
+				new ItemStack [] {new ItemStack(Material.BLACK_WOOL), new ItemStack(Material.BLACK_WOOL), new ItemStack(Material.BLACK_WOOL), new ItemStack(Material.ORANGE_WOOL), null, new ItemStack(Material.ORANGE_WOOL), new ItemStack(Material.ORANGE_WOOL), null, new ItemStack(Material.ORANGE_WOOL)})
 				.register(true);
 
 		new SlimefunItem(Categories.ARMOR, SlimefunItems.RUBBER_BOOTS, "RUBBER_BOOTS", RecipeType.ARMOR_FORGE,
-				new ItemStack [] {null, null, null, new ItemStack(Material.BLACK_WOOL), null, new ItemStack(Material.BLACK_WOOL), SlimefunItems.PLASTIC_SHEET, null, SlimefunItems.PLASTIC_SHEET})
+				new ItemStack [] {null, null, null, new ItemStack(Material.BLACK_WOOL), null, new ItemStack(Material.BLACK_WOOL), new ItemStack(Material.BLACK_WOOL), null, new ItemStack(Material.BLACK_WOOL)})
 				.register(true);
 
 		new SlimefunItem(Categories.MISC, SlimefunItems.CRUSHED_ORE, "CRUSHED_ORE", RecipeType.ORE_CRUSHER,
@@ -4665,11 +4665,11 @@ public final class SlimefunSetup {
 
 						if (BlockStorage.getLocationInfo(e.getClickedBlock().getLocation(), "visualizer") == null) {
 							BlockStorage.addBlockInfo(e.getClickedBlock(), "visualizer", "disabled");
-							p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c物流可視化: " + "&4\u2718"));
+							p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cCargo Net Visualizer: " + "&4\u2718"));
 						}
 						else {
 							BlockStorage.addBlockInfo(e.getClickedBlock(), "visualizer", null);
-							p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c物流可視化: " + "&2\u2714"));
+							p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cCargo Net Visualizer: " + "&2\u2714"));
 						}
 						return true;
 					}
@@ -4700,10 +4700,10 @@ public final class SlimefunSetup {
 						if (!item.getID().equals("CARGO_NODE")) return false;
 
 						if (CargoNet.getNetworkFromLocation(e.getClickedBlock().getLocation()) != null) {
-							p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7已連線: " + "&2\u2714"));
+							p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Connected: " + "&2\u2714"));
 						}
 						else {
-							p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7未連線: " + "&4\u2718"));
+							p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7Connected: " + "&4\u2718"));
 						}
 						return true;
 					}

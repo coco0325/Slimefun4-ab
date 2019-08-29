@@ -70,7 +70,8 @@ public final class SlimefunGuide {
 	public static int stars = 0;
 	public static int code_bytes = 0;
 	public static Date last_update = new Date();
-	
+
+	protected static boolean all_recipes = true;
 	private static final int category_size = 36;
 
 	@Deprecated
@@ -575,7 +576,7 @@ public final class SlimefunGuide {
 												openCategory(p, category, true, selected_page, book);
 											}
 											else {
-												if (!(p.getGameMode() == GameMode.CREATIVE && SlimefunStartup.instance.getSettings().RESEARCHES_FREE_IN_CREATIVE)) {
+												if (!(p.getGameMode() == GameMode.CREATIVE && Research.creative_research)) {
 													p.setLevel(p.getLevel() - research.getCost());
 												}
 
@@ -728,12 +729,12 @@ public final class SlimefunGuide {
 											openCategory(p, category, true, selected_page, book);
 										}
 										else {
-											if (!(pl.getGameMode() == GameMode.CREATIVE && SlimefunStartup.instance.getSettings().RESEARCHES_FREE_IN_CREATIVE)) {
+											if (!(pl.getGameMode() == GameMode.CREATIVE && Research.creative_research)) {
 												pl.setLevel(pl.getLevel() - research.getCost());
 											}
 
 											if (pl.getGameMode() == GameMode.CREATIVE) {
-												research.unlock(pl, SlimefunStartup.instance.getSettings().RESEARCHES_FREE_IN_CREATIVE);
+												research.unlock(pl, Research.creative_research);
 												openCategory(pl, category, survival, selected_page, book);
 											} 
 											else {
@@ -803,7 +804,7 @@ public final class SlimefunGuide {
 		final SlimefunItem sfItem = SlimefunItem.getByItem(item);
 		
 		if (sfItem == null) {
-			if (!SlimefunStartup.instance.getSettings().GUIDE_SHOW_VANILLA_RECIPES) return;
+			if (!all_recipes) return;
 		}
 
 		ItemStack[] recipe = new ItemStack[9];
