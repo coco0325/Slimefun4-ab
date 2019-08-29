@@ -22,28 +22,28 @@ public final class Categories {
 	
 	private Categories() {}
 	
-	public static Category WEAPONS = new Category(new MenuItem(Material.GOLDEN_SWORD, "&7Weapons", 0, "open"), 1);
+	public final static Category WEAPONS = new Category(new MenuItem(Material.GOLDEN_SWORD, "&7Weapons", 0, "open"), 1);
 	public static Category PORTABLE = null;
-	public static Category FOOD = new Category(new MenuItem(Material.APPLE, "&7食物類", 0, "點擊開啟"), 2);
+	public final static Category FOOD = new Category(new MenuItem(Material.APPLE, "&7食物類", 0, "點擊開啟"), 2);
 	public static Category MACHINES_1 = null;
 	public static LockedCategory ELECTRICITY = null;
 	public static LockedCategory GPS = null;
-	public static Category ARMOR = new Category(new MenuItem(Material.IRON_CHESTPLATE, "&7科技盔甲", 0, "點擊開啟"), 2);
-	public static Category LUMPS_AND_MAGIC = new Category(new MenuItem(Material.FIRE_CHARGE, "&7魔法材料", 0, "點擊開啟"), 2);
-	public static Category MAGIC = new Category(new MenuItem(Material.BLAZE_POWDER, "&7魔力物品", 0, "點擊開啟"), 3);
+	public final static Category ARMOR = new Category(new MenuItem(Material.IRON_CHESTPLATE, "&7科技盔甲", 0, "點擊開啟"), 2);
+	public final static Category LUMPS_AND_MAGIC = new Category(new MenuItem(Material.FIRE_CHARGE, "&7魔法材料", 0, "點擊開啟"), 2);
+	public final static Category MAGIC = new Category(new MenuItem(Material.BLAZE_POWDER, "&7魔力物品", 0, "點擊開啟"), 3);
 	public static Category MISC = null;
-	public static Category TECH = new Category(new CustomArmor(new MenuItem(Material.LEATHER_CHESTPLATE, "&7科技物品", 0, "點擊開啟"), Color.SILVER), 3);
+	public final static Category TECH = new Category(new CustomArmor(new MenuItem(Material.LEATHER_CHESTPLATE, "&7科技物品", 0, "點擊開啟"), Color.SILVER), 3);
 	public static Category RESOURCES = null;
 	public static Category CARGO = null;
-	public static Category TECH_MISC = new Category(new MenuItem(Material.COMPARATOR, "&7科技零件", 0, "點擊開啟"), 2);
-	public static Category MAGIC_ARMOR = new Category(new MenuItem(Material.GOLDEN_CHESTPLATE, "&7魔法盔甲", 0, "點擊開啟"), 2);
-	public static Category TALISMANS_1 = new Category(new MenuItem(Material.EMERALD, "&7魔法水晶 - &aI", 0, "點擊開啟"), 2);
-	public static LockedCategory TALISMANS_2 = new LockedCategory(new MenuItem(Material.EMERALD, "&7魔法水晶 - &aII", 0, "點擊開啟"), 3, TALISMANS_1);
-	public static Category TOOLS = new Category(new MenuItem(Material.GOLDEN_PICKAXE, "&7工具類", 0, "點擊開啟"), 1);
-	public static SeasonCategory CHRISTMAS = new SeasonCategory(12, 1, new MenuItem(Material.NETHER_STAR, "&a聖&c誕&a節", 0, ChatColor.translateAlternateColorCodes('&', "&c幫助 &a聖誕老人")));
-	public static SeasonCategory VALENTINES_DAY = new SeasonCategory(2, 2, new MenuItem(Material.POPPY, "&d情人節", 0, ChatColor.translateAlternateColorCodes('&', "&d慶祝愛情!")));
-	public static SeasonCategory EASTER = new SeasonCategory(4, 2, new MenuItem(Material.EGG, "&6復活節", 0, ChatColor.translateAlternateColorCodes('&', "&a來畫些蛋吧")));
-	public static SeasonCategory BIRTHDAY = new SeasonCategory(10, 1, new MenuItem(Material.FIREWORK_ROCKET, "&a&lTheBusyBiscuit的生日 &7(10/26)", 0, ChatColor.translateAlternateColorCodes('&', "&a與我一同慶祝")));
+	public final static Category TECH_MISC = new Category(new MenuItem(Material.COMPARATOR, "&7科技零件", 0, "點擊開啟"), 2);
+	public final static Category MAGIC_ARMOR = new Category(new MenuItem(Material.GOLDEN_CHESTPLATE, "&7魔法盔甲", 0, "點擊開啟"), 2);
+	public final static Category TALISMANS_1 = new Category(new MenuItem(Material.EMERALD, "&7魔法水晶 - &aI", 0, "點擊開啟"), 2);
+	public final static LockedCategory TALISMANS_2 = new LockedCategory(new MenuItem(Material.EMERALD, "&7魔法水晶 - &aII", 0, "點擊開啟"), 3, TALISMANS_1);
+	public final static Category TOOLS = new Category(new MenuItem(Material.GOLDEN_PICKAXE, "&7工具類", 0, "點擊開啟"), 1);
+	public final static SeasonCategory CHRISTMAS = new SeasonCategory(12, 1, new MenuItem(Material.NETHER_STAR, "&a聖&c誕&a節", 0, ChatColor.translateAlternateColorCodes('&', "&c幫助 &a聖誕老人")));
+	public final static SeasonCategory VALENTINES_DAY = new SeasonCategory(2, 2, new MenuItem(Material.POPPY, "&d情人節", 0, ChatColor.translateAlternateColorCodes('&', "&d慶祝愛情!")));
+	public final static SeasonCategory EASTER = new SeasonCategory(4, 2, new MenuItem(Material.EGG, "&6復活節", 0, ChatColor.translateAlternateColorCodes('&', "&a來畫些蛋吧")));
+	public final static SeasonCategory BIRTHDAY = new SeasonCategory(10, 1, new MenuItem(Material.FIREWORK_ROCKET, "&a&lTheBusyBiscuit的生日 &7(10/26)", 0, ChatColor.translateAlternateColorCodes('&', "&a與我一同慶祝")));
 	
 	static {
 		try {

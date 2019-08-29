@@ -38,11 +38,6 @@ public class Research {
 
 	public static String tablename = "sf_research";
 
-	/**
-	 * Whether researching is enabled or not;
-	 * @since 4.0
-	 */
-	public static boolean enableResearching;
 	
 	/**
 	 * Contains all the registered researches;
@@ -56,12 +51,6 @@ public class Research {
 	 */
 	public static List<String> titles;
 	public static List<UUID> researching = new ArrayList<>();
-	
-	/**
-	 * Whether researching in creative is free.
-	 * @since 4.0
-	 */
-	public static boolean creative_research = true;
 
 	private int id;
 	private String name, sid;
@@ -97,7 +86,7 @@ public class Research {
 	}
 	
 	public boolean isEnabled() {
-		return enableResearching && enabled;
+		return SlimefunStartup.instance.getSettings().RESEARCHES_ENABLED && enabled;
 	}
 
 
@@ -275,7 +264,7 @@ public class Research {
 	 */
 	public boolean canUnlock(Player p) {
 		if (!isEnabled()) return true;
-		return (p.getGameMode() == GameMode.CREATIVE && creative_research) || p.getLevel() >= this.cost;
+		return (p.getGameMode() == GameMode.CREATIVE && SlimefunStartup.instance.getSettings().RESEARCHES_FREE_IN_CREATIVE) || p.getLevel() >= this.cost;
 	}
 
 	/**
@@ -422,8 +411,7 @@ public class Research {
 	 * @param p Player to get the statistics
 	 * 
 	 * @since 4.0
-	 * @see #getTitle(Player, List)
-	 */
+     */
 	@Deprecated
 	public static void sendStats(CommandSender sender, Player p) {
 		PlayerProfile profile = PlayerProfile.fromUUID(p.getUniqueId());
