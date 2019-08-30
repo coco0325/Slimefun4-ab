@@ -15,6 +15,7 @@ options:
   legacy-ore-washer: false
   legacy-dust-washer: false
   legacy-machine-output: false
+  legacy-ore-grinder: false
 guide:
   default-view-book: false
 URID:

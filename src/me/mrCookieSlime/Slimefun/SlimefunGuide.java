@@ -56,7 +56,7 @@ public class SlimefunGuide {
 	public static Map<UUID, List<Object>> history = new HashMap<>();
 	public static int month = 0;
 
-	public static List<Contributor> contributors = new ArrayList<Contributor>();
+	public static List<Contributor> contributors = new ArrayList<>();
 	public static int issues = 0;
 	public static int forks = 0;
 	/**
@@ -67,7 +67,7 @@ public class SlimefunGuide {
 	public static int code_bytes = 0;
 	public static Date last_update = new Date();
 
-	static boolean all_recipes = true;
+	protected static boolean all_recipes = true;
 	private static final int category_size = 36;
 
 	@Deprecated

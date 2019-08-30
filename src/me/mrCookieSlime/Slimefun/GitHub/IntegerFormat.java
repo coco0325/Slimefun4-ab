@@ -16,7 +16,7 @@ public class IntegerFormat {
 	
 	public static Date parseGitHubDate(String str) {
 		try {
-			return date_format.parse(str.replace("T", " ").replace("Z", ""));
+			return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(str.replace("T", " ").replace("Z", ""));
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return null;

@@ -398,17 +398,12 @@ public class Research {
 	 * @param p Player to get the statistics
 	 * 
 	 * @since 4.0
-	 * @see #getTitle(Player, List)
+	 * @see #getTitle(Player, Collection)
 	 */
 	public static void sendStats(CommandSender sender, Player p) {
-		List<Research> researched = new ArrayList<Research>();
-		int levels = 0;
-		for (Research r: list()) {
-			if (r.hasUnlocked(p)) {
-				researched.add(r);
-				levels = levels + r.getLevel();
-			}
-		}
+		List<Research> researched = Research.getResearches(p.getUniqueId());
+		int levels = researched.stream().mapToInt(Research::getCost).sum();
+
 		String progress = String.valueOf(Math.round(((researched.size() * 100.0f) / list().size()) * 100.0f) / 100.0f);
 		if (Float.parseFloat(progress) < 16.0F) progress = "&4" + progress + " &r% ";
 		else if (Float.parseFloat(progress) < 32.0F) progress = "&c" + progress + " &r% ";
@@ -435,7 +430,7 @@ public class Research {
 	 * @since 4.0
 	 * @see #sendStats(CommandSender, Player)
 	 */
-	public static String getTitle(Player p, List<Research> researched) {
+	public static String getTitle(Player p, Collection<Research> researched) {
 		int index = Math.round(Float.valueOf(String.valueOf(Math.round(((researched.size() * 100.0f) / list().size()) * 100.0f) / 100.0f)) / 100.0F) *  SlimefunStartup.getCfg().getStringList("research-ranks").size();
 		if (index > 0) index--;
 		return SlimefunStartup.getCfg().getStringList("research-ranks").get(index);

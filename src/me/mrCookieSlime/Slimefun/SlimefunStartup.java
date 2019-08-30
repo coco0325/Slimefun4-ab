@@ -42,6 +42,7 @@ import me.mrCookieSlime.Slimefun.Setup.MiscSetup;
 import me.mrCookieSlime.Slimefun.Setup.ResearchSetup;
 import me.mrCookieSlime.Slimefun.Setup.SlimefunManager;
 import me.mrCookieSlime.Slimefun.Setup.SlimefunSetup;
+import me.mrCookieSlime.Slimefun.hooks.PlaceholderAPIHook;
 import me.mrCookieSlime.Slimefun.hooks.WorldEditHook;
 import me.mrCookieSlime.Slimefun.api.AutoSavingTask;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -249,6 +250,10 @@ public class SlimefunStartup extends JavaPlugin {
 					System.err.println("[Slimefun] Failed to hook into WorldEdit!");
 					System.err.println("[Slimefun] Maybe consider updating WorldEdit or Slimefun?");
 				}
+			}
+
+			if (getServer().getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+				new PlaceholderAPIHook().register();
 			}
 
 			getCommand("slimefun").setExecutor(new SlimefunCommand(this));

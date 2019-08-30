@@ -2,6 +2,7 @@ package me.mrCookieSlime.Slimefun.Objects.tasks;
 
 import me.mrCookieSlime.CSCoreLibPlugin.CSCoreLib;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -26,5 +27,4 @@ public class MagnetTask extends SlimefunTask {
 			}
 		}
 	}
-
 }
