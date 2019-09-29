@@ -36,13 +36,6 @@ public class BlockListener implements Listener {
     }
 
     @EventHandler
-    public void onMobSpawn(CreatureSpawnEvent e) {
-        if (e.getSpawnReason() == CreatureSpawnEvent.SpawnReason.SPAWNER) {
-            e.getEntity().setAI(false);
-        }
-    }
-
-    @EventHandler
     public void onBlockFall(EntityChangeBlockEvent event) {
         if (event.getEntity() instanceof FallingBlock) {
             if (BlockStorage.hasBlockInfo(event.getBlock())) {

@@ -450,7 +450,7 @@ public class SlimefunSetup {
 
         new SlimefunMachine(Categories.MACHINES_1, SlimefunItems.ORE_CRUSHER, "ORE_CRUSHER",
                 new ItemStack[]{null, null, null, null, new ItemStack(Material.NETHER_BRICK_FENCE), null, new ItemStack(Material.IRON_BARS), new CustomItem(Material.DISPENSER, "發射器 (朝上)"), new ItemStack(Material.IRON_BARS)},
-                new ItemStack[]{new ItemStack(Material.IRON_ORE), new CustomItem(SlimefunItems.IRON_DUST, (Boolean) Slimefun.getItemValue("ORE_CRUSHER", "double-ores") ? 2 : 1), new ItemStack(Material.GOLD_ORE), new CustomItem(SlimefunItems.GOLD_DUST, (Boolean) Slimefun.getItemValue("ORE_CRUSHER", "double-ores") ? 2 : 1), new ItemStack(Material.NETHERRACK, 16), SlimefunItems.SULFATE, SlimefunItems.SIFTED_ORE, SlimefunItems.CRUSHED_ORE, SlimefunItems.CRUSHED_ORE, SlimefunItems.PULVERIZED_ORE, SlimefunItems.PURE_ORE_CLUSTER, SlimefunItems.TINY_URANIUM, new ItemStack(Material.COBBLESTONE, 8), new ItemStack(Material.SAND, 1), new ItemStack(Material.GOLD_INGOT), SlimefunItems.GOLD_DUST, SlimefunItems.GOLD_4K, SlimefunItems.GOLD_DUST},
+                new ItemStack[]{new ItemStack(Material.IRON_ORE), new CustomItem(SlimefunItems.IRON_DUST, (Boolean) Slimefun.getItemValue("ORE_CRUSHER", "double-ores") ? 2 : 1), new ItemStack(Material.GOLD_ORE), new CustomItem(SlimefunItems.GOLD_DUST, (Boolean) Slimefun.getItemValue("ORE_CRUSHER", "double-ores") ? 2 : 1), new ItemStack(Material.NETHERRACK, 16), SlimefunItems.SULFATE, SlimefunItems.SIFTED_ORE, SlimefunItems.CRUSHED_ORE, SlimefunItems.CRUSHED_ORE, SlimefunItems.PULVERIZED_ORE, SlimefunItems.PURE_ORE_CLUSTER, SlimefunItems.TINY_URANIUM,  new ItemStack(Material.GRAVEL, 4), new ItemStack(Material.SAND, 1), new ItemStack(Material.GOLD_INGOT), SlimefunItems.GOLD_DUST, SlimefunItems.GOLD_4K, SlimefunItems.GOLD_DUST},
                 Material.NETHER_BRICK_FENCE)
                 .register(true, new MultiBlockInteractionHandler() {
 
@@ -745,7 +745,30 @@ public class SlimefunSetup {
                                                 Inventory outputInv = SlimefunMachine.findValidOutputInv(adding, dispBlock, inv);
                                                 if (outputInv != null) {
                                                     for (ItemStack removing : inputs.get(i)) {
-                                                        if (removing != null) inv.removeItem(removing);
+                                                        if(removing != null){
+                                                            if(removing.getType() != Material.PLAYER_HEAD && inv.contains(removing.getType())){
+                                                                inv.removeItem(removing);
+                                                            }else{
+                                                                for(ItemStack content : inv.getContents()){
+                                                                    if(content != null){
+                                                                        if(content.getType()==Material.PLAYER_HEAD){
+                                                                            if(content.hasItemMeta()&&removing.hasItemMeta()){
+                                                                                if(content.getItemMeta().hasDisplayName()&&removing.getItemMeta().hasDisplayName()){
+                                                                                    if(removing.getItemMeta().getDisplayName().equals(content.getItemMeta().getDisplayName())){
+                                                                                        if(content.getAmount() > 1){
+                                                                                            content.setAmount(content.getAmount()-1);
+                                                                                        }else{
+                                                                                            inv.removeItem(content);
+                                                                                        }
+                                                                                        break;
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
                                                     }
                                                     outputInv.addItem(adding);
                                                     p.getWorld().playSound(p.getLocation(), Sound.BLOCK_LAVA_POP, 1, 1);
@@ -2773,7 +2796,14 @@ public class SlimefunSetup {
                                         return false;
                                     }
                                 }
-
+                                //check
+                                if(!d.getInventory().getViewers().isEmpty()) return false;
+                                if(d.getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.HOPPER)) return false;
+                                for(Entity entity : d.getBlock().getLocation().getWorld().getNearbyEntities(d.getBlock().getLocation(), 1, 2, 1)){
+                                    if(entity.getType().equals(EntityType.MINECART_HOPPER)){
+                                        return false;
+                                    }
+                                }
                                 SlimefunItem sfItem = SlimefunItem.getByItem(e.getItem());
                                 if (sfItem != null) {
                                     if (!SlimefunItem.blockhandler.containsKey(sfItem.getID())) {

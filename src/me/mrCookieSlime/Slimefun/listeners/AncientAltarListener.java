@@ -76,9 +76,11 @@ public class AncientAltarListener implements Listener {
 					}, 30L);
 
 					stack.remove();
-					e.getPlayer().getInventory().addItem(fixItemStack(stack.getItemStack(), stack.getCustomName()));
-					e.getPlayer().playSound(b.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1F, 1F);
-					PlayerInventory.update(e.getPlayer());
+					if(e.getClickedBlock().getType().equals(Material.DISPENSER)){
+						e.getPlayer().getInventory().addItem(fixItemStack(stack.getItemStack(), stack.getCustomName()));
+						e.getPlayer().playSound(b.getLocation(), Sound.ENTITY_ITEM_PICKUP, 1F, 1F);
+						PlayerInventory.update(e.getPlayer());
+					}
 				}
 			}
 			else if (item.getID().equals("ANCIENT_ALTAR")) {

@@ -4,6 +4,7 @@ import java.io.*;
 
 import com.Zrips.CMI.CMI;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -297,6 +298,7 @@ public class SlimefunStartup extends JavaPlugin {
 
 								// If the item is enabled in the world, then make radioactivity do its job
 								if (Slimefun.isEnabled(p, radioactive, false)) {
+									p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&aSlimefun &7> &e你被身上的放射物汙染了! 把它丟掉或穿著生化服!"));
 									p.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 400, 3));
 									p.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 400, 3));
 									p.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 400, 3));
