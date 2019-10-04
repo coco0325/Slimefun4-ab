@@ -2384,6 +2384,7 @@ public class SlimefunSetup {
                                 if (CSCoreLib.getLib().getProtectionManager().canAccessChest(p.getUniqueId(), e.getClickedBlock(), true)) {
                                     final ItemStack input = p.getInventory().getItemInMainHand();
                                     final Block block = e.getClickedBlock().getRelative(BlockFace.UP);
+                                    if(block.getType()!=Material.AIR) return false;
                                     for (ItemStack convert : RecipeType.getRecipeInputs(machine)) {
                                         if (input != null && SlimefunManager.isItemSimiliar(input, convert, true)) {
                                             e.setCancelled(true);

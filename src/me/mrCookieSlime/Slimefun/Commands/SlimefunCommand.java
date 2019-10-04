@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -168,8 +169,17 @@ public class SlimefunCommand implements CommandExecutor, Listener {
 						}
 					}
 				}
-			}
-			else if (args[0].equalsIgnoreCase("timings")) {
+			}else if(args[0].equalsIgnoreCase("debug")) {
+				if(sender instanceof Player){
+					Player p = (Player)sender;
+					if(CSCoreLib.getLib().getProtectionManager().canBuild(p.getUniqueId(), p.getLocation().getBlock())){
+						BlockStorage.clearBlockInfo(p.getLocation().getBlock());
+						p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&aSlimefun &7> &e成功進行除錯 此方塊資料已被清除!"));
+					}else{
+						p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&aSlimefun &7> &e你需要有領地建築權限才能進行除錯喔"));
+					}
+				}
+			} else if (args[0].equalsIgnoreCase("timings")) {
 				if (sender.hasPermission("slimefun.command.timings")|| sender instanceof ConsoleCommandSender) {
 					SlimefunStartup.ticker.info(sender);
 				}
