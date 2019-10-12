@@ -152,7 +152,7 @@ public abstract class ProgrammableAndroid extends SlimefunItem {
 
             @Override
             public boolean canOpen(Block b, Player p) {
-                boolean open = BlockStorage.getLocationInfo(b.getLocation(), "owner").equals(p.getUniqueId().toString()) || p.hasPermission("slimefun.android.bypass");
+                boolean open = CSCoreLib.getLib().getProtectionManager().canAccessChest(p.getUniqueId(), b) || p.hasPermission("slimefun.android.bypass");
                 if (!open) {
                     Messages.local.sendTranslation(p, "inventory.no-access", true);
                 }
@@ -217,7 +217,7 @@ public abstract class ProgrammableAndroid extends SlimefunItem {
 
             @Override
             public boolean onBreak(Player p, Block b, SlimefunItem item, UnregisterReason reason) {
-                boolean allow = reason.equals(UnregisterReason.PLAYER_BREAK) && (BlockStorage.getLocationInfo(b.getLocation(), "owner").equals(p.getUniqueId().toString()) || p.hasPermission("slimefun.android.bypass"));
+                boolean allow = reason.equals(UnregisterReason.PLAYER_BREAK) && CSCoreLib.getLib().getProtectionManager().canBuild(p.getUniqueId(), b) || p.hasPermission("slimefun.android.bypass");
 
                 if (!BlockStorage.hasBlockInfo(b)) return false;
 

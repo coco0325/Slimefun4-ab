@@ -59,6 +59,9 @@ public class BlockListener implements Listener {
                 return;
             }
         }
+        if(!e.isCancelled()){
+            BlockStorage.clearBlockInfo(e.getBlock().getRelative(e.getDirection()));
+        }
     }
 
     @EventHandler
