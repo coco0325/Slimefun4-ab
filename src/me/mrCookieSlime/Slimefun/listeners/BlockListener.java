@@ -16,11 +16,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.type.Piston;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -53,9 +55,11 @@ public class BlockListener implements Listener {
         for (Block b : e.getBlocks()) {
             if (BlockStorage.hasBlockInfo(b)) {
                 e.setCancelled(true);
+                e.getBlock().setType(Material.AIR);
                 return;
             } else if (b.getRelative(e.getDirection()).getType() == Material.AIR && BlockStorage.hasBlockInfo(b.getRelative(e.getDirection()))) {
                 e.setCancelled(true);
+                e.getBlock().setType(Material.AIR);
                 return;
             }
         }
@@ -76,6 +80,17 @@ public class BlockListener implements Listener {
                     return;
                 }
             }
+        }
+    }
+
+    @EventHandler
+    public void onBreak(BlockBreakEvent e){
+        if(e.getBlock().getType() == Material.PISTON || e.getBlock().getType() == Material.STICKY_PISTON){
+            if(((Piston)e.getBlock()).isExtended()){
+                e.setCancelled(true);
+            }
+        }else if(e.getBlock().getType() == Material.PISTON_HEAD){
+            e.setCancelled(true);
         }
     }
 

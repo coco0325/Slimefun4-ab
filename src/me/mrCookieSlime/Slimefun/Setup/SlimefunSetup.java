@@ -1666,7 +1666,7 @@ public class SlimefunSetup {
 
                                 if (logs.contains(e.getBlock().getLocation())) logs.remove(e.getBlock().getLocation());
                                 for (Location b : logs) {
-                                    if (CSCoreLib.getLib().getProtectionManager().canBuild(e.getPlayer().getUniqueId(), b.getBlock())) {
+                                    if (CSCoreLib.getLib().getProtectionManager().canBuild(e.getPlayer().getUniqueId(), b.getBlock()) && !BlockStorage.hasBlockInfo(e.getBlock())) {
                                         b.getWorld().playEffect(b, Effect.STEP_SOUND, b.getBlock().getType());
                                         for (ItemStack drop : b.getBlock().getDrops()) {
                                             b.getWorld().dropItemNaturally(b, drop);
@@ -3068,9 +3068,7 @@ public class SlimefunSetup {
             public boolean onBreak(Player p, Block b, SlimefunItem item, UnregisterReason reason) {
                 Item stack = AncientAltarListener.findItem(b);
                 if (stack != null) {
-                    stack.removeMetadata("item_placed", SlimefunStartup.instance);
-                    b.getWorld().dropItem(b.getLocation(), AncientAltarListener.fixItemStack(stack.getItemStack(), stack.getCustomName()));
-                    stack.remove();
+                    return false;
                 }
                 return true;
             }
