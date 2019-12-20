@@ -1666,7 +1666,7 @@ public class SlimefunSetup {
 
                                 if (logs.contains(e.getBlock().getLocation())) logs.remove(e.getBlock().getLocation());
                                 for (Location b : logs) {
-                                    if (CSCoreLib.getLib().getProtectionManager().canBuild(e.getPlayer().getUniqueId(), b.getBlock()) && !BlockStorage.hasBlockInfo(e.getBlock())) {
+                                    if (CSCoreLib.getLib().getProtectionManager().canBuild(e.getPlayer().getUniqueId(), b.getBlock()) && !BlockStorage.hasBlockInfo(b.getBlock())) {
                                         b.getWorld().playEffect(b, Effect.STEP_SOUND, b.getBlock().getType());
                                         for (ItemStack drop : b.getBlock().getDrops()) {
                                             b.getWorld().dropItemNaturally(b, drop);
@@ -2800,6 +2800,11 @@ public class SlimefunSetup {
                                 //check
                                 if(!d.getInventory().getViewers().isEmpty()) return false;
                                 if(d.getBlock().getRelative(BlockFace.DOWN).getType().equals(Material.HOPPER)) return false;
+                                if(BlockStorage.check(d.getBlock().getRelative(0,-2,0), "BLOCK_PLACER")) return false;
+                                if(BlockStorage.check(d.getBlock().getRelative(1,-1,0), "BLOCK_PLACER")) return false;
+                                if(BlockStorage.check(d.getBlock().getRelative(-1,-1,0), "BLOCK_PLACER")) return false;
+                                if(BlockStorage.check(d.getBlock().getRelative(0,-1,1), "BLOCK_PLACER")) return false;
+                                if(BlockStorage.check(d.getBlock().getRelative(0,-1,-1), "BLOCK_PLACER")) return false;
                                 for(Entity entity : d.getBlock().getLocation().getWorld().getNearbyEntities(d.getBlock().getLocation(), 1, 2, 1)){
                                     if(entity.getType().equals(EntityType.MINECART_HOPPER)){
                                         return false;

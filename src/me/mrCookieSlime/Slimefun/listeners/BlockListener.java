@@ -1,6 +1,7 @@
 package me.mrCookieSlime.Slimefun.listeners;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import me.mrCookieSlime.CSCoreLibPlugin.general.Block.BlockAdjacents;
@@ -32,6 +33,9 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 public class BlockListener implements Listener {
+
+    ArrayList<Material> logs = new ArrayList<Material>(Arrays.asList(Material.ACACIA_LOG,Material.OAK_LOG,Material.DARK_OAK_LOG,Material.SPRUCE_LOG));
+    ArrayList<Material> axes = new ArrayList<Material>(Arrays.asList(Material.DIAMOND_AXE,Material.GOLDEN_AXE,Material.IRON_AXE,Material.STONE_AXE,Material.WOODEN_AXE));
 
     public BlockListener(SlimefunStartup plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -97,6 +101,15 @@ public class BlockListener implements Listener {
     @EventHandler
     public void onRightClick(PlayerInteractEvent e) {
         if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            if(axes.contains(e.getPlayer().getInventory().getItemInMainHand().getType()) || axes.contains(e.getPlayer().getInventory().getItemInOffHand().getType())){
+                if(e.getClickedBlock() != null){
+                    if(logs.contains(e.getClickedBlock().getType())){
+                        if(BlockStorage.hasBlockInfo(e.getClickedBlock())){
+                            e.setCancelled(true);
+                        }
+                    }
+                }
+            }
             if (!e.getHand().equals(EquipmentSlot.HAND)) return;
             Player p = e.getPlayer();
             Block b = e.getClickedBlock();

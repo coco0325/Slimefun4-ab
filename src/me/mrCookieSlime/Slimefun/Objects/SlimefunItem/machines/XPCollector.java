@@ -148,12 +148,13 @@ public class XPCollector extends SlimefunItem {
 	}
 	
 	protected void tick(Block b) throws Exception {
+		if(!fits(b, new CustomItem(Material.EXPERIENCE_BOTTLE, "&a知識精華"))) return;
 		Iterator<Entity> iterator = me.mrCookieSlime.Slimefun.holograms.XPCollector.getArmorStand(b).getNearbyEntities(4D, 4D, 4D).iterator();
 		while (iterator.hasNext()) {
 			Entity n = iterator.next();
 			if (n instanceof ExperienceOrb) {
 				if (ChargableBlock.getCharge(b) < getEnergyConsumption()) return;
-				
+
 				if (n.isValid()) {
 					int xp = getEXP(b) + ((ExperienceOrb) n).getExperience();
 					

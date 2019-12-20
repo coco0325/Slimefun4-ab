@@ -33,7 +33,7 @@ public class AndroidKillingListener implements Listener {
             Bukkit.getScheduler().scheduleSyncDelayedTask(SlimefunStartup.instance, () -> {
                 List<ItemStack> items = new ArrayList<>();
                 for (Entity n : e.getEntity().getNearbyEntities(0.5D, 0.5D, 0.5D)) {
-                    if (n instanceof Item && !n.hasMetadata("no_pickup")) {
+                    if (n instanceof Item && !n.hasMetadata("no_pickup") && !n.hasMetadata("PROCOSMETICS_ITEM")) {
                         items.add(((Item) n).getItemStack());
                         n.remove();
                     }
